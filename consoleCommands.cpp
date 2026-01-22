@@ -59,6 +59,13 @@ bool extensionInside(std::string directory, std::string extension) {
     }
     return false;
 }
+bool createModLibraryFolder() { // Returns true if any folders needed to be created
+    if (!inProject("Mod-Library")) {
+        makeDirectory(getPath() + '/' + "Mod-Library");
+        return true;
+    }
+    return false;
+}
 
 
 
