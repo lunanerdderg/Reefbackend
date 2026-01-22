@@ -16,6 +16,7 @@ bool deleteFile(std::string);
 std::string getInternalFiles(std::string);
 std::string getModParent(std::string);
 bool extensionInside(std::string, std::string extension=".dll");
+bool createModLibraryFolder();
 
 std::string getPath();
 
