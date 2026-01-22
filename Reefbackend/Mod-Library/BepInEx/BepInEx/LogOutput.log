@@ -1,0 +1,166 @@
+[Message:   BepInEx] BepInEx 5.4.23.4 - Subnautica (1/8/2026 1:54:47 AM)
+[Info   :   BepInEx] Running under Unity v2019.4.36.870
+[Info   :   BepInEx] CLR runtime version: 4.0.30319.42000
+[Info   :   BepInEx] Supports SRE: True
+[Info   :   BepInEx] System platform: Bits64, Windows
+[Message:   BepInEx] Preloader started
+[Info   :   BepInEx] Loaded 1 patcher method from [BepInEx.Preloader 5.4.23.4]
+[Info   :   BepInEx] Loaded 1 patcher method from [Tobey.BepInEx.Timestamp 2.0.0.0]
+[Info   :   BepInEx] Loaded 1 patcher method from [Tobey.UnityAudio.Patcher 2.0.3.0]
+[Info   :   BepInEx] 3 patcher plugins loaded
+[Info   :   BepInEx] Patching [UnityEngine.CoreModule] with [BepInEx.Chainloader]
+[Message: Timestamp] It is currently Thu, 08 Jan 2026 07:01:31 GMT according to time.cloudflare.com
+[Info   :Unity Audio Patcher] Enabling Unity Audio...
+[Message:Unity Audio Patcher] Unity Audio successfully enabled.
+[Message:   BepInEx] Preloader finished
+[Message:   BepInEx] Chainloader ready
+[Message:   BepInEx] Chainloader started
+[Info   :   BepInEx] 3 plugins to load
+[Info   :   BepInEx] Loading [Game Info 1.0.1]
+[Message: Game Info] Game Name: Subnautica
+[Message: Game Info] Game Developer: Unknown Worlds
+[Message: Game Info] Game Version: 1.22.83031
+[Info   :   BepInEx] Loading [File Tree 2.0.0]
+[Info   : File Tree] File Tree logging is enabled.
+[Info   :   BepInEx] Loading [Unity Audio Patcher 2.0.3]
+[Message:   BepInEx] Chainloader startup complete
+[Message:Unity Audio Patcher] Attempting to determine the runtime state of Unity Audio...
+[Info   : File Tree] Z:\home\luna\.local\share\Steam\steamapps\common\Subnautica
+[Info   : File Tree] |
+[Info   : File Tree] |-- BepInEx
+[Info   : File Tree] |   |
+[Info   : File Tree] |   |-- cache
+[Info   : File Tree] |   |   |
+[Info   : File Tree] |   |   |-- chainloader_typeloader.dat [637 B]
+[Info   : File Tree] |   |   \-- harmony_interop_cache.dat [745 B]
+[Info   : File Tree] |   |
+[Info   : File Tree] |   |-- config
+[Info   : File Tree] |   |   |
+[Info   : File Tree] |   |   |-- BepInEx.cfg [5.43 KB]
+[Info   : File Tree] |   |   |-- Tobey.BepInEx.Timestamp.cfg [1.47 KB]
+[Info   : File Tree] |   |   |-- Tobey.FileTree.cfg [396 B]
+[Info   : File Tree] |   |   \-- Tobey.UnityAudio.cfg [2.13 KB]
+[Info   : File Tree] |   |
+[Info   : File Tree] |   |-- core
+[Info   : File Tree] |   |   |
+[Info   : File Tree] |   |   |-- 0Harmony.dll [200 KB]
+[Info   : File Tree] |   |   |-- 0Harmony.xml [260.85 KB]
+[Info   : File Tree] |   |   |-- 0Harmony20.dll [110 KB]
+[Info   : File Tree] |   |   |-- BepInEx.dll [125 KB]
+[Info   : File Tree] |   |   |-- BepInEx.Harmony.dll [6.5 KB]
+[Info   : File Tree] |   |   |-- BepInEx.Harmony.xml [3.96 KB]
+[Info   : File Tree] |   |   |-- BepInEx.Preloader.dll [42 KB]
+[Info   : File Tree] |   |   |-- BepInEx.Preloader.xml [7.78 KB]
+[Info   : File Tree] |   |   |-- BepInEx.xml [87.73 KB]
+[Info   : File Tree] |   |   |-- HarmonyXInterop.dll [23 KB]
+[Info   : File Tree] |   |   |-- Mono.Cecil.dll [331.5 KB]
+[Info   : File Tree] |   |   |-- Mono.Cecil.Mdb.dll [42 KB]
+[Info   : File Tree] |   |   |-- Mono.Cecil.Pdb.dll [84.5 KB]
+[Info   : File Tree] |   |   |-- Mono.Cecil.Rocks.dll [27 KB]
+[Info   : File Tree] |   |   |-- MonoMod.RuntimeDetour.dll [103.5 KB]
+[Info   : File Tree] |   |   |-- MonoMod.RuntimeDetour.xml [9.19 KB]
+[Info   : File Tree] |   |   |-- MonoMod.Utils.dll [183.5 KB]
+[Info   : File Tree] |   |   \-- MonoMod.Utils.xml [77.12 KB]
+[Info   : File Tree] |   |
+[Info   : File Tree] |   |-- patchers
+[Info   : File Tree] |   |   |
+[Info   : File Tree] |   |   \-- Tobey
+[Info   : File Tree] |   |       |
+[Info   : File Tree] |   |       |-- UnityAudio
+[Info   : File Tree] |   |       |   |
+[Info   : File Tree] |   |       |   |-- Tobey.UnityAudio.Patcher.dll [730.5 KB]
+[Info   : File Tree] |   |       |   \-- Tobey.UnityAudio.Shared.dll [9 KB]
+[Info   : File Tree] |   |       |
+[Info   : File Tree] |   |       \-- Tobey.BepInEx.Timestamp.dll [228.5 KB]
+[Info   : File Tree] |   |
+[Info   : File Tree] |   |-- plugins
+[Info   : File Tree] |   |   |
+[Info   : File Tree] |   |   \-- Tobey
+[Info   : File Tree] |   |       |
+[Info   : File Tree] |   |       |-- File Tree
+[Info   : File Tree] |   |       |   |
+[Info   : File Tree] |   |       |   \-- Tobey.FileTree.dll [52 KB]
+[Info   : File Tree] |   |       |
+[Info   : File Tree] |   |       |-- UnityAudio
+[Info   : File Tree] |   |       |   |
+[Info   : File Tree] |   |       |   |-- chime.wav [742.58 KB]
+[Info   : File Tree] |   |       |   \-- Tobey.UnityAudio.Plugin.dll [15.5 KB]
+[Info   : File Tree] |   |       |
+[Info   : File Tree] |   |       \-- Tobey.BepInEx.GameInfo.dll [7 KB]
+[Info   : File Tree] |   |
+[Info   : File Tree] |   \-- LogOutput.log [0 b]
+[Info   : File Tree] |
+[Info   : File Tree] |-- MonoBleedingEdge
+[Info   : File Tree] |   |
+[Info   : File Tree] |   \-- (contents not shown)
+[Info   : File Tree] |
+[Info   : File Tree] |-- SNAppData
+[Info   : File Tree] |   |
+[Info   : File Tree] |   \-- (contents not shown)
+[Info   : File Tree] |
+[Info   : File Tree] |-- Subnautica_Data
+[Info   : File Tree] |   |
+[Info   : File Tree] |   \-- (contents not shown)
+[Info   : File Tree] |
+[Info   : File Tree] |-- .doorstop_version [5 B]
+[Info   : File Tree] |-- changelog.txt [252 B]
+[Info   : File Tree] |-- doorstop_config.ini [1.43 KB]
+[Info   : File Tree] |-- libdoorstop.dylib [25.08 KB]
+[Info   : File Tree] |-- run_bepinex.sh [8.1 KB]
+[Info   : File Tree] |-- Subnautica.exe [636.5 KB]
+[Info   : File Tree] |-- Subnautica32.exe [68.5 KB]
+[Info   : File Tree] |-- UnityCrashHandler64.exe [1.02 MB]
+[Info   : File Tree] |-- UnityPlayer.dll [24.93 MB]
+[Info   : File Tree] \-- winhttp.dll [25.5 KB]
+[Message:Unity Audio Patcher] Unity Audio is enabled at runtime.
+[Info   : Unity Log] AddressablesUtility.LoadSceneAsync loading scene: StartScreen in mode Single
+[Info   : Unity Log] Initializing Steam services
+[Info   : Unity Log] OnQuit behaviour queued for deferred registering, platform services aren't initialized.
+[Warning: Unity Log] DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+[Warning: Unity Log] Missing platform services, returning default UI scale.
+[Warning: Unity Log] Missing platform services, returning default UI scale.
+[Info   : Unity Log] AddressablesUtility.LoadSceneAsync loading scene: MenuEnvironment in mode Additive
+[Info   : Unity Log] Waiting for options to load...
+[Info   : Unity Log] RegisterSaveGame: load operation for options was not successful.
+[Info   : Unity Log] Loading game settings
+[Info   : Unity Log] AddressablesUtility.LoadSceneAsync loading scene: XMenu in mode Additive
+[Info   : Unity Log] Telemetry session started. Platform: 'Steam', UserId: '76561199057055481', SessionId: 507062291
+[Info   : Unity Log] changeset 83031, QualityLevel = 2
+[Info   : Unity Log] OK Running Win64
+[Info   : Unity Log] Application version: 1.22.83031
+[Info   : Unity Log] SystemInfo: 
+ deviceModel = OMEN Gaming Laptop 16-ae0xxx (HP)
+ deviceName = LUNA-HPOMEN
+ deviceType = Desktop
+ deviceUniqueIdentifier = dc7fab6f4e5d1ebecf3e1ccb2ac073bc8b7b052f
+ graphicsDeviceID = 10400
+ graphicsDeviceName = NVIDIA GeForce RTX 4060 Laptop GPU
+ graphicsDeviceType = Direct3D11
+ graphicsDeviceVendor = NVIDIA
+ graphicsDeviceVendorID = 4318
+ graphicsDeviceVersion = Direct3D 11.0 [level 11.1]
+ graphicsMemorySize = 8188
+ graphicsShaderLevel = 50
+ npotSupport = Full
+ maxTextureSize = 16384
+ operatingSystem = Windows 10  (10.0.19045) 64bit
+ processorCount = 24
+ processorFrequency = 2418
+ processorType = Intel(R) Core(TM) i7-14650HX
+ supportedRenderTargetCount = 8
+ supports3DTextures = True
+ supportsAccelerometer = False
+ supportsComputeShaders = True
+ supportsGyroscope = False
+ supportsImageEffects = True
+ supportsInstancing = True
+ supportsLocationService = False
+ supportsRawShadowDepthSampling = True
+ supportsRenderTextures = True
+ supportsRenderToCubemap = True
+ supportsShadows = True
+ supportsSparseTextures = True
+ supportsStencil = 1
+ supportsVibration = False
+ systemMemorySize = 31796
+
