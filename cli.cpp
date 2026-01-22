@@ -8,12 +8,22 @@ bool cli() {
     bool running = true;
     std::string command;
     unsigned short int result;
+    createModLibraryFolder();
     while (running) {
         std::getline(std::cin, command);
         std::cout << "-------\n";
         if (command.length() == 0) {}
         else if (command.substr(0,7) == "getPath") {
             std::cout << "Path:\n" << getPath() << std::endl;
+        }
+        else if (command.substr(0,22) == "createModLibraryFolder") {
+            if (createModLibraryFolder()) {
+                std::cout << "Mod-Library folder successfully created!\n";
+            }
+            else {
+                std::cout << "Mod-Library already exists.\n";
+            }
+
         }
         else if (command.substr(0,12) == "dependencies") { // Windows probably has none? Unsure
             if (commandDoesNotExist("curl")) {
