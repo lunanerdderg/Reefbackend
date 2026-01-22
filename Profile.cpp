@@ -1,6 +1,6 @@
 #include "Profile.h"
 
-
+// DESPERATELY NEEDS TESTING
 
 bool Profile::profileExists() {
     for (auto const& folder : fsys::directory_iterator{getPath() + "/Profiles/"}) {
@@ -14,13 +14,13 @@ bool Profile::profileExists() {
 void Profile::makeProfile() {
     makeDirectory(getPath() + "/Profiles/" + this->name + "/config");
     makeDirectory(getPath() + "/Profiles/" + this->name + "/patchers");
-    std::ofstream fout("plugins.tsv");
+    std::ofstream fout(getPath() + "/Profiles/" + this->name + "/plugins.tsv");
     fout << "Nautilus\t1\nBepInEx Tweaks\t1";
     fout.close();
 }
 
 std::string Profile::getTsvContents() {
-    std::ifstream fin("plugins.tsv");
+    std::ifstream fin(getPath() + "/Profiles/" + this->name + "/plugins.tsv");
     std::string fileContents = "";
     std::string line;
     while (std::getline(fin, line)) {
@@ -31,14 +31,14 @@ std::string Profile::getTsvContents() {
 }
 
 bool Profile::addMod(std::string mod) {
-    std::ofstream fout("plugins.tsv");
+    std::ofstream fout(getPath() + "/Profiles/" + this->name + "/plugins.tsv");
     fout << this->getTsvContents() << mod << "\t1";
     fout.close();
 }
 
 bool Profile::disableMod(std::string mod) {
     std::string fileContents = this->getTsvContents();
-    std::ofstream fout("plugins.tsv");
+    std::ofstream fout(getPath() + "/Profiles/" + this->name + "/plugins.tsv");
     for (int i = 0; i < fileContents.length()-mod.length(); ++i) {
         if (fileContents.substr(i,mod.length()) == mod) {
             fileContents[i + mod.length() + 1] = '0';
