@@ -20,9 +20,10 @@ void Profile::makeProfile() {
 }
 
 std::string Profile::getTsvContents() {
+    std::ifstream fin("plugins.tsv");
     std::string fileContents = "";
     std::string line;
-    while (std::getLine(fin, line)) {
+    while (std::getline(fin, line)) {
         fileContents += line;
         fileContents += '\n';
     }
@@ -31,7 +32,7 @@ std::string Profile::getTsvContents() {
 
 bool Profile::addMod(std::string mod) {
     std::ofstream fout("plugins.tsv");
-    fout << this->getTsvContents() << mod << "\t1;
+    fout << this->getTsvContents() << mod << "\t1";
     fout.close();
 }
 
