@@ -6,6 +6,7 @@
 
 * Intelligently apply Profiles to actual Subnautica game directory
 * Implement Nexus compatibility (using API key)
+* Implement `help` command
 * Safeguards for users
 
 # Planned features:
@@ -17,7 +18,6 @@
 * Implement cross-platform unrar
 * Implement cross-platform 7zip
 * Implement cross-platform tar
-* Implement `help` command
 * Possibly create a Windows version? No promises. (Likelihood of Mac version is 5%, but rising with each cross-platform addition.)
 
 # Finished:
