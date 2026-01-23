@@ -1,3 +1,5 @@
+***This project is currently in development, and should not be used!***
+
 # License
 
 You may view the GNU General Public License v3.0 [here](https://github.com/lunanerdderg/Reefbackend/blob/main/LICENSE), but the TL;DR is that you can use this project for whatever you like, as long as:
