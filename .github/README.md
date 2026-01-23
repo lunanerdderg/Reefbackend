@@ -17,7 +17,7 @@
 * Implement cross-platform 7zip
 * Implement cross-platform tar
 * Implement `help` command
-* Possibly create a Windows version? No promises. (Likelihood of Mac version is 5% and rising with each cross-platform addition.)
+* Possibly create a Windows version? No promises. (Likelihood of Mac version is 5%, but rising with each cross-platform addition.)
 
 # Finished:
 
