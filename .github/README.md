@@ -6,7 +6,8 @@
 
 * Intelligently apply Profiles to actual Subnautica game directory
 * Implement Nexus compatibility (using API key)
-* Safeguards for ordinary users
+* Find a way to automatically set Launch Options
+* Safeguards for users
 
 # Planned features:
 
