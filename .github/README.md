@@ -2,7 +2,7 @@
 
 *(No QMM or SMLHelper compatibility planned.)*
 
-# To do before ready:
+# To do before release:
 
 * Intelligently apply Profiles to actual Subnautica game directory
 * Implement Nexus compatibility (using API key)
