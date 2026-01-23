@@ -1,5 +1,7 @@
 **__This project is currently in development, and should not be used!__**
 
+(No QMM or SMLHelper compatibility planned.)
+
 # To do before ready:
 
 * Intelligently apply Profiles to actual Subnautica game directory
