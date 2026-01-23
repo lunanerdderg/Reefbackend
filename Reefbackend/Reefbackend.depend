@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1769143513 source:/home/luna/Documents/Programming/C++/Reefbackend/consoleCommands.cpp
+	"consoleCommands.h"
+
+1769142421 /home/luna/Documents/Programming/C++/Reefbackend/consoleCommands.h
+	<iostream>
+	<limits.h>
+	<unistd.h>
+	<string>
+	<vector>
+	<filesystem>
+	<fstream>
+
+1769123229 source:/home/luna/Documents/Programming/C++/Reefbackend/main.cpp
+	"cli.h"
+
+1767858772 /home/luna/Documents/Programming/C++/Reefbackend/consoleCommands.cpp
+	"consoleCommands.h"
+
+1769147045 source:/home/luna/Documents/Programming/C++/Reefbackend/cli.cpp
+	"cli.h"
+
+1769123177 /home/luna/Documents/Programming/C++/Reefbackend/cli.h
+	"Profile.h"
+
+1767994097 /home/luna/Documents/Programming/C++/Reefbackend/include/Profile.h
+	"filesystem.h"
+
+1767994250 /home/luna/Documents/Programming/C++/Reefbackend/include/filesystem.h
+	<filesystem>
+	"consoleCommands.h"
+
+1769147233 /home/luna/Documents/Programming/C++/Reefbackend/Profile.h
+	"Settings.h"
+
+1769146974 source:/home/luna/Documents/Programming/C++/Reefbackend/Profile.cpp
+	"Profile.h"
+
+1769142422 /home/luna/Documents/Programming/C++/Reefbackend/Settings.h
+	"consoleCommands.h"
+
+1768094435 source:/home/luna/Documents/Programming/C++/Reefbackend/Settings.cpp
+	"Settings.h"
+
