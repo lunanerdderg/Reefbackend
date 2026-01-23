@@ -6,11 +6,11 @@
 
 * Intelligently apply Profiles to actual Subnautica game directory
 * Implement Nexus compatibility (using API key)
-* Find a way to automatically set Launch Options
 * Safeguards for users
 
 # Planned features:
 
+* Find a way to automatically set Launch Options
 * GUI (will be in different repository)
 * Implement cross-platform curl/wget
 * Implement cross-platform unzip
