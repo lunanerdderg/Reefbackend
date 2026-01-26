@@ -1,3 +1,5 @@
+If Vortex does actually end up getting full SteamOS compatibility, production of this program will probably cease.
+
 **__This project is currently in development, and should not be used!__**
 
 *(No QMM or SMLHelper compatibility planned.)*
