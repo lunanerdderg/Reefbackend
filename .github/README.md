@@ -43,3 +43,5 @@ You may view the GNU General Public License v3.0 [here](https://github.com/lunan
 * You state the changes you made (which will happen anyway if you write a description/README of your project)
 
 (This is a simplified summary of the license and should not be taken as legal advice. Please consult a lawyer before taking any action.)
+
+**[CPR (1.14.2)](https://github.com/libcpr/cpr) is under the [MIT License](https://github.com/libcpr/cpr/blob/master/LICENSE).**
