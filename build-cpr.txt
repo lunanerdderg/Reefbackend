@@ -1,0 +1,11 @@
+# Commands
+git clone https://github.com/libcpr/cpr.git
+cd cpr && mkdir build && cd build
+cmake .. -DCPR_BUILD_TESTS=ON
+cmake --build . --parallel
+ctest -VV
+sudo ldconfig
+
+# Instructions:
+# # Right-click Reefbackend in "Projects" sidebar and click "Build options..."
+# # Go to "Linker settings" and add "/usr/local/lib/libcpr.so"
