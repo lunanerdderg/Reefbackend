@@ -45,4 +45,4 @@ You may view the GNU General Public License v3.0 [here](https://github.com/lunan
 (This is a simplified summary of the license and should not be taken as legal advice. Please consult a lawyer before taking any action.)
 
 **Dependencies:**
-* [CPR (1.14.2)](https://github.com/libcpr/cpr) is under the [MIT License](https://github.com/libcpr/cpr/blob/master/LICENSE).
+* [CPR (1.14.2)](https://github.com/libcpr/cpr/tree/1.14.x) is under the [MIT License](https://github.com/libcpr/cpr/blob/1.14.x/LICENSE).
