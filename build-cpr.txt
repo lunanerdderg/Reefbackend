@@ -1,6 +1,7 @@
 # Commands
-cd $HOME/Documents/Programming/Apps/Reefbackend/
-git clone https://github.com/libcpr/cpr.git
+# # First "cd" into whatever directory you wish to build this in
+git clone https://github.com/lunanerdderg/cpr-capture.git
+mv cpr-capture cpr
 cd cpr && mkdir build && cd build
 cmake .. -DCPR_BUILD_TESTS=ON
 cmake --build . --parallel
