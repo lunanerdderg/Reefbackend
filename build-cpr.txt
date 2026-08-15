@@ -1,4 +1,5 @@
 # Commands
+cd $HOME/Documents/Programming/Apps/Reefbackend/
 git clone https://github.com/libcpr/cpr.git
 cd cpr && mkdir build && cd build
 cmake .. -DCPR_BUILD_TESTS=ON
