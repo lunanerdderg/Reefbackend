@@ -220,7 +220,7 @@ bool cli(bool devMode) {
             }
         }
 
-        else if (command.substr(0,32) == "getBrowserDownloadURLsFromGithub") { // getBrowserDownloadURLsFromGithub "https://api.github.com/repos/BepInEx/BepInEx/releases/latest"
+        else if (command.substr(0,32) == "getBrowserDownloadURLsFromGithub") { // getBrowserDownloadURLsFromGithub "https://api.github.com/repos/BepInEx/BepInEx/releases/latest" // getBrowserDownloadURLsFromGithub "https://api.github.com/repos/BepInEx/BepInEx/releases"
             index = readTo(command, '"', 34)-1;
             std::string url = command.substr(34, index - 33);
             std::vector<std::string> urls = getBrowserDownloadURLsFromGithub(url);

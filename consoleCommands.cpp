@@ -80,7 +80,9 @@ std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // 
     std::stringstream json(getAsync(url));
     std::string curLine;
     bool prevURL = false;
-    while (!json.eof() && json >> curLine) {
+    short tagCount = 0;
+    while (!json.eof() && json >> curLine && tagCount <= 1) {
+        tagCount += (curLine == "\"tag_name\":");
         if (curLine == "\"browser_download_url\":") {
             prevURL = true;
         }
