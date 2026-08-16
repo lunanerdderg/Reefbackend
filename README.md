@@ -33,6 +33,19 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Install mods from Mod List
 * Install mods from Github
 
+# Building
+
+The project is too early for building to be worth it but if you really want to, then `cd` into whatever directory you wish to build it in and run:
+
+```
+git clone https://github.com/lunanerdderg/Reefbackend.git
+cd Reefbackend
+chmod +x bootstrap.sh
+bootstrap.sh
+```
+
+`Reefbackend.cbp` is a [Code::Blocks](https://www.codeblocks.org/downloads/binaries/) solution file, so you will need that software to open the project. (Unless your IDE can read Code::Blocks solution files.)
+
 # License
 
 You may view the GNU General Public License v3.0 [here](https://github.com/lunanerdderg/Reefbackend/blob/main/LICENSE), but the TL;DR is that you can use this project for whatever you like, as long as:
