@@ -1,5 +1,4 @@
 *
-build-cpr.txt
 !cli.cpp
 !cli.h
 !consoleCommands.cpp
@@ -15,7 +14,6 @@ build-cpr.txt
 !Reefbackend.layout
 !Settings.cpp
 !Settings.h
-!build-cpr.txt
 !LICENSE
 !.github/README.md
 !.gitignore
