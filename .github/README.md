@@ -45,4 +45,5 @@ You may view the GNU General Public License v3.0 [here](https://github.com/lunan
 (This is a simplified summary of the license and should not be taken as legal advice. Please consult a lawyer before taking any action.)
 
 **Dependencies:**
-* [CPR (1.14.2)](https://github.com/libcpr/cpr/tree/1.14.x) is under the [MIT License](https://github.com/libcpr/cpr/blob/1.14.x/LICENSE).
+* [CPR (1.14.2)](https://github.com/libcpr/cpr/tree/1.14.2) is under the [MIT License](https://github.com/libcpr/cpr/blob/1.14.2/LICENSE).
+* [JSON for Modern C++ (3.12.0)](https://github.com/nlohmann/json/tree/v3.12.0) is under the [MIT License](https://github.com/nlohmann/json/blob/v3.12.0/LICENSE.MIT).
