@@ -19,9 +19,6 @@ fi
 # Commands
 # # First "cd" into the Reefback directory
 echo
-echo "Install Json library"
-curl -O https://raw.githubusercontent.com/nlohmann/json/refs/tags/v3.12.0/single_include/nlohmann/json.hpp
-echo
 echo "Install CPR library"
 git clone https://github.com/lunanerdderg/cpr-capture.git
 mv cpr-capture cpr
