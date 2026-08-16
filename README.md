@@ -48,7 +48,7 @@ bootstrap.sh
 `Reefbackend.cbp` is a [Code::Blocks](https://www.codeblocks.org/downloads/binaries/) solution file, so you will need that software to open the project.
 
 **Solution conversion software:**
-| Convert to  | Software |
+| For  | Software |
 | - | - |
 | GNU make | [cbp2make](https://github.com/mirai-computing/cbp2make) |
 | cmake | [cbp2cmake](https://codeberg.org/Hesti/cbp2cmake) |
