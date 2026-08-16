@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Commands
 # # First "cd" into the Reefback directory
 echo "Install json hppcpr"
