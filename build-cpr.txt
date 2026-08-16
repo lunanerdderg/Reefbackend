@@ -1,4 +1,4 @@
-# Commands VYYBDIDIDBDUBDIBUDBIBD
+# Commands
 # # First "cd" into whatever directory you wish to build this in
 git clone https://github.com/lunanerdderg/cpr-capture.git
 mv cpr-capture cpr
