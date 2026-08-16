@@ -1,5 +1,9 @@
 # Commands
-# # First "cd" into whatever directory you wish to build this in
+# # First "cd" into the Reefback directory
+echo "Install json hppcpr"
+curl -O https://raw.githubusercontent.com/nlohmann/json/refs/tags/v3.12.0/single_include/nlohmann/json.hpp
+echo
+echo "Install CPR"
 git clone https://github.com/lunanerdderg/cpr-capture.git
 mv cpr-capture cpr
 cd cpr && mkdir build && cd build
