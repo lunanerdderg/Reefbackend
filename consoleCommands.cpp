@@ -75,7 +75,22 @@ bool createFile(std::string contents, std::string fileName) {
 bool downloadFromURL(std::string url, std::string fileName) {
     return createFile(getAsync(url), fileName);
 }
-std::string getBrowserDownloadURLsFromGithub(std::string url) { // BOOKMARK
+std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // BOOKMARK
+    std::vector<std::string> result;
+    std::stringstream json(getAsync(url));
+    std::string curLine;
+    bool prevURL = false;
+    while (!json.eof() && json >> curLine) {
+        if (curLine == "\"browser_download_url\":") {
+            prevURL = true;
+            std::cout << curLine.substr(1,curLine.size() - 2) << std::endl;
+            result.push_back(curLine.substr(1,curLine.size() - 2));
+        }
+        else if (prevURL) {
+            prevURL = false;
+        }
+    }
+    return result;
 }
 
 // Changes required, but not coding ones

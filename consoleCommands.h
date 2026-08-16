@@ -9,8 +9,6 @@
 #include <vector>
 #include <filesystem>
 #include <fstream>
-#include "json.hpp"
-using json = nlohmann::json;
 namespace fsys = std::filesystem;
 
 unsigned short int readTo(std::string, char query='\t', unsigned int index=0);
@@ -25,6 +23,7 @@ bool extensionInside(std::string, std::string extension=".dll");
 std::string getAsync(std::string url);
 bool createFile(std::string contents, std::string fileName);
 bool downloadFromURL(std::string url, std::string fileName);
+std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url);
 
 std::string getPath();
 std::string getHomeDirectory();
