@@ -42,19 +42,19 @@
 1768094435 source:/home/luna/Documents/Programming/C++/Reefbackend/Settings.cpp
 	"Settings.h"
 
-1786856600 source:/home/luna/Documents/Programming/Apps/Reefbackend/cli.cpp
+1786862815 source:/home/luna/Documents/Programming/Apps/Reefbackend/cli.cpp
 	"cli.h"
 
-1786855722 /home/luna/Documents/Programming/Apps/Reefbackend/cli.h
+1786862820 /home/luna/Documents/Programming/Apps/Reefbackend/cli.h
 	"Profile.h"
 
-1776061464 /home/luna/Documents/Programming/Apps/Reefbackend/Profile.h
+1786862830 /home/luna/Documents/Programming/Apps/Reefbackend/Profile.h
 	"Settings.h"
 
-1786838661 /home/luna/Documents/Programming/Apps/Reefbackend/Settings.h
+1786862839 /home/luna/Documents/Programming/Apps/Reefbackend/Settings.h
 	"consoleCommands.h"
 
-1786856646 /home/luna/Documents/Programming/Apps/Reefbackend/consoleCommands.h
+1786862912 /home/luna/Documents/Programming/Apps/Reefbackend/consoleCommands.h
 	<iostream>
 	<limits.h>
 	<unistd.h>
@@ -64,16 +64,216 @@
 	<vector>
 	<filesystem>
 	<fstream>
+	"json.hpp"
 
-1786856713 source:/home/luna/Documents/Programming/Apps/Reefbackend/consoleCommands.cpp
+1786862843 source:/home/luna/Documents/Programming/Apps/Reefbackend/consoleCommands.cpp
 	"consoleCommands.h"
 
-1776061464 source:/home/luna/Documents/Programming/Apps/Reefbackend/Profile.cpp
+1786862826 source:/home/luna/Documents/Programming/Apps/Reefbackend/Profile.cpp
 	"Profile.h"
 
-1786853571 source:/home/luna/Documents/Programming/Apps/Reefbackend/Settings.cpp
+1786862835 source:/home/luna/Documents/Programming/Apps/Reefbackend/Settings.cpp
 	"Settings.h"
 
-1786837916 source:/home/luna/Documents/Programming/Apps/Reefbackend/main.cpp
+1786862806 source:/home/luna/Documents/Programming/Apps/Reefbackend/main.cpp
 	"cli.h"
+
+1786857823 /home/luna/Documents/Programming/Apps/Reefbackend/json.hpp
+	<algorithm>
+	<cstddef>
+	<functional>
+	<initializer_list>
+	<iosfwd>
+	<iterator>
+	<memory>
+	<string>
+	<utility>
+	<vector>
+	<utility>
+	<algorithm>
+	<array>
+	<forward_list>
+	<iterator>
+	<map>
+	<optional>
+	<string>
+	<tuple>
+	<type_traits>
+	<unordered_map>
+	<utility>
+	<valarray>
+	<cstddef>
+	<exception>
+	<numeric>
+	<stdexcept>
+	<string>
+	<vector>
+	<array>
+	<cstddef>
+	<cstdint>
+	<string>
+	<utility>
+	<type_traits>
+	<stdint.h>
+	<stdint.h>
+	<version>
+	<cstdlib>
+	<cassert>
+	<compare>
+	<cstddef>
+	<array>
+	<cstddef>
+	<type_traits>
+	<utility>
+	<limits>
+	<string>
+	<tuple>
+	<type_traits>
+	<utility>
+	<iterator>
+	<cstdint>
+	<map>
+	<memory>
+	<string>
+	<vector>
+	<cstring>
+	<string>
+	<utility>
+	<experimental/filesystem>
+	<filesystem>
+	<optional>
+	<algorithm>
+	<iterator>
+	<string>
+	<tuple>
+	<type_traits>
+	<utility>
+	<valarray>
+	<vector>
+	<cstddef>
+	<iterator>
+	<tuple>
+	<utility>
+	<ranges>
+	<cstddef>
+	<string>
+	<cstdint>
+	<tuple>
+	<utility>
+	<cstdint>
+	<cstddef>
+	<functional>
+	<algorithm>
+	<array>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<cstring>
+	<iterator>
+	<limits>
+	<string>
+	<utility>
+	<vector>
+	<bit>
+	<array>
+	<cstddef>
+	<cstring>
+	<iterator>
+	<memory>
+	<numeric>
+	<string>
+	<type_traits>
+	<utility>
+	<cstdio>
+	<istream>
+	<cstddef>
+	<string>
+	<type_traits>
+	<utility>
+	<vector>
+	<array>
+	<clocale>
+	<cstddef>
+	<cstdio>
+	<cstdlib>
+	<initializer_list>
+	<string>
+	<utility>
+	<vector>
+	<cstdint>
+	<utility>
+	<string>
+	<cmath>
+	<cstdint>
+	<functional>
+	<string>
+	<utility>
+	<vector>
+	<cstddef>
+	<limits>
+	<iterator>
+	<type_traits>
+	<cstddef>
+	<iterator>
+	<utility>
+	<type_traits>
+	<algorithm>
+	<cctype>
+	<cerrno>
+	<cstdlib>
+	<iosfwd>
+	<limits>
+	<numeric>
+	<string>
+	<utility>
+	<vector>
+	<initializer_list>
+	<utility>
+	<algorithm>
+	<array>
+	<map>
+	<cmath>
+	<cstdint>
+	<cstring>
+	<limits>
+	<string>
+	<utility>
+	<vector>
+	<algorithm>
+	<cstddef>
+	<iterator>
+	<memory>
+	<string>
+	<vector>
+	<ios>
+	<ostream>
+	<algorithm>
+	<array>
+	<clocale>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<limits>
+	<string>
+	<iomanip>
+	<type_traits>
+	<utility>
+	<array>
+	<cmath>
+	<cstdint>
+	<cstring>
+	<limits>
+	<type_traits>
+	<functional>
+	<initializer_list>
+	<iterator>
+	<memory>
+	<stdexcept>
+	<type_traits>
+	<utility>
+	<vector>
+	<any>
+	<string_view>
 
