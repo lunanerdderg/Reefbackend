@@ -86,7 +86,7 @@ std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // 
         }
         else if (prevURL) {
             prevURL = false;
-            result.push_back(curLine.substr(1,curLine.size() - 3));
+            result.push_back(curLine.substr(1,curLine.size() - 2));
         }
     }
     return result;
