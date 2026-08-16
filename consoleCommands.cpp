@@ -75,7 +75,7 @@ bool createFile(std::string contents, std::string fileName) {
 bool downloadFromURL(std::string url, std::string fileName) {
     return createFile(getAsync(url), fileName);
 }
-std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // BOOKMARK
+std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // BOOKMARK (Function is done, but need to make a method to select preferred link out of vector)
     std::vector<std::string> result;
     std::stringstream json(getAsync(url));
     std::string curLine;
@@ -83,11 +83,10 @@ std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // 
     while (!json.eof() && json >> curLine) {
         if (curLine == "\"browser_download_url\":") {
             prevURL = true;
-            std::cout << curLine.substr(1,curLine.size() - 2) << std::endl;
-            result.push_back(curLine.substr(1,curLine.size() - 2));
         }
         else if (prevURL) {
             prevURL = false;
+            result.push_back(curLine.substr(1,curLine.size() - 3));
         }
     }
     return result;

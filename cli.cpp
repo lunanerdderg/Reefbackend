@@ -220,11 +220,11 @@ bool cli(bool devMode) {
             }
         }
 
-        else if (command.substr(0,3) == "dl1" && devMode) {
+        else if (command.substr(0,3) == "dl1" && devMode) { // BOOKMARK // Implement ACTUAL getBrowserDownloadURLsFromGithub command (that prints the contents of the list)
             getBrowserDownloadURLsFromGithub("https://api.github.com/repos/BepInEx/BepInEx/releases/latest");
         }
 
-        else if (command.substr(0,21) == "dlLatestGithubRelease" && devMode) { // BOOKMARK // TEST: dlLatestGithubRelease "SubnauticaModding/Nautilus" "Nautilus_SN.STABLE_.zip" "$HOME/Documents/Programming/C++/Reefbackend/.test/Subnautica" 1 1 "-pre"
+        else if (command.substr(0,21) == "dlLatestGithubRelease" && devMode) { // BOOKMARK // Remember to continue down through each command. Maybe make a "help" in the meantime // TEST: dlLatestGithubRelease "SubnauticaModding/Nautilus" "Nautilus_SN.STABLE_.zip" "$HOME/Documents/Programming/C++/Reefbackend/.test/Subnautica" 1 1 "-pre"
             index = readTo(command, '"', 23)-1;
             std::string repo = command.substr(23, index - 22);
             index2 = readTo(command, '"', index + 4)-1;
