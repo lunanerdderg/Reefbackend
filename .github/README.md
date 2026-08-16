@@ -29,7 +29,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Create and manage Profiles
 * Access and utilize Settings
 * BepInEx installation script
-* Nautilus + BepInEx Tweaks installation script
+* Nautilus installation script
 * Install mods from Mod List
 * Install mods from Github
 
