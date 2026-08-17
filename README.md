@@ -22,7 +22,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Implement 7zip libraries
 * Implement tar libraries
 
-# Possible features:
+# Possible future features:
 * Find a way to automatically set Launch Options
 * GUI (will be in different repository)
 * Maybe allow users to download and manage saves
