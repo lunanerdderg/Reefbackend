@@ -229,13 +229,21 @@ bool cli(bool devMode) {
             }
             std::cout << std::endl;
         }
-        else if (command.substr(0,12) == "dlFromGithub") { // BOOKMARK
+        else if (command.substr(0,12) == "dlFromGithub") {
             index = readTo(command, '"', 14)-1;
             std::string repo = command.substr(14, index - 13);
             repo = dlFromGithub(repo);
             std::cout << "Created '" << repo << "'\n";
         }
-
+        else if (command.substr(0,16) == "sortModInLibrary") {
+            index = readTo(command, '"', 18)-1;
+            std::string mod = command.substr(18, index - 17);
+            sortModInLibrary(mod);
+            std::cout << "Sorted '" << mod << "'\n";
+        }
+        else if (command.substr(0,22) == "addToLibraryFromGithub") { // BOOKMARK
+            addToLibraryFromGithub("BepInEx Tweaks", "toebeann/BepInExTweaks.Subnautica");
+        }
 //        else if (command.substr(0,9) == "dlBepInEx") { // To delete
 //            index = readTo(command, '"', 11)-1;
 //            std::string location = command.substr(11, index - 10);

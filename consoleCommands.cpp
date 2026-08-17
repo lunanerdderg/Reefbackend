@@ -112,6 +112,12 @@ std::string dlFromGithub(std::string repositoryName, std::string contains, bool 
     }
     else if (dlUrlList.size() == 1 || contains.size() == 0) {
         dlUrl = dlUrlList.at(0);
+        for (unsigned int i = dlUrl.size() - 2; i != -1 && dlUrl.at(i + 1) != '/'; --i) {
+            if (dlUrl.at(i) == '/') {
+                fileNameBeginningIndex = i + 1;
+            }
+        }
+
     }
     else {
         for (unsigned int i = 0; i < dlUrlList.size() && dlUrl.size() == 0; ++i) {
@@ -129,9 +135,19 @@ std::string dlFromGithub(std::string repositoryName, std::string contains, bool 
     downloadFromURL(dlUrl, dlLocation);
     return dlUrl.substr(fileNameBeginningIndex);
 }
+
+// Changes required, but not coding ones
+
+bool sortModInLibrary(std::string mod) {
+    std::string location = "Mod-Library/";
+    location += mod;
+    return true;
+}
 bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains, bool excludePrereleases) { // BOOKMARK
-    std::string location = name;
-    location += "Mod-Library/";
+    std::string location = "Mod-Library/";
+    location += name;
+    location += '/';
+    makeDirectory(location);
     std::string modFile = dlFromGithub(repositoryName, contains, excludePrereleases, location);
     if (modFile.size() == 0) {
         return false;
@@ -141,14 +157,13 @@ bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::s
     }
     else {
         if (unzip(getPath() + '/' + location + modFile, getPath() + '/' + location) > 0) {
+            deleteFile(location);
             return false;
         }
+        deleteFile(location + modFile);
     }
     return true;
 }
-
-// Changes required, but not coding ones
-
 bool createModLibraryFolder() { // Returns true if any folders needed to be created
     if (!inProject("Mod-Library")) {
         makeDirectory(getPath() + '/' + "Mod-Library");
