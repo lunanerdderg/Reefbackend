@@ -220,7 +220,7 @@ bool cli(bool devMode) {
             }
         }
 
-        else if (command.substr(0,32) == "getBrowserDownloadURLsFromGithub") { // getBrowserDownloadURLsFromGithub "https://api.github.com/repos/BepInEx/BepInEx/releases/latest" // getBrowserDownloadURLsFromGithub "https://api.github.com/repos/BepInEx/BepInEx/releases"
+        else if (command.substr(0,32) == "getBrowserDownloadURLsFromGithub") {
             index = readTo(command, '"', 34)-1;
             std::string url = command.substr(34, index - 33);
             std::vector<std::string> urls = getBrowserDownloadURLsFromGithub(url);
@@ -228,6 +228,16 @@ bool cli(bool devMode) {
                 std::cout << '"' << urls.at(i) << "\", ";
             }
             std::cout << std::endl;
+        }
+        else if (command.substr(0,12) == "dlFromGithub") {
+            index = readTo(command, '"', 14)-1;
+            std::string repo = command.substr(14, index - 13);
+            if (dlFromGithub(repo)) {
+                std::cout << "Success!\n";
+            }
+            else {
+                std::cout << "Failure.\n";
+            }
         }
 
         else if (command.substr(0,21) == "dlLatestGithubRelease" && devMode) { // BOOKMARK // Remember to continue down through each command. Maybe make a "help" in the meantime // TEST: dlLatestGithubRelease "SubnauticaModding/Nautilus" "Nautilus_SN.STABLE_.zip" "$HOME/Documents/Programming/C++/Reefbackend/.test/Subnautica" 1 1 "-pre"

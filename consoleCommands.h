@@ -24,6 +24,7 @@ std::string getAsync(std::string url);
 bool createFile(std::string contents, std::string fileName);
 bool downloadFromURL(std::string url, std::string fileName);
 std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url);
+bool dlFromGithub(std::string repositoryName, std::string contains="", bool excludePrereleases=true, std::string dlLocation=""); // Mod-Library/
 
 std::string getPath();
 std::string getHomeDirectory();

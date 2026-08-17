@@ -73,9 +73,12 @@ bool createFile(std::string contents, std::string fileName) {
     return true;
 }
 bool downloadFromURL(std::string url, std::string fileName) {
+    if (url.back() == '/') {
+        url.pop_back();
+    }
     return createFile(getAsync(url), fileName);
 }
-std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // BOOKMARK (Function is done, but need to make a method to select preferred link out of vector)
+std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // Gets the LATEST download links, NOT any from prior releases. Requires FULL url
     std::vector<std::string> result;
     std::stringstream json(getAsync(url));
     std::string curLine;
@@ -92,6 +95,39 @@ std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // 
         }
     }
     return result;
+}
+bool dlFromGithub(std::string repositoryName, std::string contains, bool excludePrereleases, std::string dlLocation) { // Requires specifically the repository name ("user/repository"), NOT url
+    unsigned int fileNameBeginningIndex = 0;
+    std::vector<std::string> dlUrlList;
+    std::string dlUrl = "";
+    std::string repoUrl = "https://api.github.com/repos/";
+    repoUrl += repositoryName;
+    repoUrl += "/releases";
+    if (excludePrereleases) {
+        repoUrl += "/latest";
+    }
+    dlUrlList = getBrowserDownloadURLsFromGithub(repoUrl);
+    if (dlUrlList.size() < 1) {
+        return false;
+    }
+    else if (dlUrlList.size() == 1 || contains.size() == 0) {
+        dlUrl = dlUrlList.at(0);
+    }
+    else {
+        for (unsigned int i = 0; i < dlUrlList.size() && dlUrl.size() == 0; ++i) {
+            for (unsigned int k = dlUrlList.at(i).size() - contains.size(); k != -1 && dlUrlList.at(i).at(k + 1) != '/'; --k) {
+                if (dlUrlList.at(i).at(k) == '/') {
+                    fileNameBeginningIndex = k + 1;
+                }
+                if (dlUrlList.at(i).substr(k, contains.size()) == contains) {
+                    dlUrl = dlUrlList.at(i);
+                }
+            }
+        }
+    }
+    dlLocation += dlUrl.substr(fileNameBeginningIndex);
+    downloadFromURL(dlUrl, dlLocation);
+    return true;
 }
 
 // Changes required, but not coding ones
