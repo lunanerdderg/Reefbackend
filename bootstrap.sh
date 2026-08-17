@@ -18,6 +18,7 @@ fi
 
 # Commands
 # # First "cd" into the Reefback directory
+# # CPR
 echo
 echo "Install CPR library"
 git clone https://github.com/lunanerdderg/cpr-capture.git
@@ -26,6 +27,8 @@ cd cpr && mkdir build && cd build
 cmake .. -DCPR_BUILD_TESTS=ON
 cmake --build . --parallel
 ctest -VV
+
+# # ldconfig
 if [ "$ldconfigVar" = "true" ]; then
   echo
   echo "Update libraries + symlinks systemwide. (If you do not wish to do this, you can safely terminate the program now. 'ldconfig' runs with sudo permissions)"
