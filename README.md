@@ -17,10 +17,12 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Release:
 
-* Implement unzip libraries
-* Implement unrar libraries
-* Implement 7zip libraries
-* Implement tar libraries
+* Implement unzip library
+* Implement unrar library
+* Implement 7zip library
+* Implement tar library
+* Polish features
+* Add bug-catching
 
 # Possible future features:
 * Find a way to automatically set Launch Options
