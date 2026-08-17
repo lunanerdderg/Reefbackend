@@ -135,6 +135,9 @@ std::string dlFromGithub(std::string repositoryName, std::string contains, bool 
     downloadFromURL(dlUrl, dlLocation);
     return dlUrl.substr(fileNameBeginningIndex);
 }
+std::string getModVersionFromGithub(std::string repositoryName, bool excludePrereleases) { // BOOKMARK
+    return "";
+}
 
 // Changes required, but not coding ones
 
