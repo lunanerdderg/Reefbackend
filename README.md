@@ -21,7 +21,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Implement cross-platform unrar
 * Implement cross-platform 7zip
 * Implement cross-platform tar
-* Maybe make a solution converter from cbp to sln
+* Maybe make a solution converter from `cbp` to `sln`? No promises.
 * Maybe Subnautica 2 compatibility? No promises. (I don't own Below Zero so I can't test it but maybe I might try adding compatibility for that too)
 * Possibly create a Windows version? Again, no promises. (Likelihood of Mac version is 5%, but rising with each cross-platform addition.)
 
