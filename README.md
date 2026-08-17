@@ -37,7 +37,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Create and manage Profiles
 * Access and utilize Settings
 * Download files asynchronously
-* Target and download Github releases
+* Target and download specific Github repository releases
 
 # Building
 
