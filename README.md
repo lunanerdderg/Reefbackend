@@ -45,7 +45,7 @@ chmod +x bootstrap.sh
 bootstrap.sh
 ```
 
-`Reefbackend.cbp` is a [Code::Blocks](https://www.codeblocks.org/downloads/binaries/) solution file, so you will need that software to open the project.
+`Reefbackend.cbp` is a [Code::Blocks](https://www.codeblocks.org/downloads/binaries/) solution file, so you will need that software to open the project. You can try a converter, but I don't know how effective they are.
 
 **Solution conversion software:**
 | Format | Converter |
