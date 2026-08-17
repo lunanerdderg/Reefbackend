@@ -17,7 +17,6 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Find a way to automatically set Launch Options
 * GUI (will be in different repository)
 * Allow users to download and manage saves
-* Implement cross-platform curl/wget
 * Implement cross-platform unzip
 * Implement cross-platform unrar
 * Implement cross-platform 7zip
