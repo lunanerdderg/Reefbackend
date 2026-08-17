@@ -129,7 +129,7 @@ std::string dlFromGithub(std::string repositoryName, std::string contains, bool 
     downloadFromURL(dlUrl, dlLocation);
     return dlUrl.substr(fileNameBeginningIndex);
 }
-bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains, bool excludePrereleases) {
+bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains, bool excludePrereleases) { // BOOKMARK
     std::string location = name;
     location += "Mod-Library/";
     std::string modFile = dlFromGithub(repositoryName, contains, excludePrereleases, location);
