@@ -4,7 +4,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 *(No QMM or SMLHelper compatibility planned.)*
 
-# To do before release:
+# To do before Pre-Release:
 
 * BepInEx installation script
 * Nautilus installation script
@@ -15,15 +15,17 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Implement `help` command
 * Safeguards for users
 
-# Planned features:
+# To do before Release:
 
+* Implement unzip libraries
+* Implement unrar libraries
+* Implement 7zip libraries
+* Implement tar libraries
+
+# Possible features:
 * Find a way to automatically set Launch Options
 * GUI (will be in different repository)
-* Allow users to download and manage saves
-* Implement cross-platform unzip
-* Implement cross-platform unrar
-* Implement cross-platform 7zip
-* Implement cross-platform tar
+* Maybe allow users to download and manage saves
 * Maybe make a solution converter from `cbp` to `sln`? No promises.
 * Maybe Subnautica 2 compatibility? No promises. (I don't own Below Zero so I can't test it but maybe I might try adding compatibility for that too)
 * Possibly create a Windows version? Again, no promises. (Likelihood of Mac version is 5%, but rising with each cross-platform addition.)
