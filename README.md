@@ -6,6 +6,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Pre-Release:
 
+* Add auto-sort for mod folders
 * BepInEx installation script
 * Nautilus installation script
 * Install mods from Mod List
