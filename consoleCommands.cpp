@@ -96,7 +96,7 @@ std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // 
     }
     return result;
 }
-bool dlFromGithub(std::string repositoryName, std::string contains, bool excludePrereleases, std::string dlLocation) { // Requires specifically the repository name ("user/repository"), NOT url
+std::string dlFromGithub(std::string repositoryName, std::string contains, bool excludePrereleases, std::string dlLocation) { // Returns the name of the file created. Requires specifically the repository name ("user/repository"), NOT url
     unsigned int fileNameBeginningIndex = 0;
     std::vector<std::string> dlUrlList;
     std::string dlUrl = "";
@@ -108,7 +108,7 @@ bool dlFromGithub(std::string repositoryName, std::string contains, bool exclude
     }
     dlUrlList = getBrowserDownloadURLsFromGithub(repoUrl);
     if (dlUrlList.size() < 1) {
-        return false;
+        return "";
     }
     else if (dlUrlList.size() == 1 || contains.size() == 0) {
         dlUrl = dlUrlList.at(0);
@@ -127,14 +127,22 @@ bool dlFromGithub(std::string repositoryName, std::string contains, bool exclude
     }
     dlLocation += dlUrl.substr(fileNameBeginningIndex);
     downloadFromURL(dlUrl, dlLocation);
-    return true;
+    return dlUrl.substr(fileNameBeginningIndex);
 }
 bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains, bool excludePrereleases) {
     std::string location = name;
     location += "Mod-Library/";
-    bool result = dlFromGithub(repositoryName, contains, excludePrereleases, location);
-    if (!result) {
-        return false
+    std::string modFile = dlFromGithub(repositoryName, contains, excludePrereleases, location);
+    if (modFile.size() == 0) {
+        return false;
+    }
+    else if (modFile.size() >= 5 && modFile.substr(modFile.size() - 4) == ".dll") {
+        //
+    }
+    else {
+        if (unzip(getPath() + '/' + location + modFile, getPath() + '/' + location) > 0) {
+            return false;
+        }
     }
     return true;
 }

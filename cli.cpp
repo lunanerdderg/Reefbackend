@@ -229,15 +229,11 @@ bool cli(bool devMode) {
             }
             std::cout << std::endl;
         }
-        else if (command.substr(0,12) == "dlFromGithub") {
+        else if (command.substr(0,12) == "dlFromGithub") { // BOOKMARK
             index = readTo(command, '"', 14)-1;
             std::string repo = command.substr(14, index - 13);
-            if (dlFromGithub(repo)) {
-                std::cout << "Success!\n";
-            }
-            else {
-                std::cout << "Failure.\n";
-            }
+            repo = dlFromGithub(repo);
+            std::cout << "Created '" << repo << "'\n";
         }
 
 //        else if (command.substr(0,9) == "dlBepInEx") { // To delete
