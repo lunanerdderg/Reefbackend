@@ -240,123 +240,97 @@ bool cli(bool devMode) {
             }
         }
 
-        else if (command.substr(0,21) == "dlLatestGithubRelease" && devMode) { // BOOKMARK // Remember to continue down through each command. Maybe make a "help" in the meantime // TEST: dlLatestGithubRelease "SubnauticaModding/Nautilus" "Nautilus_SN.STABLE_.zip" "$HOME/Documents/Programming/C++/Reefbackend/.test/Subnautica" 1 1 "-pre"
-            index = readTo(command, '"', 23)-1;
-            std::string repo = command.substr(23, index - 22);
-            index2 = readTo(command, '"', index + 4)-1;
-            std::string fileName = command.substr(index + 4, index2 - index - 3);
-            index = readTo(command, '"', index2 + 4)-1;
-            std::string location = command.substr(index2 + 4, index - index2 - 3);
-            unsigned short int includePreReleases = false;
-            unsigned short int suffix = false;
-            std::string removeStr = "";
-            if (command.length() > index + 3) {
-                includePreReleases = command.at(index + 3) != '0';
-            }
-            if (command.length() > index + 5) {
-                suffix = command.at(index + 5) != '0';
-            }
-            if (command.length() > index + 8) {
-                removeStr = command.substr(index + 8, command.length() - index - 9);
-            }
-            if (dlLatestGithubRelease(repo, fileName, location, includePreReleases, suffix, removeStr)) {
-                std::cout << '\'' << fileName << "' successfully installed to '" << location << "'\n"; // Change for Windows
-            }
-            else {
-                std::cout << "Installation failed\n";
-            }
-        }
-        else if (command.substr(0,9) == "dlBepInEx") {
-            index = readTo(command, '"', 11)-1;
-            std::string location = command.substr(11, index - 10);
-            if (dlBepInEx(location)) {
-                std::cout << "\nBepInEx successfully downloaded.\nNow open Subnautica, quit from main menu, and run 'installBepInEx' to get started!\n";
-            }
-            else {
-                std::cout << "\nBepInEx already installed.\n";
-            }
-        }
-        else if (command.substr(0,14) == "installBepInEx") {
-            std::string location;
-            if (command.length() > 16) {
-                index = readTo(command, '"', 16)-1;
-                location = command.substr(16, index - 15);
-            }
-            else {
-                location = settings.getSubnauticaDirectory();
-            }
-
-            std::ifstream fin("Mod-List.tsv");
-            std::string repo;
-            std::string fileName;
-            std::string finalName;
-            std::string includeAllReleases;
-            std::string suffix;
-            std::string removeStr;
-            std::string temp;
-            for (short int i = 0; i < 2; ++i) {
-                std::getline(fin, repo, '\t');
-                std::getline(fin, fileName, '\t');
-                std::getline(fin, finalName, '\t');
-                std::getline(fin, includeAllReleases, '\t');
-                std::getline(fin, suffix, '\t');
-                std::getline(fin, removeStr, '\t');
-                std::getline(fin, temp);
-                std::cout << repo << ", " << fileName << ", " << finalName << ", " << includeAllReleases << ", " << suffix << ", " << removeStr << std::endl;
-                addToLibrary(repo, fileName, finalName, includeAllReleases.at(0) == '1', suffix.at(0) == '1', removeStr);
-            }
-
-            if (installBepInEx(location)) {
-                std::cout << "\nBepInEx successfully installed!\n";
-            }
-            else {
-                std::cout << "\nBepInEx already installed.\n";
-            }
-        }
-        else if (command.substr(0,12) == "addToLibrary") { // Either pass file path or mod name
-            index = readTo(command, '"', 14)-1;
-            std::string filePath = command.substr(14, index - 13);
-            std::string finalName;
-            if (command.length() > index + 4) {
-                index2 = readTo(command, '"', index + 4)-1;
-                finalName = command.substr(index + 4, index2 - index - 3);
-            }
-            else {
-                finalName = "";
-            }
-            if (addToLibrary(filePath, finalName)) {
-                std::cout << '\'' << filePath << "' successfully added to your library!\n";
-            }
-            else {
-                std::cout << "Installation failed.\n";
-            }
-        }
-        else if (command.substr(0,14) == "addToLibraryGh" && devMode) {
-            index = readTo(command, '"', 16)-1;
-            std::string repo = command.substr(16, index - 15);
-            index2 = readTo(command, '"', index + 4)-1;
-            std::string fileName = command.substr(index + 4, index2 - index - 3);
-            index = readTo(command, '"', index2 + 4)-1;
-            std::string finalName = command.substr(index2 + 4, index - index2 - 3);
-            unsigned short int includePreReleases = false;
-            unsigned short int suffix = false;
-            std::string removeStr = "";
-            if (command.length() > index + 3) {
-                includePreReleases = command.at(index + 3) != '0';
-            }
-            if (command.length() > index + 5) {
-                suffix = command.at(index + 5) != '0';
-            }
-            if (command.length() > index + 8) {
-                removeStr = command.substr(index + 8, command.length() - index - 9);
-            }
-            if (addToLibrary(repo, fileName, finalName, includePreReleases, suffix, removeStr)) {
-                std::cout << '\'' << finalName << "' successfully added to your library!\n";
-            }
-            else {
-                std::cout << "Installation failed.\n";
-            }
-        }
+//        else if (command.substr(0,9) == "dlBepInEx") { // To delete
+//            index = readTo(command, '"', 11)-1;
+//            std::string location = command.substr(11, index - 10);
+//            if (dlBepInEx(location)) {
+//                std::cout << "\nBepInEx successfully downloaded.\nNow open Subnautica, quit from main menu, and run 'installBepInEx' to get started!\n";
+//            }
+//            else {
+//                std::cout << "\nBepInEx already installed.\n";
+//            }
+//        }
+//        else if (command.substr(0,14) == "installBepInEx") {
+//            std::string location;
+//            if (command.length() > 16) {
+//                index = readTo(command, '"', 16)-1;
+//                location = command.substr(16, index - 15);
+//            }
+//            else {
+//                location = settings.getSubnauticaDirectory();
+//            }
+//
+//            std::ifstream fin("Mod-List.tsv");
+//            std::string repo;
+//            std::string fileName;
+//            std::string finalName;
+//            std::string includeAllReleases;
+//            std::string suffix;
+//            std::string removeStr;
+//            std::string temp;
+//            for (short int i = 0; i < 2; ++i) {
+//                std::getline(fin, repo, '\t');
+//                std::getline(fin, fileName, '\t');
+//                std::getline(fin, finalName, '\t');
+//                std::getline(fin, includeAllReleases, '\t');
+//                std::getline(fin, suffix, '\t');
+//                std::getline(fin, removeStr, '\t');
+//                std::getline(fin, temp);
+//                std::cout << repo << ", " << fileName << ", " << finalName << ", " << includeAllReleases << ", " << suffix << ", " << removeStr << std::endl;
+//                addToLibrary(repo, fileName, finalName, includeAllReleases.at(0) == '1', suffix.at(0) == '1', removeStr);
+//            }
+//
+//            if (installBepInEx(location)) {
+//                std::cout << "\nBepInEx successfully installed!\n";
+//            }
+//            else {
+//                std::cout << "\nBepInEx already installed.\n";
+//            }
+//        }
+//        else if (command.substr(0,12) == "addToLibrary") { // Either pass file path or mod name
+//            index = readTo(command, '"', 14)-1;
+//            std::string filePath = command.substr(14, index - 13);
+//            std::string finalName;
+//            if (command.length() > index + 4) {
+//                index2 = readTo(command, '"', index + 4)-1;
+//                finalName = command.substr(index + 4, index2 - index - 3);
+//            }
+//            else {
+//                finalName = "";
+//            }
+//            if (addToLibrary(filePath, finalName)) {
+//                std::cout << '\'' << filePath << "' successfully added to your library!\n";
+//            }
+//            else {
+//                std::cout << "Installation failed.\n";
+//            }
+//        }
+//        else if (command.substr(0,14) == "addToLibraryGh" && devMode) {
+//            index = readTo(command, '"', 16)-1;
+//            std::string repo = command.substr(16, index - 15);
+//            index2 = readTo(command, '"', index + 4)-1;
+//            std::string fileName = command.substr(index + 4, index2 - index - 3);
+//            index = readTo(command, '"', index2 + 4)-1;
+//            std::string finalName = command.substr(index2 + 4, index - index2 - 3);
+//            unsigned short int includePreReleases = false;
+//            unsigned short int suffix = false;
+//            std::string removeStr = "";
+//            if (command.length() > index + 3) {
+//                includePreReleases = command.at(index + 3) != '0';
+//            }
+//            if (command.length() > index + 5) {
+//                suffix = command.at(index + 5) != '0';
+//            }
+//            if (command.length() > index + 8) {
+//                removeStr = command.substr(index + 8, command.length() - index - 9);
+//            }
+//            if (addToLibrary(repo, fileName, finalName, includePreReleases, suffix, removeStr)) {
+//                std::cout << '\'' << finalName << "' successfully added to your library!\n";
+//            }
+//            else {
+//                std::cout << "Installation failed.\n";
+//            }
+//        }
         else if (command.substr(0,19) == "listInstallableMods") {
             std::ifstream fin("Mod-List.tsv");
             std::string tempText;

@@ -11,39 +11,45 @@
 #include <fstream>
 namespace fsys = std::filesystem;
 
+// Cross-platform
 unsigned short int readTo(std::string, char query='\t', unsigned int index=0);
 unsigned short int fileExists(std::string, unsigned short int exitNum=1);
 bool inProject(std::string);
 bool makeDirectory(std::string);
 bool moveFile(std::string, std::string);
 bool deleteFile(std::string);
-std::string getInternalFiles(std::string);
 std::string getModParent(std::string);
-bool extensionInside(std::string, std::string extension=".dll");
+//std::string getInternalFiles(std::string);
+//bool extensionInside(std::string, std::string extension=".dll");
+
 std::string getAsync(std::string url);
 bool createFile(std::string contents, std::string fileName);
 bool downloadFromURL(std::string url, std::string fileName);
 std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url);
-bool dlFromGithub(std::string repositoryName, std::string contains="", bool excludePrereleases=true, std::string dlLocation=""); // Mod-Library/
+bool dlFromGithub(std::string repositoryName, std::string contains="", bool excludePrereleases=true, std::string dlLocation="");
+bool addToLibraryFromGithub(std::string repositoryName, std::string contains="", bool excludePrereleases=true);
 
-std::string getPath();
-std::string getHomeDirectory();
-
+// Changes needed for cross-platform, but not programming ones
 bool createModLibraryFolder();
-unsigned short int findSubnautica();
-unsigned short int commandDoesNotExist(std::string, unsigned short int exitNum=1);
-bool haveAllNecessaryDependencies();
 
 bool copyFile(std::string, std::string);
 bool renameFile(std::string, std::string);
-unsigned short int unzip(std::string, std::string);
-
-bool dlLatestGithubRelease(std::string, std::string, std::string, bool includeAllReleases=true, bool suffix=false, std::string removeStr="");
-bool dlNautilus(std::string);
-bool dlBepInEx(std::string);
-bool installBepInEx(std::string);
-bool addToLibrary(std::string, std::string finalName="");
-bool addToLibrary(std::string, std::string, std::string, bool includeAllReleases=true, bool suffix=false, std::string removeStr="");
 
 std::string getProfiles();
 std::string getMods();
+
+// Linux-only
+std::string getPath();
+std::string getHomeDirectory();
+unsigned short int findSubnautica();
+    // Literally uses commands
+unsigned short int commandDoesNotExist(std::string, unsigned short int exitNum=1);
+bool haveAllNecessaryDependencies();
+unsigned short int unzip(std::string, std::string);
+
+// To delete
+//bool dlNautilus(std::string);
+//bool dlBepInEx(std::string);
+//bool installBepInEx(std::string);
+//bool addToLibrary(std::string, std::string finalName="");
+//bool addToLibrary(std::string, std::string, std::string, bool includeAllReleases=true, bool suffix=false, std::string removeStr="");
