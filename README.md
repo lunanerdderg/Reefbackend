@@ -33,9 +33,9 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Find a way to automatically set Launch Options
 * GUI (will be in different repository)
 * Maybe allow users to download and manage saves
-* Maybe make a solution converter from `cbp` to `sln`? No promises.
-* Maybe Subnautica 2 compatibility? Again, no promises. (I don't own Below Zero so I can't test it but maybe I might try adding compatibility for that too)
-* Possibly create a Windows version? Once more, no promises. (Likelihood of Mac version is 5%, but rising with each cross-platform addition.)
+* Maybe Subnautica 2 compatibility? No promises. (I don't own Below Zero so I can't test it but maybe I might try adding compatibility for that too)
+* Possibly create a Windows version? Again, no promises. (Likelihood of Mac version is 5%, but rising with each cross-platform addition.)
+* Maybe make a solution converter from `cbp` to `sln`? Once more, no promises.
 
 # Finished:
 
