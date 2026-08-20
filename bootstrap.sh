@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# # First "cd" into the Reefback directory
+
 # Make sure all commands are installed
 listOfCommands="echo cd mv curl git cmake ctest"
 for command in $listOfCommands; do
@@ -17,7 +19,6 @@ fi
 
 
 # Commands
-# # First "cd" into the Reefback directory
 # # CPR
 echo
 echo "Install CPR library"
