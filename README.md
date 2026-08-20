@@ -23,7 +23,8 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Release:
 
-* Add ability to update mods
+* Add ability to scan for mod updates
+* Add ability to update mods (manually and automatically)
 * Return only specific settings to default, not all simultaneously
 * Automatically save all changes to Profile made in-game once Subnautica is closed, and remove profile to automatically return to vanilla 
 * Automatically install mod dependencies with mods
