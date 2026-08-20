@@ -17,13 +17,13 @@ unsigned short int fileExists(std::string, unsigned short int exitNum=1);
 bool inProject(std::string);
 bool makeDirectory(std::string);
 bool moveFile(std::string, std::string);
+bool makeFile(std::string contents, std::string fileName);
 bool deleteFile(std::string);
 std::string getModParent(std::string);
 //std::string getInternalFiles(std::string);
 //bool extensionInside(std::string, std::string extension=".dll");
 
 std::string getAsync(std::string url);
-bool createFile(std::string contents, std::string fileName);
 bool downloadFromURL(std::string url, std::string fileName);
 std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url);
 std::string dlFromGithub(std::string repositoryName, std::string contains="", bool excludePrereleases=true, std::string dlLocation="");

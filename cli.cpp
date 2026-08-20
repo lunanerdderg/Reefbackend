@@ -26,6 +26,30 @@ bool cli(bool devMode) {
             }
 
         }
+
+
+        // ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // =========================================================================================================================================    consoleCommands
+
+        // ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        else if (command.substr(0,14) == "getAsyncToCout" && devMode) {
+            index = readTo(command, '"', 16)-1;
+            std::string location = command.substr(16, index - 15);
+            std::cout << getAsync(location) << std::endl;
+        }
+        else if (command.substr(0,14) == "getAsyncToFile" && devMode) {
+            index = readTo(command, '"', 16)-1;
+            std::string location = command.substr(16, index - 15);
+            if (downloadFromURL(location, "sample.zip")) {
+                std::cout << "Success!\n";
+            }
+            else {
+                std::cout << "Failure.\n";
+            }
+        }
         else if (command.substr(0,12) == "dependencies") { // Windows probably has none? Unsure
             if (commandDoesNotExist("unzip")) {
                 std::cout << "unzip is necessary and needs to be installed through your package manager!!!\n";
@@ -50,29 +74,6 @@ bool cli(bool devMode) {
             }
             else {
                 std::cout << "7zip is installed\n";
-            }
-        }
-
-
-        // ------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        // =========================================================================================================================================    consoleCommands
-
-        // ------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        else if (command.substr(0,14) == "getAsyncToCout" && devMode) {
-            index = readTo(command, '"', 16)-1;
-            std::string location = command.substr(16, index - 15);
-            std::cout << getAsync(location) << std::endl;
-        }
-        else if (command.substr(0,14) == "getAsyncToFile" && devMode) {
-            index = readTo(command, '"', 16)-1;
-            std::string location = command.substr(16, index - 15);
-            if (downloadFromURL(location, "sample.zip")) {
-                std::cout << "Success!\n";
-            }
-            else {
-                std::cout << "Failure.\n";
             }
         }
         else if (command.substr(0,28) == "haveAllNecessaryDependencies") {

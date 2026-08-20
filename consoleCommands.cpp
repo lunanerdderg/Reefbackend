@@ -22,6 +22,12 @@ unsigned short int fileExists(std::string file, unsigned short int exitNum) { //
 bool inProject(std::string file) { // Get if file is in executable directory
     return fileExists(getPath() + '/' + file);
 }
+bool makeFile(std::string contents, std::string fileName) {
+    std::ofstream foutOne(fileName.c_str(), std::ios::binary);
+    foutOne << contents;
+    foutOne.close();
+    return true;
+}
 bool makeDirectory(std::string destination) {
     return fsys::create_directories(destination);
 }
@@ -66,17 +72,11 @@ std::string getAsync(std::string url) {
     cpr::Response r = fr.get();
     return r.text;
 }
-bool createFile(std::string contents, std::string fileName) {
-    std::ofstream foutOne(fileName.c_str(), std::ios::binary);
-    foutOne << contents;
-    foutOne.close();
-    return true;
-}
 bool downloadFromURL(std::string url, std::string fileName) {
     if (url.back() == '/') {
         url.pop_back();
     }
-    return createFile(getAsync(url), fileName);
+    return makeFile(getAsync(url), fileName);
 }
 std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url) { // Gets the LATEST download links, NOT any from prior releases. Requires FULL url
     std::vector<std::string> result;
@@ -204,7 +204,7 @@ bool sortModInLibrary(std::string mod) { // sortModInLibrary "BepInEx Tweaks"
 bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains, bool excludePrereleases) {
     std::string location = "Mod-Library/";
     location += name;
-    createFile(getModVersionFromGithub(repositoryName, excludePrereleases), location + ".version");
+    makeFile(getModVersionFromGithub(repositoryName, excludePrereleases), location + ".version");
     location += '/';
     makeDirectory(location);
     std::string modFile = dlFromGithub(repositoryName, contains, excludePrereleases, location);
