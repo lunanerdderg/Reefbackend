@@ -89,7 +89,7 @@ You may view the GNU General Public License v3.0 [here](https://github.com/lunan
 * Your project uses a [GNU license](https://choosealicense.com/licenses/)
 * You state the changes you made (which will most likely happen anyway if you write a descriptive README or description for your project)
 
-(This is a simplified summary of the license and should not be taken as legal advice. Please consult a lawyer before taking any action.)
-
+_(This is a simplified summary of the license and should not be taken as legal advice. Please consult a lawyer before taking any action.)
+_
 **Dependencies:**
 * [CPR (1.14.2)](https://github.com/libcpr/cpr/tree/1.14.2) is under the [MIT License](https://github.com/libcpr/cpr/blob/1.14.2/LICENSE).
