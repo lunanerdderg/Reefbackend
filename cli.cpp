@@ -220,7 +220,7 @@ bool cli(bool devMode) {
             }
         }
 
-        else if (command.substr(0,32) == "getBrowserDownloadURLsFromGithub") {
+        else if (command.substr(0,32) == "getBrowserDownloadURLsFromGithub" && devMode) {
             index = readTo(command, '"', 34)-1;
             std::string url = command.substr(34, index - 33);
             std::vector<std::string> urls = getBrowserDownloadURLsFromGithub(url);
@@ -229,20 +229,26 @@ bool cli(bool devMode) {
             }
             std::cout << std::endl;
         }
-        else if (command.substr(0,12) == "dlFromGithub") {
+        else if (command.substr(0,23) == "getModVersionFromGithub" && devMode) {
+            index = readTo(command, '"', 25)-1;
+            std::string repo = command.substr(25, index - 24);
+            repo = getModVersionFromGithub(repo, false);
+            std::cout << "Created '" << repo << "'\n";
+        }
+        else if (command.substr(0,12) == "dlFromGithub" && devMode) {
             index = readTo(command, '"', 14)-1;
             std::string repo = command.substr(14, index - 13);
             repo = dlFromGithub(repo);
             std::cout << "Created '" << repo << "'\n";
         }
-        else if (command.substr(0,16) == "sortModInLibrary") {
+        else if (command.substr(0,16) == "sortModInLibrary" && devMode) {
             index = readTo(command, '"', 18)-1;
             std::string mod = command.substr(18, index - 17);
             sortModInLibrary(mod);
             std::cout << "Sorted '" << mod << "'\n";
         }
         else if (command.substr(0,22) == "addToLibraryFromGithub") { // BOOKMARK
-            addToLibraryFromGithub("BepInEx Tweaks", "toebeann/BepInExTweaks.Subnautica");
+            addToLibraryFromGithub("Nautilus", "SubnauticaModding/Nautilus", "SN.STABLE", false);
         }
 //        else if (command.substr(0,9) == "dlBepInEx") { // To delete
 //            index = readTo(command, '"', 11)-1;

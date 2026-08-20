@@ -1,3 +1,5 @@
-BepInEx	toebeann/BepInEx.Subnautica		0	BepInEx is a decompilation tool for Unity games. The Subnautica pack was created by toebeann.
-Nautilus	SubnauticaModding/Nautilus		1	Nautilus is the core Subnautica modding library that aims to enhance developer productivity by offering common helper utilities as easy to use and robust as possible.
-BepInEx Tweaks	toebeann/BepInExTweaks.Subnautica		0	Useful tweaks for BepInEx in Subnautica, resolving common issues with BepInEx.
+BepInEx	toebeann/BepInEx.Subnautica		1	BepInEx is a decompilation tool for Unity games. The Subnautica pack was created by toebeann.
+Nautilus	SubnauticaModding/Nautilus	SN.STABLE	0	Nautilus is the core Subnautica modding library that aims to enhance developer productivity by offering common helper utilities as easy to use and robust as possible.
+CuddleLibs	VELD-Dev/CuddleLibs		1	Universal libraries for modders using modules.
+Archipelago	Berserker66/ArchipelagoSubnauticaModSrc		1	Cross-game randomizer.
+BepInEx Tweaks	toebeann/BepInExTweaks.Subnautica		1	Useful tweaks for BepInEx in Subnautica, resolving common issues with BepInEx.

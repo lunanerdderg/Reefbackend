@@ -135,15 +135,54 @@ std::string dlFromGithub(std::string repositoryName, std::string contains, bool 
     downloadFromURL(dlUrl, dlLocation);
     return dlUrl.substr(fileNameBeginningIndex);
 }
-std::string getModVersionFromGithub(std::string repositoryName, bool excludePrereleases) { // BOOKMARK
-    return "";
+std::string getModVersionFromGithub(std::string repositoryName, bool excludePrereleases) {
+    repositoryName = "https://api.github.com/repos/" + repositoryName + "/releases";
+    if (excludePrereleases) {
+        repositoryName += "/latest";
+    }
+    std::string result = "";
+    std::stringstream json(getAsync(repositoryName));
+    std::string curLine;
+    bool tag = false;
+    while (!json.eof() && json >> curLine && result == "") {
+        if (tag) {
+            result = curLine.substr(1,curLine.size() - 3);
+        }
+        tag = (curLine == "\"tag_name\":");
+    }
+    return result;
 }
 
 // Changes required, but not coding ones
 
-bool sortModInLibrary(std::string mod) {
-    std::string location = "Mod-Library/";
-    location += mod;
+bool sortModInLibrary(std::string mod) { // sortModInLibrary "BepInEx Tweaks"
+    std::string location = getPath() + "/Mod-Library/" + mod;
+    if (fileExists(location + "/BepInEx")) {
+        renameFile(location, ".temp");
+        renameFile(getPath() + "/Mod-Library/.temp/BepInEx", mod);
+        moveFile(getPath() + "/Mod-Library/.temp/" + mod, "Mod-Library");
+        deleteFile(getPath() + "/Mod-Library/.temp/");
+    }
+    if (fileExists(location + "/plugin") || fileExists(location + "/config") || fileExists(location + "/patchers")) {
+        return true;
+    }
+
+//    bool containsDLL = false;
+//    for (auto const& file : fsys::recursive_directory_iterator(location)) { // Testing whether the mod contains a .dll might help to organize it if it requires CustomCraft3 or contains a structure file and needs to be placed in those directories
+//        std::string fileString = file.path().string();
+//        if (fileString.size() > 4 && fileString.substr(fileString.size() - 4) == ".dll") {
+//            containsDLL = true;
+//            break;
+//        }
+//    }
+
+    makeDirectory(location + "/plugins");
+    for (auto const& file : fsys::directory_iterator(location)) {
+        std::string fileString = file.path().string();
+        if (fileString != location + "/plugins") {
+            moveFile(fileString, location + "/plugins");
+        }
+    }
     return true;
 }
 bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains, bool excludePrereleases) { // BOOKMARK
@@ -165,7 +204,7 @@ bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::s
         }
         deleteFile(location + modFile);
     }
-    return true;
+    return sortModInLibrary(name);
 }
 bool createModLibraryFolder() { // Returns true if any folders needed to be created
     if (!inProject("Mod-Library")) {

@@ -1,1 +1,1 @@
-Name	Repository	String that release file contains (leave blank if only one file in release)	0 if only look at latest, 1 if include pre-releases	Description of mod
+Name	Repository	String that release file contains (leave blank if only one file in release)	1 if only look at latest, 0 if include pre-releases	Description of mod
