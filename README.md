@@ -32,8 +32,8 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Filter Nexus mods to exclude mods which require SMLHelper
 * Automatically create all files necessary for function of program if not detected in directory
 * Implement unzip library
-* Implement unrar library
 * Implement 7zip library
+* Implement unrar library
 * Implement tar library
 * Eliminate as many absolute (non-relative) paths as possible
 * Polish features
