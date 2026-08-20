@@ -10,12 +10,13 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 * Create Profiles
 * Delete Profiles
-* Set default Profile (or vanilla) [does nothing yet]
 * Add mods to Profiles from Library 
 * Remove mods from Profiles
 * Apply Profiles to actual Subnautica game directory
 * Switch back from modded to vanilla
-* Function to save all changes to Profile made in-game
+* Function to save all changes to Profile made in-game (manual, not automatic)
+* Set default Profile (or vanilla)
+* Open with nondefault Profile/vanilla
 * Implement Nexus compatibility (using API key)
   * List available mods from Nexus
   * Keep track of Nexus mod versions
@@ -30,7 +31,6 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Add ability to scan for mod updates
 * Add ability to update mods (manually and automatically)
 * Return only specific settings to default, not all simultaneously
-* Automatically load default Profile when game is opened
 * Automatically save all changes to Profile made in-game once Subnautica is closed, and remove profile to automatically return to vanilla 
 * Automatically install mod dependencies with mods
 * Allow mods to be added directly to Profiles without requiring manual installation to Library first (automatic instead)
