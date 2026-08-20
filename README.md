@@ -9,6 +9,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 # To do before Pre-Release:
 
 * Add mods to Profiles from Library 
+* Remove mods from Profiles
 * Apply Profiles to actual Subnautica game directory
 * Switch back from modded to vanilla
 * Function to save all changes to Profile made in-game
