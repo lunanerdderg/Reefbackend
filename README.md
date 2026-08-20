@@ -12,7 +12,6 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Add mods to Profiles from Library 
 * Apply Profiles to actual Subnautica game directory
 * Function to save all changes to Profile made in-game
-* Keep track of Modlist dependencies
 * Implement Nexus compatibility (using API key)
   * List available mods from Nexus
   * Keep track of Nexus mod versions
