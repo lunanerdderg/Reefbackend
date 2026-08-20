@@ -61,7 +61,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # Building
 
-The project is too early for building to be worth it but if you really want to, then `cd` into whatever directory you wish to build it in and run:
+The project is too early for building to be worth it, but if you really want to, then `cd` into whatever directory you wish to build it in and run:
 
 ```
 git clone https://github.com/lunanerdderg/Reefbackend.git
