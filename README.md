@@ -87,7 +87,7 @@ You may view the GNU General Public License v3.0 [here](https://github.com/lunan
 * You credit me
 * Your project is open-source
 * Your project uses a [GNU license](https://choosealicense.com/licenses/)
-* You state the changes you made (which will happen anyway if you write a description/README of your project)
+* You state the changes you made (which will most likely happen anyway if you write a descriptive README or description for your project)
 
 (This is a simplified summary of the license and should not be taken as legal advice. Please consult a lawyer before taking any action.)
 
