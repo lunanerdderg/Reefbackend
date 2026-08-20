@@ -6,9 +6,9 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Pre-Release:
 
-* BepInEx installation script
-* Nautilus installation script
-* Read and print Mod List
+* BepInEx + Nautilus installation script
+* Read and print Modlist
+* Add mods to Profiles from Library 
 * Apply Profiles to actual Subnautica game directory
 * Keep track of mod versions
 * Implement Nexus compatibility (using API key)
@@ -20,6 +20,8 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 * Add ability to update mods
 * Automatically install mod dependencies with mods
+* Return only specific settings to default, not all simultaneously
+* Allow mods to be added directly to Profiles without requiring manual installation to Library first (automatic instead)
 * Implement unzip library
 * Implement unrar library
 * Implement 7zip library
@@ -39,6 +41,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 * Create and manage Profiles
 * Access and utilize Settings
+* Return settings to default
 * Download files asynchronously
 * Target and download specific Github repository releases
 * Add auto-sort for freshly-downloaded mods
