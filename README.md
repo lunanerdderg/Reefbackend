@@ -50,7 +50,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # Finished:
 
-* Create and manage Profiles
+* Create and manage Profile folders
 * Access and utilize Settings
 * Return settings to default
 * Download files asynchronously
