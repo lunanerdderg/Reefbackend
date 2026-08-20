@@ -4,7 +4,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 *(No QMM or SMLHelper compatibility planned.)*
 
-_[(How version numbering works in all my programs.)](https://github.com/lunanerdderg/lunanerdderg.github.io/blob/main/version-numbering.md)_
+-# _[(How version numbering works in all my programs.)](https://github.com/lunanerdderg/lunanerdderg.github.io/blob/main/version-numbering.md)_
 
 # To do before Pre-Release:
 
