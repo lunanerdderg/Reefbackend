@@ -32,6 +32,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Implement unrar library
 * Implement 7zip library
 * Implement tar library
+* Eliminate as many absolute (non-relative) paths as possible
 * Polish features
 * Add bug-catching
 
