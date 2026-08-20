@@ -27,24 +27,6 @@ bool cli(bool devMode) {
 
         }
         else if (command.substr(0,12) == "dependencies") { // Windows probably has none? Unsure
-            if (commandDoesNotExist("curl")) {
-                std::cout << "curl is necessary and needs to be installed through your package manager!!!\n";
-            }
-            else {
-                std::cout << "curl is installed\n";
-            }
-            if (commandDoesNotExist("wget")) {
-                std::cout << "wget is necessary and needs to be installed through your package manager!!!\n";
-            }
-            else {
-                std::cout << "wget is installed\n";
-            }
-            if (commandDoesNotExist("grep")) {
-                std::cout << "grep is necessary and needs to be installed through your package manager!!!\n";
-            }
-            else {
-                std::cout << "grep is installed\n";
-            }
             if (commandDoesNotExist("unzip")) {
                 std::cout << "unzip is necessary and needs to be installed through your package manager!!!\n";
             }
@@ -241,6 +223,12 @@ bool cli(bool devMode) {
             repo = dlFromGithub(repo);
             std::cout << "Created '" << repo << "'\n";
         }
+        else if (command.substr(0,20) == "removeModFromLibrary" && devMode) {
+            index = readTo(command, '"', 22)-1;
+            std::string mod = command.substr(22, index - 21);
+            removeModFromLibrary(mod);
+            std::cout << "Removed '" << mod << "'\n";
+        }
         else if (command.substr(0,16) == "sortModInLibrary" && devMode) {
             index = readTo(command, '"', 18)-1;
             std::string mod = command.substr(18, index - 17);
@@ -248,7 +236,10 @@ bool cli(bool devMode) {
             std::cout << "Sorted '" << mod << "'\n";
         }
         else if (command.substr(0,22) == "addToLibraryFromGithub") { // BOOKMARK
-            addToLibraryFromGithub("Nautilus", "SubnauticaModding/Nautilus", "SN.STABLE", false);
+            addToLibraryFromGithub("Nautilus", "SubnauticaModding/Nautilus", "", false);
+        }
+        else if (command.substr(0,30) == "addBepInExAndNautilusToLibrary") { // BOOKMARK
+            addBepInExAndNautilusToLibrary();
         }
 //        else if (command.substr(0,9) == "dlBepInEx") { // To delete
 //            index = readTo(command, '"', 11)-1;

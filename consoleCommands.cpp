@@ -155,15 +155,31 @@ std::string getModVersionFromGithub(std::string repositoryName, bool excludePrer
 
 // Changes required, but not coding ones
 
+bool createModLibraryFolder() { // Returns true if any folders needed to be created
+    if (!inProject("Mod-Library")) {
+        makeDirectory(getPath() + "/Mod-Library");
+        return true;
+    }
+    return false;
+}
 bool sortModInLibrary(std::string mod) { // sortModInLibrary "BepInEx Tweaks"
     std::string location = getPath() + "/Mod-Library/" + mod;
     if (fileExists(location + "/BepInEx")) {
+        if (fileExists(location + "doorstop_config.ini")) {
+            deleteFile(location + "doorstop_config.ini");
+        }
+        if (fileExists(location + "winhttp.dll")) {
+            deleteFile(location + "winhttp.dll");
+        }
+        if (fileExists(location + ".doorstop_version")) {
+            deleteFile(location + ".doorstop_version");
+        }
         renameFile(location, ".temp");
         renameFile(getPath() + "/Mod-Library/.temp/BepInEx", mod);
         moveFile(getPath() + "/Mod-Library/.temp/" + mod, "Mod-Library");
         deleteFile(getPath() + "/Mod-Library/.temp/");
     }
-    if (fileExists(location + "/plugin") || fileExists(location + "/config") || fileExists(location + "/patchers")) {
+    if (fileExists(location + "/plugin") || fileExists(location + "/config") || fileExists(location + "/patchers") || fileExists(location + "/core")) {
         return true;
     }
 
@@ -188,6 +204,7 @@ bool sortModInLibrary(std::string mod) { // sortModInLibrary "BepInEx Tweaks"
 bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains, bool excludePrereleases) {
     std::string location = "Mod-Library/";
     location += name;
+    createFile(getModVersionFromGithub(repositoryName, excludePrereleases), location + ".version");
     location += '/';
     makeDirectory(location);
     std::string modFile = dlFromGithub(repositoryName, contains, excludePrereleases, location);
@@ -204,14 +221,16 @@ bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::s
         }
         deleteFile(location + modFile);
     }
-    return sortModInLibrary(name);
-}
-bool createModLibraryFolder() { // Returns true if any folders needed to be created
-    if (!inProject("Mod-Library")) {
-        makeDirectory(getPath() + '/' + "Mod-Library");
+    if (repositoryName == "toebeann/BepInEx.Subnautica") {
         return true;
     }
-    return false;
+    return sortModInLibrary(name);
+}
+bool addBepInExAndNautilusToLibrary() {
+    return (addToLibraryFromGithub("BepInEx", "toebeann/BepInEx.Subnautica") && addToLibraryFromGithub("Nautilus", "SubnauticaModding/Nautilus", "SN.STABLE", false));
+}
+bool removeModFromLibrary(std::string modName) {
+    return (deleteFile(getPath() + "/Mod-Library/" + modName) && deleteFile(getPath() + "/Mod-Library/" + modName + ".version"));
 }
 bool copyFile(std::string file, std::string destination) {
     makeDirectory(file.substr(file.find_last_of('/') + 1));
@@ -302,19 +321,7 @@ unsigned short int commandDoesNotExist(std::string command, unsigned short int e
     return exitNum;
 }
 bool haveAllNecessaryDependencies() {
-    if (commandDoesNotExist("curl")) {
-        return false;
-    }
-    if (commandDoesNotExist("wget")) {
-        return false;
-    }
-    if (commandDoesNotExist("grep")) {
-        return false;
-    }
-    if (commandDoesNotExist("unzip")) {
-        return false;
-    }
-    return true;
+    return (!commandDoesNotExist("unzip"));
 }
 
 unsigned short int unzip(std::string file, std::string location) { // Returns 0 if successful, 1 if failed on rar, and 7 if failed on 7z

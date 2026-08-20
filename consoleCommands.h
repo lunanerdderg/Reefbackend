@@ -30,9 +30,11 @@ std::string dlFromGithub(std::string repositoryName, std::string contains="", bo
 std::string getModVersionFromGithub(std::string repositoryName, bool excludePrereleases=true);
 
 // Changes needed for cross-platform, but not programming ones
+bool createModLibraryFolder();
 bool sortModInLibrary(std::string mod);
 bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains="", bool excludePrereleases=true);
-bool createModLibraryFolder();
+bool addBepInExAndNautilusToLibrary();
+bool removeModFromLibrary(std::string modName);
 
 bool copyFile(std::string, std::string);
 bool renameFile(std::string, std::string);
