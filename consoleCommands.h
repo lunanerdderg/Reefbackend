@@ -29,6 +29,10 @@ std::vector<std::string> getBrowserDownloadURLsFromGithub(std::string url);
 std::string dlFromGithub(std::string repositoryName, std::string contains="", bool excludePrereleases=true, std::string dlLocation="");
 std::string getModVersionFromGithub(std::string repositoryName, bool excludePrereleases=true);
 
+std::vector<std::vector<std::string>> getModList();
+std::vector<std::string> getModList(std::string name);
+bool addToLibraryFromModList(std::string name, bool safety=false);
+
 // Changes needed for cross-platform, but not programming ones
 bool createModLibraryFolder();
 bool sortModInLibrary(std::string mod);

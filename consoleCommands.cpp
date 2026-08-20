@@ -152,6 +152,44 @@ std::string getModVersionFromGithub(std::string repositoryName, bool excludePrer
     }
     return result;
 }
+std::vector<std::vector<std::string>> getModList() {
+    std::vector<std::vector<std::string>> result(1);
+    std::ifstream modList("mod-list.tsv");
+    std::string line;
+    for (unsigned int lineIndex = 0; std::getline(modList, line);++lineIndex) {
+        result.at(lineIndex).resize(0);
+        for (unsigned int prevIndex = 0, nextIndex = 0; result.at(lineIndex).size() < 5 && prevIndex < line.size() && nextIndex < line.size(); prevIndex = nextIndex + 1) {
+            nextIndex = readTo(line, '\t', prevIndex);
+            result.at(lineIndex).push_back(line.substr(prevIndex, nextIndex - prevIndex));
+        }
+        result.resize(result.size() + 1);
+    }
+    return result;
+}
+std::vector<std::string> getModList(std::string name) {
+    std::vector<std::string> result;
+    std::ifstream modList("mod-list.tsv");
+    for (std::string line; std::getline(modList, line);) {
+        if (line.size() > name.size() && line.substr(0, name.size()) == name) {
+            for (unsigned int prevIndex = 0, nextIndex = 0; result.size() < 5 && prevIndex < line.size() && nextIndex < line.size(); prevIndex = nextIndex + 1) {
+                nextIndex = readTo(line, '\t', prevIndex);
+                result.push_back(line.substr(prevIndex, nextIndex - prevIndex));
+            }
+            return result;
+        }
+    }
+    return result;
+}
+bool addToLibraryFromModList(std::string name, bool safety) { // BOOKMARK
+    if (safety && fileExists("Mod-Library/" + name)) {
+        return false;
+    }
+    std::vector<std::string> mod = getModList(name);
+    if (mod.size() < 5) {
+        return false;
+    }
+    return addToLibraryFromGithub(mod.at(0), mod.at(1), mod.at(2), (mod.at(3) == "1"));
+}
 
 // Changes required, but not coding ones
 

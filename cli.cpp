@@ -236,128 +236,60 @@ bool cli(bool devMode) {
             sortModInLibrary(mod);
             std::cout << "Sorted '" << mod << "'\n";
         }
-        else if (command.substr(0,22) == "addToLibraryFromGithub") { // BOOKMARK
+        else if (command.substr(0,22) == "addToLibraryFromGithub" && devMode) { // BOOKMARK
             addToLibraryFromGithub("Nautilus", "SubnauticaModding/Nautilus", "", false);
         }
-        else if (command.substr(0,30) == "addBepInExAndNautilusToLibrary") { // BOOKMARK
+        else if (command.substr(0,30) == "addBepInExAndNautilusToLibrary") {
             addBepInExAndNautilusToLibrary();
         }
-//        else if (command.substr(0,9) == "dlBepInEx") { // To delete
-//            index = readTo(command, '"', 11)-1;
-//            std::string location = command.substr(11, index - 10);
-//            if (dlBepInEx(location)) {
-//                std::cout << "\nBepInEx successfully downloaded.\nNow open Subnautica, quit from main menu, and run 'installBepInEx' to get started!\n";
-//            }
-//            else {
-//                std::cout << "\nBepInEx already installed.\n";
-//            }
-//        }
-//        else if (command.substr(0,14) == "installBepInEx") {
-//            std::string location;
-//            if (command.length() > 16) {
-//                index = readTo(command, '"', 16)-1;
-//                location = command.substr(16, index - 15);
-//            }
-//            else {
-//                location = settings.getSubnauticaDirectory();
-//            }
-//
-//            std::ifstream fin("Mod-List.tsv");
-//            std::string repo;
-//            std::string fileName;
-//            std::string finalName;
-//            std::string includeAllReleases;
-//            std::string suffix;
-//            std::string removeStr;
-//            std::string temp;
-//            for (short int i = 0; i < 2; ++i) {
-//                std::getline(fin, repo, '\t');
-//                std::getline(fin, fileName, '\t');
-//                std::getline(fin, finalName, '\t');
-//                std::getline(fin, includeAllReleases, '\t');
-//                std::getline(fin, suffix, '\t');
-//                std::getline(fin, removeStr, '\t');
-//                std::getline(fin, temp);
-//                std::cout << repo << ", " << fileName << ", " << finalName << ", " << includeAllReleases << ", " << suffix << ", " << removeStr << std::endl;
-//                addToLibrary(repo, fileName, finalName, includeAllReleases.at(0) == '1', suffix.at(0) == '1', removeStr);
-//            }
-//
-//            if (installBepInEx(location)) {
-//                std::cout << "\nBepInEx successfully installed!\n";
-//            }
-//            else {
-//                std::cout << "\nBepInEx already installed.\n";
-//            }
-//        }
-//        else if (command.substr(0,12) == "addToLibrary") { // Either pass file path or mod name
-//            index = readTo(command, '"', 14)-1;
-//            std::string filePath = command.substr(14, index - 13);
-//            std::string finalName;
-//            if (command.length() > index + 4) {
-//                index2 = readTo(command, '"', index + 4)-1;
-//                finalName = command.substr(index + 4, index2 - index - 3);
-//            }
-//            else {
-//                finalName = "";
-//            }
-//            if (addToLibrary(filePath, finalName)) {
-//                std::cout << '\'' << filePath << "' successfully added to your library!\n";
-//            }
-//            else {
-//                std::cout << "Installation failed.\n";
-//            }
-//        }
-//        else if (command.substr(0,14) == "addToLibraryGh" && devMode) {
-//            index = readTo(command, '"', 16)-1;
-//            std::string repo = command.substr(16, index - 15);
-//            index2 = readTo(command, '"', index + 4)-1;
-//            std::string fileName = command.substr(index + 4, index2 - index - 3);
-//            index = readTo(command, '"', index2 + 4)-1;
-//            std::string finalName = command.substr(index2 + 4, index - index2 - 3);
-//            unsigned short int includePreReleases = false;
-//            unsigned short int suffix = false;
-//            std::string removeStr = "";
-//            if (command.length() > index + 3) {
-//                includePreReleases = command.at(index + 3) != '0';
-//            }
-//            if (command.length() > index + 5) {
-//                suffix = command.at(index + 5) != '0';
-//            }
-//            if (command.length() > index + 8) {
-//                removeStr = command.substr(index + 8, command.length() - index - 9);
-//            }
-//            if (addToLibrary(repo, fileName, finalName, includePreReleases, suffix, removeStr)) {
-//                std::cout << '\'' << finalName << "' successfully added to your library!\n";
-//            }
-//            else {
-//                std::cout << "Installation failed.\n";
-//            }
-//        }
-        else if (command.substr(0,19) == "listInstallableMods") {
-            std::ifstream fin("Mod-List.tsv");
-            std::string tempText;
-            while (std::getline(fin, command)) {
-                tempText = "";
-                for (int i = 0; i < command.size() && command.at(i) != '\t'; ++i) {
-                    tempText += command.at(i);
-                }
-                std::cout << "\n- " << tempText << std::endl;
-                tempText = "";
-                for (int i = command.size() - 1; i >= 0 && command.at(i) != '\t'; --i) {
-                    tempText = command.at(i) + tempText;
-                }
-                short int counter = 0;
-                for (int i = 0; i < tempText.size(); ++i) {
-                    std::cout << tempText.at(i);
-                    ++counter;
-                    if (counter > 50 && tempText.at(i) == ' ') {
-                        std::cout << std::endl;
-                        counter = 0;
-                    }
+        else if (command.substr(0,30) == "getModList") {
+//            std::vector<std::string> result = getModList("Nautilus");
+            std::vector<std::vector<std::string>> result = getModList();
+            std::cout << "Mods:\n";
+            for (std::vector<std::string> line : result) {
+                std::cout << "- ";
+                for (std::string value : line) {
+//                for (std::string value : result) {
+                    std::cout << value << ", ";
                 }
                 std::cout << std::endl;
             }
         }
+        else if (command.substr(0,23) == "addToLibraryFromModList") {
+            index = readTo(command, '"', 25)-1;
+            std::string mod = command.substr(25, index - 24);
+            if (addToLibraryFromModList(mod, !devMode)) {
+                std::cout << "Added '" << mod << "' to Library.\n";
+            }
+            else {
+                std::cout << "Failed.\n";
+            }
+        }
+//        else if (command.substr(0,19) == "listInstallableMods") {
+//            std::ifstream fin("Mod-List.tsv");
+//            std::string tempText;
+//            while (std::getline(fin, command)) {
+//                tempText = "";
+//                for (int i = 0; i < command.size() && command.at(i) != '\t'; ++i) {
+//                    tempText += command.at(i);
+//                }
+//                std::cout << "\n- " << tempText << std::endl;
+//                tempText = "";
+//                for (int i = command.size() - 1; i >= 0 && command.at(i) != '\t'; --i) {
+//                    tempText = command.at(i) + tempText;
+//                }
+//                short int counter = 0;
+//                for (int i = 0; i < tempText.size(); ++i) {
+//                    std::cout << tempText.at(i);
+//                    ++counter;
+//                    if (counter > 50 && tempText.at(i) == ' ') {
+//                        std::cout << std::endl;
+//                        counter = 0;
+//                    }
+//                }
+//                std::cout << std::endl;
+//            }
+//        }
 
         else if (command.substr(0,7) == "getMods") {
             command = getMods();
