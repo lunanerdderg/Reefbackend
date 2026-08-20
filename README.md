@@ -14,9 +14,9 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Function to save all changes to Profile made in-game
 * Keep track of Modlist dependencies
 * Implement Nexus compatibility (using API key)
-  * List available mods from Nexus
-  * Download mod files from Nexus
-  * Keep track of Nexus mod dependencies
+ * List available mods from Nexus
+ * Download mod files from Nexus
+ * Keep track of Nexus mod dependencies
 * Implement `help` command
 * Safeguards for users
 
