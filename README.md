@@ -23,6 +23,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Release:
 
+* Elegantly handle `config`-only and `patchers`-only mods
 * Add ability to scan for mod updates
 * Add ability to update mods (manually and automatically)
 * Return only specific settings to default, not all simultaneously
