@@ -185,7 +185,7 @@ bool sortModInLibrary(std::string mod) { // sortModInLibrary "BepInEx Tweaks"
     }
     return true;
 }
-bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains, bool excludePrereleases) { // BOOKMARK
+bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains, bool excludePrereleases) {
     std::string location = "Mod-Library/";
     location += name;
     location += '/';
