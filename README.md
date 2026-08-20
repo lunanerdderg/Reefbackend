@@ -62,6 +62,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Keep track of Github mod versions
 * Read Modlist for functions which need it, and print it at request for user
 * Add mods to library from Modlist
+* Remove mods from Modlist
 
 # Building
 
