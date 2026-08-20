@@ -13,12 +13,14 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Apply Profiles to actual Subnautica game directory
 * Keep track of mod versions
 * Implement Nexus compatibility (using API key)
+* Keep track of mod dependencies
 * Implement `help` command
 * Safeguards for users
 
 # To do before Release:
 
 * Add ability to update mods
+* Automatically install mod dependencies with mods
 * Implement unzip library
 * Implement unrar library
 * Implement 7zip library
