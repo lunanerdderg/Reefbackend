@@ -10,7 +10,7 @@ void Settings::resetSettings() {
     this->changeSubnauticaDirectory(findSubnautica());
 }
 void Settings::readSettings() {
-    if (!inProject("settings.tsv")) {
+    if (!fileExists("settings.tsv")) {
         this->resetSettings();
     }
     std::string setting;
@@ -90,7 +90,7 @@ unsigned short int Settings::changeSavesDirectory(unsigned short int location) {
 }
 
 void Settings::writeToSettings() {
-    if (!inProject("settings.tsv")) {
+    if (!fileExists("settings.tsv")) {
         this->resetSettings();
     }
     std::string setting;

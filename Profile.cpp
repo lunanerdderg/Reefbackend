@@ -3,7 +3,7 @@
 // Function to install Profile to Subnautica directory
 
 bool Profile::profileExists() {
-    for (auto const& folder : fsys::directory_iterator{getPath() + "/Profiles/"}) {
+    for (auto const& folder : fsys::directory_iterator{"Profiles/"}) {
         if (folder.path().filename().string() == this->name) {
             return true;
         }
@@ -12,15 +12,15 @@ bool Profile::profileExists() {
 }
 
 void Profile::makeProfile() {
-    makeDirectory(getPath() + "/Profiles/" + this->name + "/config");
-    makeDirectory(getPath() + "/Profiles/" + this->name + "/patchers");
-    std::ofstream fout(getPath() + "/Profiles/" + this->name + "/plugins.tsv");
+    makeDirectory("Profiles/" + this->name + "/config");
+    makeDirectory("Profiles/" + this->name + "/patchers");
+    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
     fout << "Nautilus\t1\nBepInEx Tweaks\t1";
     fout.close();
 }
 
 std::string Profile::getTsvContents() {
-    std::ifstream fin(getPath() + "/Profiles/" + this->name + "/plugins.tsv");
+    std::ifstream fin("Profiles/" + this->name + "/plugins.tsv");
     std::string fileContents = "";
     std::string line;
     while (std::getline(fin, line)) {
@@ -32,14 +32,14 @@ std::string Profile::getTsvContents() {
 
 void Profile::addMod(std::string mod) {
     std::string contents = this->getTsvContents();
-    std::ofstream fout(getPath() + "/Profiles/" + this->name + "/plugins.tsv");
+    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
     fout << contents << mod << "\t1";
     fout.close();
 }
 
 void Profile::disableMod(std::string mod) {
     std::string fileContents = this->getTsvContents();
-    std::ofstream fout(getPath() + "/Profiles/" + this->name + "/plugins.tsv");
+    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
     for (int i = 0; i < fileContents.length()-mod.length(); ++i) {
         if (fileContents.substr(i,mod.length()) == mod) {
             fileContents[i + mod.length() + 1] = '0';
@@ -52,7 +52,7 @@ void Profile::disableMod(std::string mod) {
 
 void Profile::removeMod(std::string mod) {
     std::string fileContents = this->getTsvContents();
-    std::ofstream fout(getPath() + "/Profiles/" + this->name + "/plugins.tsv");
+    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
     for (int i = 0; i < fileContents.length()-mod.length(); ++i) {
         if (fileContents.substr(i,mod.length()) == mod) {
             fileContents = fileContents.substr(0,i-1) + fileContents.substr(i + mod.length() + 2);

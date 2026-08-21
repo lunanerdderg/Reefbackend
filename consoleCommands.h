@@ -14,12 +14,16 @@ namespace fsys = std::filesystem;
 // Cross-platform
 unsigned short int readTo(std::string, char query='\t', unsigned int index=0);
 unsigned short int fileExists(std::string, unsigned short int exitNum=1);
-bool inProject(std::string);
 bool makeDirectory(std::string);
-bool moveFile(std::string, std::string);
+//bool makeFile(std::string fileName);
 bool makeFile(std::string contents, std::string fileName);
+bool copyFile(std::string, std::string);
 bool deleteFile(std::string);
-std::string getModParent(std::string);
+bool moveFile(std::string, std::string);
+bool createNecessaryFolders();
+std::string getProfiles();
+std::string getMods();
+//std::string getModParent(std::string);
 //std::string getInternalFiles(std::string);
 //bool extensionInside(std::string, std::string extension=".dll");
 
@@ -34,30 +38,18 @@ std::vector<std::string> getModList(std::string name);
 bool addToLibraryFromModList(std::string name, bool safety=false);
 
 // Changes needed for cross-platform, but not programming ones
-bool createModLibraryFolder();
 bool sortModInLibrary(std::string mod);
 bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::string contains="", bool excludePrereleases=true);
 bool addBepInExAndNautilusToLibrary();
 bool removeModFromLibrary(std::string modName);
 
-bool copyFile(std::string, std::string);
 bool renameFile(std::string, std::string);
 
-std::string getProfiles();
-std::string getMods();
-
 // Linux-only
-std::string getPath();
+//std::string getPath();
 std::string getHomeDirectory();
 unsigned short int findSubnautica();
     // Literally uses commands
 unsigned short int commandDoesNotExist(std::string, unsigned short int exitNum=1);
 bool haveAllNecessaryDependencies();
 unsigned short int unzip(std::string, std::string);
-
-// To delete
-//bool dlNautilus(std::string);
-//bool dlBepInEx(std::string);
-//bool installBepInEx(std::string);
-//bool addToLibrary(std::string, std::string finalName="");
-//bool addToLibrary(std::string, std::string, std::string, bool includeAllReleases=true, bool suffix=false, std::string removeStr="");

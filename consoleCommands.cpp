@@ -19,9 +19,12 @@ unsigned short int fileExists(std::string file, unsigned short int exitNum) { //
     }
     return 0;
 }
-bool inProject(std::string file) { // Get if file is in executable directory
-    return fileExists(getPath() + '/' + file);
-}
+//bool makeFile(std::string fileName) {
+//    std::ofstream foutOne(fileName.c_str());
+//    foutOne << "";
+//    foutOne.close();
+//    return true;
+//}
 bool makeFile(std::string contents, std::string fileName) {
     std::ofstream foutOne(fileName.c_str(), std::ios::binary);
     foutOne << contents;
@@ -29,25 +32,73 @@ bool makeFile(std::string contents, std::string fileName) {
     return true;
 }
 bool makeDirectory(std::string destination) {
+    if (fileExists(destination)) {
+        return false;
+    }
     return fsys::create_directories(destination);
 }
-bool moveFile(std::string file, std::string destination) {
-    copyFile(file, destination);
-    deleteFile(file);
+bool copyFile(std::string file, std::string destination) {
+    makeDirectory(destination);
+    if (fsys::is_directory(file)) {
+        unsigned int slash = file.find_last_of('/');
+        if (slash != 0) {
+            ++slash;
+        }
+//        if (destination == "") {
+//            destination += '/';
+//        }
+        destination += file.substr(slash);
+    }
+    fsys::copy(file, destination, fsys::copy_options::overwrite_existing | fsys::copy_options::recursive);
     return true;
 }
 bool deleteFile(std::string destination) {
     fsys::remove_all(destination);
     return true;
 }
-std::string getModParent(std::string directory) {
-    for (auto const& folder : fsys::recursive_directory_iterator{directory}) {
-        if (folder.is_directory() && (folder.path().filename().string() == "plugins" || folder.path().filename().string() == "config")) {
-            return folder.path().parent_path().string();
+bool moveFile(std::string file, std::string destination) {
+    copyFile(file, destination);
+    deleteFile(file);
+    return true;
+}
+bool createNecessaryFolders() { // Returns true if any folders needed to be created
+    if (!fileExists("Mod-Library")) {
+        makeDirectory("Mod-Library");
+    }
+    if (!fileExists("Profiles")) {
+        makeDirectory("Profiles");
+    }
+    return true;
+}
+std::string getProfiles() {
+    std::string result = "";
+    for (auto const& folder : fsys::directory_iterator{"Profiles"}) {
+        if (folder.is_directory()) {
+            result += folder.path().filename().string();
+            result += '\n';
         }
     }
-    return "";
+    return result;
 }
+std::string getMods() {
+    std::string result = "";
+    for (auto const& folder : fsys::directory_iterator{"Mod-Library"}) {
+        if (folder.is_directory()) {
+            result += folder.path().filename().string();
+            result += '\n';
+        }
+    }
+    return result;
+}
+
+//std::string getModParent(std::string directory) {
+//    for (auto const& folder : fsys::recursive_directory_iterator{directory}) {
+//        if (folder.is_directory() && (folder.path().filename().string() == "plugins" || folder.path().filename().string() == "config")) {
+//            return folder.path().parent_path().string();
+//        }
+//    }
+//    return "";
+//}
 //std::string getInternalFiles(std::string directory) {
 //    std::string result = "";
 //    for (auto const& folder : fsys::recursive_directory_iterator{directory}) {
@@ -191,17 +242,11 @@ bool addToLibraryFromModList(std::string name, bool safety) { // BOOKMARK
     return addToLibraryFromGithub(mod.at(0), mod.at(1), mod.at(2), (mod.at(3) == "1"));
 }
 
+
 // Changes required, but not coding ones
 
-bool createModLibraryFolder() { // Returns true if any folders needed to be created
-    if (!inProject("Mod-Library")) {
-        makeDirectory(getPath() + "/Mod-Library");
-        return true;
-    }
-    return false;
-}
-bool sortModInLibrary(std::string mod) { // sortModInLibrary "BepInEx Tweaks"
-    std::string location = getPath() + "/Mod-Library/" + mod;
+bool sortModInLibrary(std::string mod) {
+    std::string location = "Mod-Library/" + mod;
     if (fileExists(location + "/BepInEx")) {
         if (fileExists(location + "doorstop_config.ini")) {
             deleteFile(location + "doorstop_config.ini");
@@ -213,9 +258,9 @@ bool sortModInLibrary(std::string mod) { // sortModInLibrary "BepInEx Tweaks"
             deleteFile(location + ".doorstop_version");
         }
         renameFile(location, ".temp");
-        renameFile(getPath() + "/Mod-Library/.temp/BepInEx", mod);
-        moveFile(getPath() + "/Mod-Library/.temp/" + mod, "Mod-Library");
-        deleteFile(getPath() + "/Mod-Library/.temp/");
+        renameFile("Mod-Library/.temp/BepInEx", mod);
+        moveFile("Mod-Library/.temp/" + mod, "Mod-Library/" + mod);
+        deleteFile("Mod-Library/.temp/");
     }
     if (fileExists(location + "/plugin") || fileExists(location + "/config") || fileExists(location + "/patchers") || fileExists(location + "/core")) {
         return true;
@@ -234,6 +279,7 @@ bool sortModInLibrary(std::string mod) { // sortModInLibrary "BepInEx Tweaks"
     for (auto const& file : fsys::directory_iterator(location)) {
         std::string fileString = file.path().string();
         if (fileString != location + "/plugins") {
+            std::cout << fileString  << ", " << location << "/plugins" << std::endl;
             moveFile(fileString, location + "/plugins");
         }
     }
@@ -253,7 +299,7 @@ bool addToLibraryFromGithub(std::string name, std::string repositoryName, std::s
         //
     }
     else {
-        if (unzip(getPath() + '/' + location + modFile, getPath() + '/' + location) > 0) {
+        if (unzip(location + modFile, location) > 0) { // Absolute path
             deleteFile(location);
             return false;
         }
@@ -268,56 +314,28 @@ bool addBepInExAndNautilusToLibrary() {
     return (addToLibraryFromGithub("BepInEx", "toebeann/BepInEx.Subnautica") && addToLibraryFromGithub("Nautilus", "SubnauticaModding/Nautilus", "SN.STABLE", false));
 }
 bool removeModFromLibrary(std::string modName) {
-    return (deleteFile(getPath() + "/Mod-Library/" + modName) && deleteFile(getPath() + "/Mod-Library/" + modName + ".version"));
-}
-bool copyFile(std::string file, std::string destination) {
-    makeDirectory(file.substr(file.find_last_of('/') + 1));
-    fsys::copy(file, destination + '/' + file.substr(file.find_last_of('/') + 1), fsys::copy_options::overwrite_existing | fsys::copy_options::recursive);
-    return true;
+    return (deleteFile("Mod-Library/" + modName) && deleteFile("Mod-Library/" + modName + ".version"));
 }
 bool renameFile(std::string file, std::string newName) {
-    fsys::rename(file, file.substr(0, file.find_last_of('/')) + '/' + newName);
+    fsys::rename(file, file.substr(0, file.find_last_of('/') + 1) + newName);
     return true;
 }
-
-std::string getProfiles() {
-    std::string result = "";
-    for (auto const& folder : fsys::directory_iterator{getPath() + "/Profiles/"}) { // "\\Profiles\\"
-        if (folder.is_directory()) {
-            result += folder.path().filename().string();
-            result += '\n';
-        }
-    }
-    return result;
-}
-std::string getMods() {
-    std::string result = "";
-    for (auto const& folder : fsys::directory_iterator{getPath() + "/Mod-Library/"}) {
-        if (folder.is_directory()) {
-            result += folder.path().filename().string();
-            result += '\n';
-        }
-    }
-    return result;
-}
-
-
 
 // Linux
 // Suppress Linux console: >/dev/null 2>&1
 
-std::string getPath() {
-    char result[PATH_MAX];
-    long long int count = readlink("/proc/self/exe", result, PATH_MAX);
-    std::string returnVal(result, (count > 0) ? count : 0);
-    int index = returnVal.length();
-    for (int i = 0; i < returnVal.length()-5; ++i) {
-        if (returnVal.substr(i, 5) == "/bin/") {
-            index = i;
-        }
-    }
-    return returnVal.substr(0,index);
-}
+//std::string getPath() {
+//    char result[PATH_MAX];
+//    long long int count = readlink("/proc/self/exe", result, PATH_MAX);
+//    std::string returnVal(result, (count > 0) ? count : 0);
+//    int index = returnVal.length();
+//    for (int i = 0; i < returnVal.length()-5; ++i) {
+//        if (returnVal.substr(i, 5) == "/bin/") {
+//            index = i;
+//        }
+//    }
+//    return returnVal.substr(0,index);
+//}
 std::string getHomeDirectory() {
     const char *homedir;
     if ((homedir = getenv("HOME")) == NULL) {
@@ -385,169 +403,6 @@ unsigned short int unzip(std::string file, std::string location) { // Returns 0 
     system(file.c_str());
     return result;
 }
-
-// To delete
-
-//bool dlBepInEx(std::string subnauticaDirectory) {
-//    std::string directory = subnauticaDirectory + "/BepInEx"; // Windows: td::string directory = subnauticaDirectory + "\\BepInEx";
-//    if (fileExists(directory)) {
-//        return false;
-//    }
-//    dlLatestGithubRelease("toebeann/BepInEx.Subnautica", "Tobey.s.BepInEx.Pack.for.Subnautica.zip", subnauticaDirectory); // Windows: dlLatestGithubRelease("toebeann\\BepInEx.Subnautica", "Tobey.s.BepInEx.Pack.for.Subnautica.zip", subnauticaDirectory);
-//    directory = subnauticaDirectory + "/Tobey.s.BepInEx.Pack.for.Subnautica.zip"; // Windows: directory = subnauticaDirectory + "\\Tobey.s.BepInEx.Pack.for.Subnautica.zip";
-//    unzip(directory, subnauticaDirectory);
-//    deleteFile(directory);
-//    return true;
-//}
-//bool installBepInEx(std::string subnauticaDirectory) {
-//    if (inProject("Mod-Library/BepInEx")) {
-//        return false;
-//    }
-//    std::string path = getPath() + "/Mod-Library/BepInEx";
-//    makeDirectory(path);
-//    moveFile(subnauticaDirectory + "/BepInEx", path);
-//    moveFile(subnauticaDirectory + "/changelog.txt", path);
-//    moveFile(subnauticaDirectory + "/doorstop_config.ini", path);
-//    moveFile(subnauticaDirectory + "/libdoorstop.dylib", path);
-//    moveFile(subnauticaDirectory + "/run_bepinex.sh", path);
-//    moveFile(subnauticaDirectory + "/steam_appid.txt", path);
-//    moveFile(subnauticaDirectory + "/.doorstop_version", path);
-//    copyFile(subnauticaDirectory + "/winhttp.dll", path);
-//    return true;
-//}
-//bool addToLibrary(std::string filePath, std::string finalName) {
-//    bool isPath = false;
-//    for (int i = 1; i < filePath.size() && filePath.at(i - 1); ++i) {
-//        if (filePath.at(i) == '/') { // Windows: if (filePath.at(i) == '\\') {
-//            isPath = true;
-//        }
-//    }
-//    if (isPath) {
-//        if (finalName == "") {
-//            finalName = fsys::path(filePath.c_str()).stem().string();
-//        }
-//        std::string path = getPath() + "/Mod-Library/" + finalName;
-//        std::string parentPath;
-//        std::string internalFiles;
-//        bool isArchive;
-//        {
-//            std::string extension = fsys::path(filePath.c_str()).extension().string();
-//            isArchive = (extension == ".zip" || extension == ".rar" || extension == ".7z" || extension.substr(0,4) == ".tar");
-//        }
-//        makeDirectory(path);
-//        if (isArchive) {
-//            unzip(filePath, path);
-//        }
-//        std::string archive = path + '/' + filePath;
-//        deleteFile(path + '/' + filePath);
-//        parentPath = getModParent(path);
-//        if (parentPath == "") {
-//            makeDirectory(path + "/plugins");
-//            bool dllInside = extensionInside(path);
-//            for (auto const& file : fsys::directory_iterator{path}) {
-//                if (file.path().string() != path + "/plugins") {
-//                    if (!dllInside && file.path().extension().string() == ".txt") {
-//                        makeDirectory(path + "/plugins/CustomCraft3/WorkingFiles");
-//                        moveFile(file.path().string(), path + "/plugins/CustomCraft3/WorkingFiles");
-//                    }
-//                    else if (!dllInside && file.path().extension().string() == ".structure") {
-//                        makeDirectory(path + "/plugins/EpicStructureLoader/Structures");
-//                        moveFile(file.path().string(), path + "/plugins/EpicStructureLoader/Structures");
-//                    }
-//                    else if (!dllInside && file.path().extension().string() == ".optoctreepatch") {
-//                        makeDirectory(path + "/plugins/TerrainPatcher/patches");
-//                        moveFile(file.path().string(), path + "/plugins/TerrainPatcher/patches");
-//                    }
-//                    else {
-//                        moveFile(file.path().string(), path + "/plugins");
-//                    }
-//                }
-//            }
-//        }
-//        else if (parentPath != path) {
-//            for (auto const& file : fsys::directory_iterator{parentPath}) {
-//                moveFile(file.path().string(),path);
-//            }
-//            deleteFile(parentPath);
-//        }
-//        if (fileExists(getPath() + '/' + finalName)) {
-//            deleteFile(getPath() + '/' + finalName);
-//        }
-//    }
-//    else {
-//        std::ifstream fin("Mod-List.tsv");
-//        std::string line;
-//        while (std::getline(fin, line)) {
-//            if (line.substr(0,filePath.size()) == filePath) {
-//                unsigned int prevIndex = 0;
-//                std::vector<std::string> parameters = {};
-//                for (int i = 0; i < line.size(); ++i) {
-//                    if (line.at(i) == '\t') {
-//                        parameters.push_back(line.substr(prevIndex, i - prevIndex));
-//                        prevIndex = i + 1;
-//                    }
-//                }
-//                parameters[3][0] -= '0';
-//                parameters[4][0] -= '0';
-//                return addToLibrary(parameters.at(1),parameters.at(2),parameters.at(0),parameters.at(3).at(0),parameters.at(4).at(0),parameters.at(5));
-//            }
-//        }
-//    }
-//    return true;
-//}
-//bool addToLibrary(std::string repo, std::string fileName, std::string finalName, bool includeAllReleases, bool suffix, std::string removeStr) {
-//    std::string path = getPath() + "/Mod-Library/" + finalName;
-//    std::string parentPath;
-//    std::string internalFiles;
-//    makeDirectory(path);
-//    bool result = dlLatestGithubRelease(repo, fileName, path, includeAllReleases, suffix, removeStr);
-//    if (!result) {
-//        return false;
-//    }
-//    std::string archive = path + '/' + fileName;
-//    if (suffix) {
-//        archive = archive.substr(0, archive.length()-4) + '*' + archive.substr(archive.length()-4, 4);
-//        unzip(archive, path);
-//    }
-//    else {
-//        unzip(archive, path);
-//    }
-//    deleteFile(path + '/' + fileName);
-//    parentPath = getModParent(path);
-//    if (parentPath == "") {
-//        makeDirectory(path + "/plugins");
-//        bool dllInside = extensionInside(path);
-//        for (auto const& file : fsys::directory_iterator{path}) {
-//            if (file.path().string() != path + "/plugins") {
-//                if (!dllInside && file.path().extension().string() == ".txt") {
-//                    makeDirectory(path + "/plugins/CustomCraft3/WorkingFiles");
-//                    moveFile(file.path().string(), path + "/plugins/CustomCraft3/WorkingFiles");
-//                }
-//                else if (!dllInside && file.path().extension().string() == ".structure") {
-//                    makeDirectory(path + "/plugins/EpicStructureLoader/Structures");
-//                    moveFile(file.path().string(), path + "/plugins/EpicStructureLoader/Structures");
-//                }
-//                else if (!dllInside && file.path().extension().string() == ".optoctreepatch") {
-//                    makeDirectory(path + "/plugins/TerrainPatcher/patches");
-//                    moveFile(file.path().string(), path + "/plugins/TerrainPatcher/patches");
-//                }
-//                else {
-//                    moveFile(file.path().string(), path + "/plugins");
-//                }
-//            }
-//        }
-//    }
-//    else if (parentPath != path) {
-//        for (auto const& file : fsys::directory_iterator{parentPath}) {
-//            moveFile(file.path().string(),path);
-//        }
-//        deleteFile(parentPath);
-//    }
-//    if (fileExists(getPath() + '/' + finalName)) {
-//        deleteFile(getPath() + '/' + finalName);
-//    }
-//    return true;
-//}
 
 
 // Windows

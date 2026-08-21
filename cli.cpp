@@ -8,24 +8,17 @@ bool cli(bool devMode) {
     bool running = true;
     std::string command;
     unsigned short int result;
-    createModLibraryFolder();
+    if (!devMode) {
+        createNecessaryFolders();
+    }
     std::cout << "Type 'q' to quit.\n==============\n";
     while (running) {
         std::getline(std::cin, command);
         std::cout << "-------\n";
         if (command.length() == 0) {}
-        else if (command.substr(0,7) == "getPath" && devMode) {
-            std::cout << "Path:\n" << getPath() << std::endl;
-        }
-        else if (command.substr(0,22) == "createModLibraryFolder" && devMode) {
-            if (createModLibraryFolder()) {
-                std::cout << "Mod-Library folder successfully created!\n";
-            }
-            else {
-                std::cout << "Mod-Library already exists.\n";
-            }
-
-        }
+//        else if (command.substr(0,7) == "getPath" && devMode) {
+//            std::cout << "Path:\n" << getPath() << std::endl;
+//        }
 
 
         // ------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,14 +69,14 @@ bool cli(bool devMode) {
                 std::cout << "7zip is installed\n";
             }
         }
-        else if (command.substr(0,28) == "haveAllNecessaryDependencies") {
-            if (haveAllNecessaryDependencies()) {
-                std::cout << "All necessary dependencies are installed. Run 'dependencies' to see if optional dependencies installed\n";
-            }
-            else {
-                std::cout << "Necessary dependencies are NOT installed. Please run 'dependencies' to see what you're missing.\n";
-            }
-        }
+//        else if (command.substr(0,28) == "haveAllNecessaryDependencies") {
+//            if (haveAllNecessaryDependencies()) {
+//                std::cout << "All necessary dependencies are installed. Run 'dependencies' to see if optional dependencies installed\n";
+//            }
+//            else {
+//                std::cout << "Necessary dependencies are NOT installed. Please run 'dependencies' to see what you're missing.\n";
+//            }
+//        }
         else if (command.substr(0,10) == "fileExists" && devMode) {
             index = readTo(command, '"', 12)-1;
             std::string location = command.substr(12, index - 11);
@@ -107,10 +100,10 @@ bool cli(bool devMode) {
                 std::cout << "Command '" << temp << "' exists.\n";
             }
         }
-        else if (command.substr(0,9) == "inProject" && devMode) {
+        else if (command.substr(0,9) == "fileExists" && devMode) {
             index = readTo(command, '"', 11)-1;
             std::string temp = command.substr(11, index - 10);
-            if (inProject(temp)) {
+            if (fileExists(temp)) {
                 std::cout << "File '" << temp << "' is in project.\n";
             }
             else {
@@ -265,32 +258,6 @@ bool cli(bool devMode) {
                 std::cout << "Failed.\n";
             }
         }
-//        else if (command.substr(0,19) == "listInstallableMods") {
-//            std::ifstream fin("Mod-List.tsv");
-//            std::string tempText;
-//            while (std::getline(fin, command)) {
-//                tempText = "";
-//                for (int i = 0; i < command.size() && command.at(i) != '\t'; ++i) {
-//                    tempText += command.at(i);
-//                }
-//                std::cout << "\n- " << tempText << std::endl;
-//                tempText = "";
-//                for (int i = command.size() - 1; i >= 0 && command.at(i) != '\t'; --i) {
-//                    tempText = command.at(i) + tempText;
-//                }
-//                short int counter = 0;
-//                for (int i = 0; i < tempText.size(); ++i) {
-//                    std::cout << tempText.at(i);
-//                    ++counter;
-//                    if (counter > 50 && tempText.at(i) == ' ') {
-//                        std::cout << std::endl;
-//                        counter = 0;
-//                    }
-//                }
-//                std::cout << std::endl;
-//            }
-//        }
-
         else if (command.substr(0,7) == "getMods") {
             command = getMods();
             if (command == "") {
@@ -345,7 +312,7 @@ bool cli(bool devMode) {
         else if (command.substr(0,25) == "getSubnauticaDirectory") {
             std::cout << "Current Subnautica directory is '" << settings.getSubnauticaDirectory() << "'\n";
         }
-        else if (command.substr(0,25) == "getSavesDirectory") {
+        else if (command.substr(0,25) == "getSavesDirectory" && devMode) {
             std::cout << "Current saves directory is '" << settings.getSavesDirectory() << "'\n";
         }
         else if (command.substr(0,25) == "changeSubnauticaDirectory") {
