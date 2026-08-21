@@ -8,7 +8,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Pre-Release:
 
-* Mod Library dependency tracking capability (`MOD_NAME.depend` files in `Mod-Library`?)
+* Mod dependency tracking capability (`MOD_NAME.depend` files in `Mod-Library`?)
 * Function to save all changes to Profile (manual, not automatic)
 * Manually save previous log
 * Set default Profile (or vanilla)
