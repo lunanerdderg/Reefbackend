@@ -37,7 +37,6 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Implement 7zip library
 * Implement unrar library
 * Implement tar library
-* Eliminate as many absolute (non-relative) paths as possible
 * Polish features
 * Add bug-catching
 
@@ -70,6 +69,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Remove mods from Profiles
 * Apply Profiles to actual Subnautica game directory
 * Switch back from modded to vanilla and between Profiles
+* Eliminated all absolute (non-relative) paths, (aside from Subnautica directory, which is necessary)
 
 # Building
 
