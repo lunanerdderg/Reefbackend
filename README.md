@@ -31,6 +31,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Automatically save previous logs once Subnautica is closed
 * Automatically install mod dependencies with mods
 * Allow mods to be added directly to Profiles without requiring manual installation to Library first (automatic instead)
+* Test as many mods as possible to ensure sorting algorithm can handle all possible variations
 * Filter Nexus mods to exclude mods which require SMLHelper
 * Automatically create all files necessary for function of program if not detected in directory
 * Implement unzip library
