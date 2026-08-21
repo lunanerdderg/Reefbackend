@@ -340,7 +340,7 @@ bool cli(bool devMode) {
         else if (command.substr(0,11) == "openProfile") {
             index = readTo(command, '"', 13)-1;
             std::string name = command.substr(13, index - 12);
-            curProfile.changeProfile(name);
+            curProfile.selectDifferentProfile(name);
             std::cout << "Profile '" << name << "' opened.\n";
         }
         else if (command.substr(0,12) == "closeProfile") {
@@ -357,7 +357,7 @@ bool cli(bool devMode) {
         else if (command.substr(0,13) == "changeProfile") {
             index = readTo(command, '"', 15)-1;
             std::string name = command.substr(15, index - 14);
-            curProfile.changeProfile(name);
+            curProfile.selectDifferentProfile(name);
             std::cout << "Selected profile changed to '" << name << std::endl;
         }
         else if (command.substr(0,13) == "renameProfile") {
@@ -383,6 +383,26 @@ bool cli(bool devMode) {
             std::string name = command.substr(12, index - 11);
             curProfile.disableMod(name);
             std::cout << "Disabled '" << name << "' in selected profile.\n";
+        }
+        else if (command.substr(0,11) == "loadProfile") {
+            curProfile.loadProfile();
+            std::cout << "Selected profile loaded into Subnautica directory.\n";
+        }
+        else if (command.substr(0,13) == "unloadAllMods" && devMode) {
+            curProfile.unloadAllMods();
+            std::cout << "All mods unloaded from Subnautica directory.\n";
+        }
+        else if (command.substr(0,11) == "saveProfile") { // BOOKMARK
+            curProfile.saveProfile();
+            std::cout << "Current profile saved from Subnautica directory.\n";
+        }
+        else if (command.substr(0,13) == "unloadProfile") {
+            curProfile.unloadProfile();
+            std::cout << "Current profile saved and unloaded from Subnautica directory.\n";
+        }
+        else if (command.substr(0,14) == "loadNewProfile") {
+            curProfile.loadNewProfile("d");
+            std::cout << "New profile loaded into Subnautica directory.\n";
         }
 
 

@@ -8,19 +8,26 @@ class Profile {
         virtual ~Profile();
         bool deleteProfile();
         bool isProfileSelected();
-        bool changeProfile(std::string newName="");
+        bool selectDifferentProfile(std::string newName="");
         bool closeProfile();
         std::string getName();
-        bool rename(std::string newName);
-        void addMod(std::string);
-        void disableMod(std::string);
-        void removeMod(std::string);
+        bool rename(std::string);
+
+        bool addMod(std::string);
+        bool disableMod(std::string);
+        bool removeMod(std::string);
+
+        bool loadProfile();
+        bool saveProfile();
+        bool unloadProfile();
+        bool unloadAllMods();
+        bool loadNewProfile(std::string);
 
     private:
         std::string name;
         bool profileExists();
         std::string getTsvContents();
-        void makeProfile();
+        bool makeProfile();
 };
 
 #endif // PROFILE_H

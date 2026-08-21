@@ -18,7 +18,7 @@ bool Profile::deleteProfile() {
     return true;
 }
 
-bool Profile::changeProfile(std::string newName) {
+bool Profile::selectDifferentProfile(std::string newName) {
     this->name = newName;
     if (newName != "" && !this->profileExists()) {
         this->makeProfile();
@@ -57,32 +57,34 @@ bool Profile::profileExists() {
     return false;
 }
 
-void Profile::makeProfile() {
+bool Profile::makeProfile() {
     makeDirectory("Profiles/" + this->name + "/cache");
     makeDirectory("Profiles/" + this->name + "/config");
     makeDirectory("Profiles/" + this->name + "/patchers");
     makeDirectory("Profiles/" + this->name + "/Previous-Logs");
-    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
+    std::ofstream fout("Profiles/" + this->name + "/mods.tsv");
     fout << "";
     fout.close();
+    return true;
 }
 
 std::string Profile::getTsvContents() {
-    std::ifstream fin("Profiles/" + this->name + "/plugins.tsv");
+    std::ifstream fin("Profiles/" + this->name + "/mods.tsv");
     return std::string(std::istreambuf_iterator<char>(fin), std::istreambuf_iterator<char>());;
 }
 
-void Profile::addMod(std::string mod) {
+bool Profile::addMod(std::string mod) {
     std::string contents = this->getTsvContents();
-    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
+    std::ofstream fout("Profiles/" + this->name + "/mods.tsv");
     if (contents != "") {
         fout << contents << std::endl;
     }
     fout << mod << "\t1";
     fout.close();
+    return true;
 }
 
-void Profile::disableMod(std::string mod) {
+bool Profile::disableMod(std::string mod) {
     std::string fileContents = this->getTsvContents();
     for (int i = 0; i < fileContents.length()-mod.length(); ++i) {
         if (fileContents.substr(i,mod.length()) == mod) {
@@ -90,14 +92,15 @@ void Profile::disableMod(std::string mod) {
             break;
         }
     }
-    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
+    std::ofstream fout("Profiles/" + this->name + "/mods.tsv");
     fout << fileContents;
     fout.close();
+    return true;
 }
 
-void Profile::removeMod(std::string mod) {
+bool Profile::removeMod(std::string mod) {
     std::string fileContents = this->getTsvContents();
-    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
+    std::ofstream fout("Profiles/" + this->name + "/mods.tsv");
     for (int i = 0; i < fileContents.length()-mod.length(); ++i) {
         if (fileContents.substr(i,mod.length()) == mod) {
             fileContents = fileContents.substr(0,i-1) + fileContents.substr(i + mod.length() + 2);
@@ -106,4 +109,72 @@ void Profile::removeMod(std::string mod) {
     }
     fout << fileContents;
     fout.close();
+    return true;
 }
+
+bool Profile::loadProfile() {
+    Settings config;
+    if (this->name == "" || !fileExists("Mod-Library/BepInEx") || !fileExists("Mod-Library/Nautilus") || config.getSubnauticaDirectory() == "") {
+        return false;
+    }
+
+    for (auto const& file : fsys::directory_iterator{"Mod-Library/BepInEx"}) {
+        copyFile(file.path().string(), config.getSubnauticaDirectory());
+    }
+    for (auto const& folder : fsys::directory_iterator{"Mod-Library/Nautilus"}) {
+        for (auto const& file : fsys::directory_iterator{folder.path().string()}) {
+            copyFile(file.path().string(), config.getSubnauticaDirectory() + "/BepInEx/" + folder.path().filename().string());
+        }
+    }
+
+    std::istringstream mods(this->getTsvContents());
+    std::string mod;
+    while (std::getline(mods, mod)) {
+        if (mod.back() == '1') {
+            mod = mod.substr(0, mod.size() - 2);
+            for (auto const& folder : fsys::directory_iterator{"Mod-Library/" + mod}) {
+                for (auto const& file : fsys::directory_iterator{folder.path().string()}) {
+                    copyFile(file.path().string(), config.getSubnauticaDirectory() + "/BepInEx/" + folder.path().filename().string());
+                }
+            }
+        }
+    }
+
+    for (auto const& folder : fsys::directory_iterator{"Profiles/" + this->name}) {
+        if (fsys::is_directory(folder.path())) {
+            for (auto const& file : fsys::directory_iterator{folder.path().string()}) {
+                copyFile(file.path().string(), config.getSubnauticaDirectory() + "/BepInEx/" + folder.path().filename().string());
+            }
+        }
+    }
+    return true;
+}
+bool Profile::unloadAllMods() {
+    Settings config;
+    if (config.getSubnauticaDirectory() == "") {
+        return false;
+    }
+    for (auto const& file : fsys::directory_iterator{"Mod-Library/BepInEx"}) {
+        std::string fileToBeDeleted = config.getSubnauticaDirectory() + '/' + file.path().filename().string();
+        if (fileExists(fileToBeDeleted)) {
+            deleteFile(fileToBeDeleted);
+        }
+    }
+    return true;
+}
+bool Profile::saveProfile() { // BOOKMARK
+    return true;
+}
+bool Profile::unloadProfile() {
+    return (this->saveProfile() && this->unloadAllMods());
+}
+bool Profile::loadNewProfile(std::string newProfile) {
+    Settings config;
+    if (!fileExists("Profiles/" + newProfile) || !fileExists("Mod-Library/BepInEx") || !fileExists("Mod-Library/Nautilus") || config.getSubnauticaDirectory() == "") {
+        return false;
+    }
+    this->selectDifferentProfile(newProfile);
+    this->unloadProfile();
+    return this->loadProfile();
+}
+

@@ -47,7 +47,7 @@ bool copyFile(std::string file, std::string destination) {
 //        if (destination == "") {
 //            destination += '/';
 //        }
-        destination += file.substr(slash);
+        destination += '/' + file.substr(slash);
     }
     fsys::copy(file, destination, fsys::copy_options::overwrite_existing | fsys::copy_options::recursive);
     return true;
