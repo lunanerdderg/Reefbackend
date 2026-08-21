@@ -19,6 +19,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
   * Keep track of Nexus mod dependencies
 * Implement `help` command
 * Safeguards for users
+* Major bug fixes (minor bugs may remain)
 
 # To do before Release:
 
