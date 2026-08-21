@@ -9,10 +9,12 @@ class Settings {
         void resetSettings();
         std::string getSubnauticaDirectory();
         std::string getSavesDirectory();
+        std::string getDefaultProfile(); // BOOKMARK
         unsigned short int changeSubnauticaDirectory(std::string);
         unsigned short int changeSubnauticaDirectory(unsigned short int);
         unsigned short int changeSavesDirectory(std::string);
         unsigned short int changeSavesDirectory(unsigned short int);
+        bool changeDefaultProfile(std::string); // BOOKMARK
 
     private:
         std::string subnauticaDirectory;

@@ -231,7 +231,7 @@ std::vector<std::string> getModList(std::string name) {
     }
     return result;
 }
-bool addToLibraryFromModList(std::string name, bool safety) { // BOOKMARK
+bool addToLibraryFromModList(std::string name, bool safety) {
     if (safety && fileExists("Mod-Library/" + name)) {
         return false;
     }

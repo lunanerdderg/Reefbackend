@@ -76,7 +76,7 @@ unsigned short int Settings::changeSavesDirectory(unsigned short int location) {
     if (location == 1) {
         this->savesDirectory = "$HOME/.local/share/Steam/steamapps/common/Subnautica/SNAppData/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica\\SNAppData
     }
-//    else if (location == 2) {
+//    else if (location == 2) { // BOOKMARK
 //        this->savesDirectory = "$HOME/Games/Heroic/Subnautica/SNAppData/"; // Windows: C:\\\\Users\\h\\Games\\Heroic\\Subnautica\\SNAppData
 //    }
 //    else if (location == 3) {
