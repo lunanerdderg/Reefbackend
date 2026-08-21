@@ -1,8 +1,54 @@
 #include "Profile.h"
 
-// Function to install Profile to Subnautica directory
+Profile::Profile(std::string nameInput) { // Constructor assumes BepInEx already installed. Require user to install BepInEx first
+    this->name = nameInput;
+    if (this->name != "" && !this->profileExists()) {
+        this->makeProfile();
+    }
+}
+
+Profile::~Profile() {}
+
+bool Profile::deleteProfile() {
+    if (this->name == "") {
+        return false;
+    }
+    deleteFile("Profiles/" + this->name);
+    closeProfile();
+    return true;
+}
+
+bool Profile::changeProfile(std::string newName) {
+    this->name = newName;
+    if (newName != "" && !this->profileExists()) {
+        this->makeProfile();
+    }
+    return true;
+}
+
+bool Profile::closeProfile() {
+    this->name = "";
+    return true;
+}
+
+bool Profile::isProfileSelected() {
+    return this->name != "";
+}
+
+std::string Profile::getName() {
+    return this->name;
+}
+
+bool Profile::rename(std::string newName) {
+    renameFile("Profiles/" + this->name, newName);
+    this->name = newName;
+    return true;
+}
 
 bool Profile::profileExists() {
+    if (this->name == "") {
+        return false;
+    }
     for (auto const& folder : fsys::directory_iterator{"Profiles/"}) {
         if (folder.path().filename().string() == this->name) {
             return true;
@@ -12,40 +58,39 @@ bool Profile::profileExists() {
 }
 
 void Profile::makeProfile() {
+    makeDirectory("Profiles/" + this->name + "/cache");
     makeDirectory("Profiles/" + this->name + "/config");
     makeDirectory("Profiles/" + this->name + "/patchers");
+    makeDirectory("Profiles/" + this->name + "/Previous-Logs");
     std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
-    fout << "Nautilus\t1\nBepInEx Tweaks\t1";
+    fout << "";
     fout.close();
 }
 
 std::string Profile::getTsvContents() {
     std::ifstream fin("Profiles/" + this->name + "/plugins.tsv");
-    std::string fileContents = "";
-    std::string line;
-    while (std::getline(fin, line)) {
-        fileContents += line;
-        fileContents += '\n';
-    }
-    return fileContents;
+    return std::string(std::istreambuf_iterator<char>(fin), std::istreambuf_iterator<char>());;
 }
 
 void Profile::addMod(std::string mod) {
     std::string contents = this->getTsvContents();
     std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
-    fout << contents << mod << "\t1";
+    if (contents != "") {
+        fout << contents << std::endl;
+    }
+    fout << mod << "\t1";
     fout.close();
 }
 
 void Profile::disableMod(std::string mod) {
     std::string fileContents = this->getTsvContents();
-    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
     for (int i = 0; i < fileContents.length()-mod.length(); ++i) {
         if (fileContents.substr(i,mod.length()) == mod) {
             fileContents[i + mod.length() + 1] = '0';
             break;
         }
     }
+    std::ofstream fout("Profiles/" + this->name + "/plugins.tsv");
     fout << fileContents;
     fout.close();
 }
@@ -61,34 +106,4 @@ void Profile::removeMod(std::string mod) {
     }
     fout << fileContents;
     fout.close();
-}
-
-Profile::Profile(std::string nameInput) { // Constructor assumes BepInEx already installed. Require user to install BepInEx first
-    this->name = nameInput;
-    if (this->name != "" && !this->profileExists()) {
-        this->makeProfile();
-    }
-}
-
-Profile::~Profile() {}
-
-bool Profile::profileSelected() {
-    return this->name != "";
-}
-
-std::string Profile::getName() {
-    return this->name;
-}
-
-bool Profile::changeName(std::string newName) {
-    this->name = newName;
-    if (newName != "" && !this->profileExists()) {
-        this->makeProfile();
-    }
-    return true;
-}
-
-bool Profile::closeProfile() {
-    this->name = "";
-    return true;
 }

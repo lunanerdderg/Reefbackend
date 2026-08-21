@@ -88,7 +88,7 @@ bool cli(bool devMode) {
             }
         }
         else if (command.substr(0,16) == "getHomeDirectory" && devMode) {
-            std::cout << "Home is located at '" << getHomeDirectory() << "'\n";
+            std::cout << "Home is located at '" << getHomeDirectory() << std::endl;
         }
         else if (command.substr(0,19) == "commandDoesNotExist" && devMode) {
             index = readTo(command, '"', 21)-1;
@@ -209,25 +209,25 @@ bool cli(bool devMode) {
             index = readTo(command, '"', 25)-1;
             std::string repo = command.substr(25, index - 24);
             repo = getModVersionFromGithub(repo, false);
-            std::cout << "Created '" << repo << "'\n";
+            std::cout << "Created '" << repo << std::endl;
         }
         else if (command.substr(0,12) == "dlFromGithub" && devMode) {
             index = readTo(command, '"', 14)-1;
             std::string repo = command.substr(14, index - 13);
             repo = dlFromGithub(repo);
-            std::cout << "Created '" << repo << "'\n";
+            std::cout << "Created '" << repo << std::endl;
         }
         else if (command.substr(0,20) == "removeModFromLibrary" && devMode) {
             index = readTo(command, '"', 22)-1;
             std::string mod = command.substr(22, index - 21);
             removeModFromLibrary(mod);
-            std::cout << "Removed '" << mod << "'\n";
+            std::cout << "Removed '" << mod << std::endl;
         }
         else if (command.substr(0,16) == "sortModInLibrary" && devMode) {
             index = readTo(command, '"', 18)-1;
             std::string mod = command.substr(18, index - 17);
             sortModInLibrary(mod);
-            std::cout << "Sorted '" << mod << "'\n";
+            std::cout << "Sorted '" << mod << std::endl;
         }
         else if (command.substr(0,22) == "addToLibraryFromGithub" && devMode) { // BOOKMARK
             addToLibraryFromGithub("Nautilus", "SubnauticaModding/Nautilus", "", false);
@@ -310,22 +310,22 @@ bool cli(bool devMode) {
             }
         }
         else if (command.substr(0,25) == "getSubnauticaDirectory") {
-            std::cout << "Current Subnautica directory is '" << settings.getSubnauticaDirectory() << "'\n";
+            std::cout << "Current Subnautica directory is '" << settings.getSubnauticaDirectory() << std::endl;
         }
         else if (command.substr(0,25) == "getSavesDirectory" && devMode) {
-            std::cout << "Current saves directory is '" << settings.getSavesDirectory() << "'\n";
+            std::cout << "Current saves directory is '" << settings.getSavesDirectory() << std::endl;
         }
         else if (command.substr(0,25) == "changeSubnauticaDirectory") {
             index = readTo(command, '"', 27)-1;
             std::string location = command.substr(27, index - 26);
             settings.changeSubnauticaDirectory(location);
-            std::cout << "Subnautica directory set to '" << location << "'\n";
+            std::cout << "Subnautica directory set to '" << location << std::endl;
         }
         else if (command.substr(0,20) == "changeSavesDirectory" && devMode) {
             index = readTo(command, '"', 22)-1;
             std::string location = command.substr(22, index - 21);
             settings.changeSavesDirectory(location);
-            std::cout << "Saves directory set to '" << location << "'\n";
+            std::cout << "Saves directory set to '" << location << std::endl;
             std::cout << "SAVE FUNCTIONALITY DOES NOT EXIST YET!\n";
         }
 
@@ -340,21 +340,31 @@ bool cli(bool devMode) {
         else if (command.substr(0,11) == "openProfile") {
             index = readTo(command, '"', 13)-1;
             std::string name = command.substr(13, index - 12);
-            curProfile.changeName(name);
+            curProfile.changeProfile(name);
             std::cout << "Profile '" << name << "' opened.\n";
         }
         else if (command.substr(0,12) == "closeProfile") {
             curProfile.closeProfile();
             std::cout << "Selected profile closed.\n";
         }
+        else if (command.substr(0,13) == "deleteProfile") {
+            curProfile.deleteProfile();
+            std::cout << "Deleted profile.\n";
+        }
         else if (command.substr(0,14) == "getProfileName") {
-            std::cout << "Selected profile is named '" << curProfile.getName() << "'\n";
+            std::cout << "Selected profile is named '" << curProfile.getName() << std::endl;
         }
         else if (command.substr(0,13) == "changeProfile") {
             index = readTo(command, '"', 15)-1;
             std::string name = command.substr(15, index - 14);
-            curProfile.changeName(name);
-            std::cout << "Selected profile changed to '" << name << "'\n";
+            curProfile.changeProfile(name);
+            std::cout << "Selected profile changed to '" << name << std::endl;
+        }
+        else if (command.substr(0,13) == "renameProfile") {
+            index = readTo(command, '"', 15)-1;
+            std::string name = command.substr(15, index - 14);
+            curProfile.rename(name);
+            std::cout << "Profile renamed to '" << name << std::endl;
         }
         else if (command.substr(0,6) == "addMod") {
             index = readTo(command, '"', 8)-1;

@@ -6,10 +6,12 @@ class Profile {
     public:
         Profile(std::string nameInput="");
         virtual ~Profile();
-        bool profileSelected();
-        std::string getName();
-        bool changeName(std::string newName="");
+        bool deleteProfile();
+        bool isProfileSelected();
+        bool changeProfile(std::string newName="");
         bool closeProfile();
+        std::string getName();
+        bool rename(std::string newName);
         void addMod(std::string);
         void disableMod(std::string);
         void removeMod(std::string);
