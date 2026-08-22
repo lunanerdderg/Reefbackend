@@ -1,112 +1,156 @@
 #include "Settings.h"
 
-void Settings::resetSettings() {
+Settings::Settings() {}
+
+Settings::~Settings() {}
+
+void Settings::resetAllSettings() {
     std::ifstream  defaultSettingsFile("default-settings.tsv", std::ios::binary);
     std::ofstream  settingsFile("settings.tsv",   std::ios::binary);
     settingsFile << defaultSettingsFile.rdbuf();
     defaultSettingsFile.close();
     settingsFile.close();
-    this->readSettings();
     this->changeSubnauticaDirectory(findSubnautica());
+    this->changeSavesDirectory(findSubnautica());
 }
-void Settings::readSettings() {
-    if (!fileExists("settings.tsv")) {
-        this->resetSettings();
-    }
-    std::string setting;
-    std::ifstream fin("settings.tsv");
-    std::getline(fin, setting);
-    this->changeSubnauticaDirectory(setting.substr(0, readTo(setting)));
-    std::getline(fin, setting);
-    this->changeSavesDirectory(setting.substr(0, readTo(setting)));
-    fin.close();
+std::string Settings::resetSetting(std::string settingString) {
+    return this->resetSettingFromIndex(getSettingIndex(settingString));
 }
-Settings::Settings() {
-    readSettings();
+std::string Settings::getSetting(std::string settingString) {
+    return this->getSettingFromIndex(getSettingIndex(settingString));
+}
+std::string Settings::changeSetting(std::string settingString, std::string newSetting) {
+    return this->changeSettingFromIndex(getSettingIndex(settingString), newSetting);
 }
 
-Settings::~Settings() {
-    writeToSettings();
-}
-
-std::string Settings::getSubnauticaDirectory() {
-    this->readSettings();
-    return this->subnauticaDirectory;
-}
-std::string Settings::getSavesDirectory() {
-    this->readSettings();
-    return this->savesDirectory;
-}
-
-
-unsigned short int Settings::changeSubnauticaDirectory(std::string location) {
-    this->subnauticaDirectory = location;
-    writeToSettings();
-    return 4;
-}
-unsigned short int Settings::changeSubnauticaDirectory(unsigned short int location) {
+void Settings::changeSubnauticaDirectory(unsigned short int location) {
     if (location >= 4) {
-        return 0;
+        return;
     }
-    this->subnauticaDirectory = getHomeDirectory();
+    std::string subnauticaDirectory = getHomeDirectory();
     if (location == 0) {
-        this->subnauticaDirectory = "";
+        subnauticaDirectory = "";
     }
     else if (location == 1) {
-        this->subnauticaDirectory += "/.local/share/Steam/steamapps/common/Subnautica/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica
+        subnauticaDirectory += "/.local/share/Steam/steamapps/common/Subnautica/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica
     }
     else if (location == 2) {
-        this->subnauticaDirectory += "/Games/Heroic/Subnautica/"; // Windows: C:\\\\Users\\USERNAME\\Games\\Heroic\\Subnautica
+        subnauticaDirectory += "/Games/Heroic/Subnautica/"; // Windows: C:\\\\Users\\USERNAME\\Games\\Heroic\\Subnautica
     }
     else if (location == 3) {
-        this->subnauticaDirectory += "/.lutris/epic-games-store/drive_c/Program Files/Epic Games/Subnautica/"; // Windows (Epic): C:\\\\Program Files\\Epic Games\\Subnautica
+        subnauticaDirectory += "/.lutris/epic-games-store/drive_c/Program Files/Epic Games/Subnautica/"; // Windows (Epic): C:\\\\Program Files\\Epic Games\\Subnautica
     }
-    writeToSettings();
-    return location;
+    this->changeSettingFromIndex(getSettingIndex("subnauticaDirectory"), subnauticaDirectory);
 }
-unsigned short int Settings::changeSavesDirectory(std::string location) {
-    this->savesDirectory = location;
-    writeToSettings();
-    return 4;
-}
-unsigned short int Settings::changeSavesDirectory(unsigned short int location) {
+void Settings::changeSavesDirectory(unsigned short int location) {
     if (location >= 4) {
-        return 0;
+        return;
     }
-    if (location == 1) {
-        this->savesDirectory = "$HOME/.local/share/Steam/steamapps/common/Subnautica/SNAppData/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica\\SNAppData
+    std::string savesDirectory = getHomeDirectory();
+    if (location == 0) {
+        savesDirectory = "";
+    }
+    else if (location == 1) {
+        savesDirectory += "/.local/share/Steam/steamapps/common/Subnautica/SNAppData/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica\\SNAppData
     }
 //    else if (location == 2) { // BOOKMARK
-//        this->savesDirectory = "$HOME/Games/Heroic/Subnautica/SNAppData/"; // Windows: C:\\\\Users\\h\\Games\\Heroic\\Subnautica\\SNAppData
+//        savesDirectory += "/Games/Heroic/Subnautica/SNAppData/"; // Windows: C:\\\\Users\\h\\Games\\Heroic\\Subnautica\\SNAppData
 //    }
 //    else if (location == 3) {
-//        this->savesDirectory = "$HOME/.lutris/epic-games-store/drive_c/Users/*/AppData/LocalLow/Unknown Worlds/Subnautica/Subnautica/"; // Windows (Epic): C:\\\\Users\\h\\AppData\\LocalLow\\Unknown Worlds\\Subnautica\\Subnautica
+//        savesDirectory += "/.lutris/epic-games-store/drive_c/Users/*/AppData/LocalLow/Unknown Worlds/Subnautica/Subnautica/"; // Windows (Epic): C:\\\\Users\\h\\AppData\\LocalLow\\Unknown Worlds\\Subnautica\\Subnautica
 //    }
 //    if (location != 0 && location <= 3) {
     if (location == 1) {
-        writeToSettings();
+        this->changeSettingFromIndex(this->getSettingIndex("savesDirectory"), savesDirectory);
     }
-    return location;
+}
+//bool Settings::changeDefaultProfile(std::string profile) {
+//    if (profile != "" && !fileExists("Profiles/" + profile)) {
+//        return false;
+//    }
+//    this->changeSettingFromIndex(this->getSettingIndex("defaultProfile"), profile);
+//    return true;
+//}
+
+unsigned int Settings::getSettingIndex(std::string settingString) {
+    if (settingString == "subnauticaDirectory") {return 0;}
+    if (settingString == "saveDirectory" || settingString == "savesDirectory") {return 1;}
+    if (settingString == "defaultProfile") {return 2;}
+    return -1;
 }
 
-std::string Settings::getDefaultProfile() { //  BOOKMARK
-    return "";
-}
-bool Settings::changeDefaultProfile(std::string profile) {
-    if (profile != "" && !fileExists("Profiles/" + profile)) {
-        return false;
+std::string Settings::resetSettingFromIndex(unsigned int settingIndex) {
+    std::string originalSetting;
+    if (settingIndex == this->getSettingIndex("subnauticaDirectory")) {
+        originalSetting = this->getSettingFromIndex(settingIndex);
+        this->changeSubnauticaDirectory(findSubnautica());
     }
-    // Set default Profile to "profile" in settings.tsv
-    return true;
+    else if (settingIndex == this->getSettingIndex("savesDirectory")) {
+        originalSetting = this->getSettingFromIndex(settingIndex);
+        this->changeSavesDirectory(findSubnautica());
+    }
+    else {
+        std::vector<std::string> settingsVector = this->getSettings();
+        originalSetting = settingsVector.at(settingIndex);
+        settingsVector[settingIndex] = getSettingFromIndex(settingIndex, true);
+        this->writeToSettings(settingsVector);
+    }
+    return originalSetting;
 }
 
-void Settings::writeToSettings() {
-    if (!fileExists("settings.tsv")) {
-        this->resetSettings();
+std::string Settings::getSettingFromIndex(unsigned int settingsIndex, bool defaultSettings) {
+    std::string fileName = "settings.tsv";
+    if (defaultSettings) {
+        fileName = "default-settings.tsv";
+    }
+    if (!fileExists(fileName)) { // Function to create "default-settings.tsv"
+        this->resetAllSettings();
     }
     std::string setting;
+    std::ifstream fin(fileName.c_str());
+    for (unsigned int i = 0; std::getline(fin, setting); ++i) {
+        if (i == settingsIndex) {
+            return setting.substr(0, readTo(setting));
+        }
+    }
+    fin.close();
+    return "";
+}
+std::vector<std::string> Settings::getSettings(bool defaultSettings) { // Private
+    std::string fileName = "settings.tsv";
+    if (defaultSettings) {
+        fileName = "default-settings.tsv";
+    }
+    if (!fileExists(fileName)) { // Function to create "default-settings.tsv"
+        this->resetAllSettings();
+    }
+    std::vector<std::string> result;
+    std::string setting;
+    std::ifstream fin(fileName.c_str());
+    while (std::getline(fin, setting)) {
+        result.push_back(setting.substr(0, readTo(setting)));
+    }
+    fin.close();
+    return result;
+}
+
+std::string Settings::changeSettingFromIndex(unsigned int settingIndex, std::string newSetting) {
+    std::vector<std::string> settingsVector = this->getSettings();
+    std::string originalSetting = settingsVector.at(settingIndex);
+    settingsVector[settingIndex] = newSetting;
+    this->writeToSettings(settingsVector);
+    return originalSetting;
+}
+
+void Settings::writeToSettings(std::vector<std::string> settingsVector) {
+    if (!fileExists("settings.tsv")) {
+        this->resetAllSettings();
+    }
+    std::vector<std::string> settingsDescriptions = {"Subnautica directory", "Subnautica saves directory", "Default Profile (vanilla if blank)"};
+    std::string setting;
     std::ofstream fout("settings.tsv");
-    fout << this->subnauticaDirectory << "\tSubnautica directory" << std::endl;
-    fout << this->savesDirectory << "\tSubnautica saves directory" << std::endl;
+    for (unsigned int i = 0; i < settingsVector.size(); ++i) {
+        fout << settingsVector.at(i) << "\t" << settingsDescriptions.at(i) << std::endl;
+    }
     fout.close();
 }

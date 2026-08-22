@@ -126,7 +126,7 @@ std::vector<std::string> Profile::installMod(std::string mod, std::vector<std::s
         }
         for (auto const& folder : fsys::directory_iterator{"Mod-Library/" + mod}) {
             for (auto const& file : fsys::directory_iterator{folder.path().string()}) {
-                copyFile(file.path().string(), config.getSubnauticaDirectory() + "/BepInEx/" + folder.path().filename().string());
+                copyFile(file.path().string(), config.getSetting("subnauticaDirectory") + "/BepInEx/" + folder.path().filename().string());
             }
         }
         previousMods.push_back(mod);
@@ -136,16 +136,16 @@ std::vector<std::string> Profile::installMod(std::string mod, std::vector<std::s
 
 bool Profile::loadProfile() {
     Settings config;
-    if (this->name == "" || !fileExists("Mod-Library/BepInEx") || !fileExists("Mod-Library/Nautilus") || config.getSubnauticaDirectory() == "") {
+    if (this->name == "" || !fileExists("Mod-Library/BepInEx") || !fileExists("Mod-Library/Nautilus") || config.getSetting("subnauticaDirectory") == "") {
         return false;
     }
 
     for (auto const& file : fsys::directory_iterator{"Mod-Library/BepInEx"}) {
-        copyFile(file.path().string(), config.getSubnauticaDirectory());
+        copyFile(file.path().string(), config.getSetting("subnauticaDirectory"));
     }
     for (auto const& folder : fsys::directory_iterator{"Mod-Library/Nautilus"}) {
         for (auto const& file : fsys::directory_iterator{folder.path().string()}) {
-            copyFile(file.path().string(), config.getSubnauticaDirectory() + "/BepInEx/" + folder.path().filename().string());
+            copyFile(file.path().string(), config.getSetting("subnauticaDirectory") + "/BepInEx/" + folder.path().filename().string());
         }
     }
 
@@ -165,7 +165,7 @@ bool Profile::loadProfile() {
     for (auto const& folder : fsys::directory_iterator{"Profiles/" + this->name}) {
         if (fsys::is_directory(folder.path()) && folder.path().filename().string() != "Previous-Logs") {
             for (auto const& file : fsys::directory_iterator{folder.path().string()}) {
-                copyFile(file.path().string(), config.getSubnauticaDirectory() + "/BepInEx/" + folder.path().filename().string());
+                copyFile(file.path().string(), config.getSetting("subnauticaDirectory") + "/BepInEx/" + folder.path().filename().string());
             }
         }
     }
@@ -173,11 +173,11 @@ bool Profile::loadProfile() {
 }
 bool Profile::unloadAllMods() {
     Settings config;
-    if (config.getSubnauticaDirectory() == "") {
+    if (config.getSetting("subnauticaDirectory") == "") {
         return false;
     }
     for (auto const& file : fsys::directory_iterator{"Mod-Library/BepInEx"}) {
-        std::string fileToBeDeleted = config.getSubnauticaDirectory() + '/' + file.path().filename().string();
+        std::string fileToBeDeleted = config.getSetting("subnauticaDirectory") + '/' + file.path().filename().string();
         if (fileExists(fileToBeDeleted)) {
             deleteFile(fileToBeDeleted);
         }
@@ -186,17 +186,17 @@ bool Profile::unloadAllMods() {
 }
 bool Profile::saveProfile() {
     Settings config;
-    if (config.getSubnauticaDirectory() == "" || !fileExists(config.getSubnauticaDirectory() + "/BepInEx/plugins")) {
+    if (config.getSetting("subnauticaDirectory") == "" || !fileExists(config.getSetting("subnauticaDirectory") + "/BepInEx/plugins")) {
         return false;
     }
-    if (fileExists(config.getSubnauticaDirectory() + "/BepInEx/cache")) {
-        copyFile(config.getSubnauticaDirectory() + "/BepInEx/cache", "Profiles/" + this->name);
+    if (fileExists(config.getSetting("subnauticaDirectory") + "/BepInEx/cache")) {
+        copyFile(config.getSetting("subnauticaDirectory") + "/BepInEx/cache", "Profiles/" + this->name);
     }
-    if (fileExists(config.getSubnauticaDirectory() + "/BepInEx/LogOutput.log")) {
-        copyFile(config.getSubnauticaDirectory() + "/BepInEx/LogOutput.log", "Profiles/" + this->name + "/Previous-Logs");
+    if (fileExists(config.getSetting("subnauticaDirectory") + "/BepInEx/LogOutput.log")) {
+        copyFile(config.getSetting("subnauticaDirectory") + "/BepInEx/LogOutput.log", "Profiles/" + this->name + "/Previous-Logs");
         renameFile("Profiles/" + this->name + "/Previous-Logs/LogOutput.log", "LogOutput-" + getDateTimeString() + ".log"); // LogOutput-hh_mm_ss-DD_MM_YYYY.log
     }
-    copyFile(config.getSubnauticaDirectory() + "/BepInEx/config", "Profiles/" + this->name);
+    copyFile(config.getSetting("subnauticaDirectory") + "/BepInEx/config", "Profiles/" + this->name);
     return true;
 }
 bool Profile::unloadProfile() {
@@ -204,7 +204,7 @@ bool Profile::unloadProfile() {
 }
 bool Profile::loadNewProfile(std::string newProfile) {
     Settings config;
-    if (!fileExists("Profiles/" + newProfile) || !fileExists("Mod-Library/BepInEx") || !fileExists("Mod-Library/Nautilus") || config.getSubnauticaDirectory() == "") {
+    if (!fileExists("Profiles/" + newProfile) || !fileExists("Mod-Library/BepInEx") || !fileExists("Mod-Library/Nautilus") || config.getSetting("subnauticaDirectory") == "") {
         return false;
     }
     this->selectDifferentProfile(newProfile);

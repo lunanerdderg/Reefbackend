@@ -285,9 +285,28 @@ bool cli(bool devMode) {
         // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-        else if (command.substr(0,13) == "resetSettings") {
-            settings.resetSettings();
+        else if (command.substr(0,16) == "resetAllSettings") {
+            settings.resetAllSettings();
             std::cout << "Settings reset to defaults.\n";
+        }
+        else if (command.substr(0,12) == "resetSetting") {
+            index = readTo(command, '"', 14)-1;
+            std::string settingString = command.substr(14, index - 13);
+            settings.resetSetting(settingString);
+            std::cout << "Setting '" << settingString << "' reset to default.\n";
+        }
+        else if (command.substr(0,13) == "changeSetting") {
+            index = readTo(command, '"', 15)-1;
+            std::string settingString = command.substr(15, index - 14);
+            index2 = readTo(command, '"', index + 4)-1;
+            std::string value = command.substr(index + 4, index2 - index - 3);
+            settings.changeSetting(settingString, value);
+            std::cout << "Changed setting '" << settingString << "' to value '" << value << "'\n";
+        }
+        else if (command.substr(0,10) == "getSetting") {
+            index = readTo(command, '"', 12)-1;
+            std::string settingString = command.substr(12, index - 11);
+            std::cout << "Setting '" << settingString << "' has value '" << settings.getSetting(settingString) << "'\n";
         }
         else if (command.substr(0,26) == "autosetSubnauticaDirectory") {
             index = findSubnautica();
@@ -310,21 +329,21 @@ bool cli(bool devMode) {
             }
         }
         else if (command.substr(0,25) == "getSubnauticaDirectory") {
-            std::cout << "Current Subnautica directory is '" << settings.getSubnauticaDirectory() << std::endl;
+            std::cout << "Current Subnautica directory is '" << settings.getSetting("subnauticaDirectory") << std::endl;
         }
         else if (command.substr(0,25) == "getSavesDirectory" && devMode) {
-            std::cout << "Current saves directory is '" << settings.getSavesDirectory() << std::endl;
+            std::cout << "Current saves directory is '" << settings.getSetting("savesDirectory") << std::endl;
         }
         else if (command.substr(0,25) == "changeSubnauticaDirectory") {
             index = readTo(command, '"', 27)-1;
             std::string location = command.substr(27, index - 26);
-            settings.changeSubnauticaDirectory(location);
+            settings.changeSetting("subnauticaDirectory", location);
             std::cout << "Subnautica directory set to '" << location << std::endl;
         }
         else if (command.substr(0,20) == "changeSavesDirectory" && devMode) {
             index = readTo(command, '"', 22)-1;
             std::string location = command.substr(22, index - 21);
-            settings.changeSavesDirectory(location);
+            settings.changeSetting("savesDirectory", location);
             std::cout << "Saves directory set to '" << location << std::endl;
             std::cout << "SAVE FUNCTIONALITY DOES NOT EXIST YET!\n";
         }
