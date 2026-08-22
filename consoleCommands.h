@@ -1,11 +1,13 @@
-#include <iostream> // Remember to move to 'cli.h'
 #include <limits.h> // Linux
 #include <unistd.h> // Linux
 #include <pwd.h> // Linux
 
 #include <cpr/cpr.h> // Must be rebuilt for Windows
 
+#include <iostream> // Remember to remove for GUI version
+#include <ctime>
 #include <string>
+#include <sstream>
 #include <vector>
 #include <filesystem>
 #include <fstream>
@@ -26,6 +28,7 @@ std::string getMods();
 //std::string getModParent(std::string);
 //std::string getInternalFiles(std::string);
 //bool extensionInside(std::string, std::string extension=".dll");
+std::string getDateTimeString();
 
 std::string getAsync(std::string url);
 bool downloadFromURL(std::string url, std::string fileName);

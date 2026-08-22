@@ -162,7 +162,17 @@ bool Profile::unloadAllMods() {
     }
     return true;
 }
-bool Profile::saveProfile() { // BOOKMARK
+bool Profile::saveProfile() {
+    Settings config;
+    if (config.getSubnauticaDirectory() == "" || !fileExists(config.getSubnauticaDirectory() + "/BepInEx/plugins")) {
+        return false;
+    }
+    if (fileExists(config.getSubnauticaDirectory() + "/BepInEx/cache")) {
+        copyFile(config.getSubnauticaDirectory() + "/BepInEx/cache", "Profiles/" + this->name + "/cache");
+    }
+    copyFile(config.getSubnauticaDirectory() + "/BepInEx/config", "Profiles/" + this->name + "/config");
+    copyFile(config.getSubnauticaDirectory() + "/BepInEx/LogOutput.log", "Profiles/" + this->name + "/Previous-Logs");
+    renameFile("Profiles/" + this->name + "/Previous-Logs/LogOutput.log", "LogOutput-" + getDateTimeString() + ".log"); // LogOutput-hh_mm_ss-DD_MM_YYYY.log
     return true;
 }
 bool Profile::unloadProfile() {

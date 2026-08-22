@@ -118,6 +118,14 @@ std::string getMods() {
 //    return false;
 //}
 
+std::string getDateTimeString() {
+    std::ostringstream timeStream;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    timeStream << std::put_time(&tm, "%H_%M_%S-%d_%m_%Y");
+    return timeStream.str();
+}
+
 std::string getAsync(std::string url) {
     cpr::AsyncResponse fr = cpr::GetAsync(cpr::Url{url});
     cpr::Response r = fr.get();
