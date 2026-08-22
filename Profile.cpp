@@ -60,7 +60,7 @@ bool Profile::profileExists() {
 bool Profile::makeProfile() {
     makeDirectory("Profiles/" + this->name + "/cache");
     makeDirectory("Profiles/" + this->name + "/config");
-    makeDirectory("Profiles/" + this->name + "/patchers");
+//    makeDirectory("Profiles/" + this->name + "/patchers");
     makeDirectory("Profiles/" + this->name + "/Previous-Logs");
     std::ofstream fout("Profiles/" + this->name + "/mods.tsv");
     fout << "";
