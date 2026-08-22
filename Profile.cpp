@@ -212,3 +212,11 @@ bool Profile::loadNewProfile(std::string newProfile) {
     return this->loadProfile();
 }
 
+bool Profile::changeDefaultProfile(std::string profile) { // BOOKMARK
+    Settings config;
+    if (profile != "" && !fileExists("Profiles/" + profile)) {
+        return false;
+    }
+    config.changeSettingFromIndex(config.getSettingIndex("defaultProfile"), profile);
+    return true;
+}

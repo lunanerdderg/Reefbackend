@@ -53,24 +53,14 @@ void Settings::changeSavesDirectory(unsigned short int location) {
     else if (location == 1) {
         savesDirectory += "/.local/share/Steam/steamapps/common/Subnautica/SNAppData/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica\\SNAppData
     }
-//    else if (location == 2) { // BOOKMARK
-//        savesDirectory += "/Games/Heroic/Subnautica/SNAppData/"; // Windows: C:\\\\Users\\h\\Games\\Heroic\\Subnautica\\SNAppData
-//    }
-//    else if (location == 3) {
-//        savesDirectory += "/.lutris/epic-games-store/drive_c/Users/*/AppData/LocalLow/Unknown Worlds/Subnautica/Subnautica/"; // Windows (Epic): C:\\\\Users\\h\\AppData\\LocalLow\\Unknown Worlds\\Subnautica\\Subnautica
-//    }
-//    if (location != 0 && location <= 3) {
-    if (location == 1) {
-        this->changeSettingFromIndex(this->getSettingIndex("savesDirectory"), savesDirectory);
+    else if (location == 2) { // BOOKMARK
+        savesDirectory += "/Games/Heroic/Subnautica/SNAppData/"; // Windows: C:\\\\Users\\h\\Games\\Heroic\\Subnautica\\SNAppData
     }
+    else if (location == 3) {
+        savesDirectory += "/.lutris/epic-games-store/drive_c/Users/*/AppData/LocalLow/Unknown Worlds/Subnautica/Subnautica/"; // Windows (Epic): C:\\\\Users\\h\\AppData\\LocalLow\\Unknown Worlds\\Subnautica\\Subnautica
+    }
+    this->changeSettingFromIndex(this->getSettingIndex("savesDirectory"), savesDirectory);
 }
-//bool Settings::changeDefaultProfile(std::string profile) {
-//    if (profile != "" && !fileExists("Profiles/" + profile)) {
-//        return false;
-//    }
-//    this->changeSettingFromIndex(this->getSettingIndex("defaultProfile"), profile);
-//    return true;
-//}
 
 unsigned int Settings::getSettingIndex(std::string settingString) {
     if (settingString == "subnauticaDirectory") {return 0;}

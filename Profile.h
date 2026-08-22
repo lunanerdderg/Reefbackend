@@ -22,6 +22,8 @@ class Profile {
         bool saveProfile();
         bool unloadProfile();
         bool loadNewProfile(std::string);
+        bool changeDefaultProfile(std::string);
+
 
     private:
         std::string name;
