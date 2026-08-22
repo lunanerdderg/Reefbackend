@@ -392,7 +392,7 @@ bool cli(bool devMode) {
             curProfile.unloadAllMods();
             std::cout << "All mods unloaded from Subnautica directory.\n";
         }
-        else if (command.substr(0,11) == "saveProfile") { // BOOKMARK
+        else if (command.substr(0,11) == "saveProfile") {
             curProfile.saveProfile();
             std::cout << "Current profile saved from Subnautica directory.\n";
         }

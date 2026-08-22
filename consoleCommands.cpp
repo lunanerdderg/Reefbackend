@@ -12,6 +12,14 @@ unsigned short int readTo(std::string stringIn, char query, unsigned int index) 
     }
     return stringIn.length();
 }
+unsigned int findInVector(std::vector<std::string> listOfStrings, std::string query) {
+    for (unsigned int i = 0; i < listOfStrings.size(); ++i) {
+            if (listOfStrings.at(i) == query) {
+                return i;
+            }
+    }
+    return -1;
+}
 unsigned short int fileExists(std::string file, unsigned short int exitNum) { // Get if file exists on computer
     std::filesystem::path filePath(file.c_str());
     if (fsys::exists(filePath)) {

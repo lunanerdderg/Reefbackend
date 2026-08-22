@@ -15,6 +15,7 @@ namespace fsys = std::filesystem;
 
 // Cross-platform
 unsigned short int readTo(std::string, char query='\t', unsigned int index=0);
+unsigned int findInVector(std::vector<std::string> listOfStrings, std::string query);
 unsigned short int fileExists(std::string, unsigned short int exitNum=1);
 bool makeDirectory(std::string);
 //bool makeFile(std::string fileName);

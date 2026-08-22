@@ -18,9 +18,9 @@ class Profile {
         bool removeMod(std::string);
 
         bool loadProfile();
+        bool unloadAllMods();
         bool saveProfile();
         bool unloadProfile();
-        bool unloadAllMods();
         bool loadNewProfile(std::string);
 
     private:
@@ -28,6 +28,7 @@ class Profile {
         bool profileExists();
         std::string getTsvContents();
         bool makeProfile();
+        std::vector<std::string> installMod(std::string, std::vector<std::string>);
 };
 
 #endif // PROFILE_H
