@@ -89,6 +89,17 @@ unsigned short int Settings::changeSavesDirectory(unsigned short int location) {
     return location;
 }
 
+std::string Settings::getDefaultProfile() { //  BOOKMARK
+    return "";
+}
+bool Settings::changeDefaultProfile(std::string profile) {
+    if (profile != "" && !fileExists("Profiles/" + profile)) {
+        return false;
+    }
+    // Set default Profile to "profile" in settings.tsv
+    return true;
+}
+
 void Settings::writeToSettings() {
     if (!fileExists("settings.tsv")) {
         this->resetSettings();
