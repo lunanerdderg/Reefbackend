@@ -14,7 +14,8 @@ class Settings {
         unsigned short int changeSubnauticaDirectory(unsigned short int);
         unsigned short int changeSavesDirectory(std::string);
         unsigned short int changeSavesDirectory(unsigned short int);
-        bool changeDefaultProfile(std::string); // BOOKMARK
+        std::string getDefaultProfile(); // BOOKMARK
+        bool changeDefaultProfile(std::string);
 
     private:
         std::string subnauticaDirectory;
