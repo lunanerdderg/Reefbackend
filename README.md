@@ -8,7 +8,6 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Pre-Release:
 
-* Set default Profile (or vanilla)
 * Open with nondefault Profile/vanilla
 * Implement Nexus compatibility (using API key)
   * List available mods from Nexus
@@ -72,6 +71,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Apply Profiles to actual Subnautica game directory
 * Switch back from modded to vanilla and between Profiles
 * Eliminated all absolute (non-relative) paths, (aside from Subnautica directory, which is necessary)
+* Set default Profile (or vanilla)
 
 # Building
 
