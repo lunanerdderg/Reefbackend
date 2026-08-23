@@ -22,12 +22,14 @@ class Profile {
         bool saveProfile();
         bool unloadProfile();
         bool loadNewProfile(std::string);
-        bool changeDefaultProfile(std::string);
+        bool changeDefaultProfile(bool autoLoad=true);
+        bool changeDefaultProfile(std::string profile, bool autoLoad=true);
 
 
     private:
         std::string name;
         bool profileExists();
+        bool profileExists(std::string);
         std::string getTsvContents();
         bool makeProfile();
         std::vector<std::string> installMod(std::string, std::vector<std::string>);

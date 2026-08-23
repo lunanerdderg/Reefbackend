@@ -403,7 +403,7 @@ bool cli(bool devMode) {
             curProfile.disableMod(name);
             std::cout << "Disabled '" << name << "' in selected profile.\n";
         }
-        else if (command.substr(0,11) == "loadProfile") {
+        else if (command.substr(0,11) == "loadProfile" && devMode) {
             curProfile.loadProfile();
             std::cout << "Selected profile loaded into Subnautica directory.\n";
         }
@@ -411,17 +411,25 @@ bool cli(bool devMode) {
             curProfile.unloadAllMods();
             std::cout << "All mods unloaded from Subnautica directory.\n";
         }
-        else if (command.substr(0,11) == "saveProfile") {
+        else if (command.substr(0,11) == "saveProfile") { // Unsure if devMode-only or not
             curProfile.saveProfile();
             std::cout << "Current profile saved from Subnautica directory.\n";
         }
-        else if (command.substr(0,13) == "unloadProfile") {
+        else if (command.substr(0,13) == "unloadProfile" && devMode) {
             curProfile.unloadProfile();
             std::cout << "Current profile saved and unloaded from Subnautica directory.\n";
         }
-        else if (command.substr(0,14) == "loadNewProfile") {
-            curProfile.loadNewProfile("d");
+        else if (command.substr(0,14) == "loadNewProfile" && devMode) {
+            index = readTo(command, '"', 16)-1;
+            std::string name = command.substr(16, index - 15);
+            curProfile.loadNewProfile(name);
             std::cout << "New profile loaded into Subnautica directory.\n";
+        }
+        else if (command.substr(0,20) == "changeDefaultProfile") {
+            index = readTo(command, '"', 22)-1;
+            std::string name = command.substr(22, index - 21);
+            curProfile.changeDefaultProfile(name);
+            std::cout << "Changed default profile to '" << name << "' in selected profile.\n";
         }
 
 
