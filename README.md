@@ -39,7 +39,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 # Possible future features:
 * Find a way to automatically set Launch Options
 * GUI (will be in different repository)
-* Add functionality with Subnautica bought from Epic Games (currently only works with Steam)
+* Add compatibility with Subnautica bought from Epic Games (currently only works with Steam)
 * Maybe allow users to download and manage saves
 * Maybe Subnautica 2 compatibility? No promises. (I don't own Below Zero so I can't test it but maybe I might try adding compatibility for that too)
 * Possibly create a Windows version? Again, no promises. (Likelihood of Mac version is 5%, but rising with each cross-platform addition.)
