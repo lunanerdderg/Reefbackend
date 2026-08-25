@@ -2,7 +2,7 @@
 
 bool cli(bool devMode) {
     Settings settings;
-    Profile curProfile("");
+    Profile curProfile(settings.getSetting("defaultProfile"));
     unsigned int index = 0;
     unsigned int index2 = 0;
     bool running = true;
@@ -508,7 +508,14 @@ bool cli(bool devMode) {
                 index = readTo(command, '"', 20)-1;
                 std::string name = command.substr(20, index - 19);
                 curProfile.openSubnautica(name);
-                std::cout << "Opened Subnautica with NON-default profile: '" << name << "'\n";
+                std::cout << "Opening Subnautica with NON-default profile: ";
+                if (name == "") {
+                    std::cout << "vanilla";
+                }
+                else {
+                    std::cout << '\'' << name << '\'';
+                }
+                std::cout << " ...\n";
             }
         }
         else if (command.substr(0,14) == "openSubnautica") {
@@ -517,7 +524,14 @@ bool cli(bool devMode) {
             }
             else {
                 curProfile.openSubnautica();
-                std::cout << "Opened Subnautica with default profile: '" << curProfile.getName() << "'\n";
+                std::cout << "Opening Subnautica with default profile: ";
+                if (settings.getSetting("defaultProfile") == "") {
+                    std::cout << "vanilla";
+                }
+                else {
+                    std::cout << '\'' << curProfile.getName() << '\'';
+                }
+                std::cout << " ...\n";
             }
         }
 

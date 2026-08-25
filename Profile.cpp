@@ -234,7 +234,7 @@ bool Profile::openSubnautica(bool refresh) {
         this->unloadProfile();
         this->loadProfile();
     }
-    system("steam steam://rungameid/264710");
+    system("nohup steam steam://rungameid/264710 >/dev/null 2>&1 &");
     return true;
 }
 bool Profile::openSubnautica(std::string profile) {
