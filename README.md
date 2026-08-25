@@ -6,6 +6,8 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 <sub>_[(How version numbering works in all my programs.)](https://github.com/lunanerdderg/lunanerdderg.github.io/blob/main/version-numbering.md)_</sub>
 
+(Nexus API-accessing files are private, and inaccessible to public for now. `NexusAPI.h` and `NexusAPI.cpp` are not in the repository.)
+
 # To do before Pre-Release:
 
 * Implement Nexus compatibility (using API key)
