@@ -1,6 +1,6 @@
 #ifndef PROFILE_H
 #define PROFILE_H
-#include "Settings.h"
+#include "NexusAPI.h"
 
 class Profile {
     public:

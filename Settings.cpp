@@ -40,7 +40,7 @@ void Settings::changeSubnauticaDirectory(unsigned short int location) {
     else if (location == 3) {
         subnauticaDirectory += "/.lutris/epic-games-store/drive_c/Program Files/Epic Games/Subnautica/"; // Windows (Epic): C:\\\\Program Files\\Epic Games\\Subnautica
     }
-    this->changeSettingFromIndex(getSettingIndex("subnauticaDirectory"), subnauticaDirectory);
+    this->changeSettingFromIndex(this->getSettingIndex("subnauticaDirectory"), subnauticaDirectory);
 }
 void Settings::changeSavesDirectory(unsigned short int location) {
     if (location >= 4) {
@@ -66,6 +66,7 @@ unsigned int Settings::getSettingIndex(std::string settingString) {
     if (settingString == "subnauticaDirectory") {return 0;}
     if (settingString == "saveDirectory" || settingString == "savesDirectory") {return 1;}
     if (settingString == "defaultProfile") {return 2;}
+    if (settingString == "apiKey" || settingString == "nexusKey" || settingString == "nexusAPI" || settingString == "nexusApi") {return 3;}
     return -1;
 }
 
@@ -136,7 +137,7 @@ void Settings::writeToSettings(std::vector<std::string> settingsVector) {
     if (!fileExists("settings.tsv")) {
         this->resetAllSettings();
     }
-    std::vector<std::string> settingsDescriptions = {"Subnautica directory", "Subnautica saves directory", "Default Profile (vanilla if blank)"};
+    std::vector<std::string> settingsDescriptions = {"Subnautica directory", "Subnautica saves directory", "Default Profile (vanilla if blank)", "Nexus API key"};
     std::string setting;
     std::ofstream fout("settings.tsv");
     for (unsigned int i = 0; i < settingsVector.size(); ++i) {

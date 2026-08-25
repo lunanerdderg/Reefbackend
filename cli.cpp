@@ -2,6 +2,12 @@
 
 bool cli(bool devMode) {
     Settings settings;
+    if (settings.getSetting("apiKey") == "") {
+        std::string key;
+        std::cout << "Insert your API key: ";
+        std::cin >> key;
+    }
+    NexusAPI nexus;
     Profile curProfile(settings.getSetting("defaultProfile"));
     unsigned int index = 0;
     unsigned int index2 = 0;
@@ -358,6 +364,21 @@ bool cli(bool devMode) {
             settings.changeSetting("savesDirectory", location);
             std::cout << "Saves directory set to '" << location << std::endl;
             std::cout << "SAVE FUNCTIONALITY DOES NOT EXIST YET!\n";
+        }
+
+
+        // ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // =========================================================================================================================================    NexusApi
+
+        // ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        else if (command.substr(0,15) == "getTrendingMods") {
+            std::cout << nexus.getTrendingMods() << std::endl;
+        }
+        else if (command.substr(0,10) == "getModFile") {
+            std::cout << nexus.getModFile("4034") << std::endl;
         }
 
 
