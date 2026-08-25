@@ -8,8 +8,6 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Pre-Release:
 
-* Reload default Profile immediately after Steam closes
-* Save Profile immediately after Steam closes
 * Implement Nexus compatibility (using API key)
   * List available mods from Nexus
   * Keep track of Nexus mod versions
@@ -21,6 +19,8 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Release:
 
+* Reload default Profile immediately after Steam closes
+* Save Profile immediately after Steam closes
 * Remove files in `config` if their associated mod is uninstalled
 * Add ability to scan for mod updates
 * Add ability to update mods (manually and automatically)
