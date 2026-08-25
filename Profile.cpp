@@ -146,7 +146,6 @@ bool Profile::loadProfile() {
         std::vector<std::string> previousMods;
         while (std::getline(mods, mod)) {
             if (mod.back() == '1') {
-                std::cout << "Made it. " << mod << std::endl;
                 mod = mod.substr(0, mod.size() - 2);
                 previousMods = this->installMod(mod, previousMods);
             }
@@ -243,12 +242,13 @@ bool Profile::openSubnautica(std::string profile) {
     }
     if (profile == "") {
         this->unloadProfile();
-        this->openSubnautica(false);
+//        this->openSubnautica(false);
     }
     else {
         this->loadNewProfile(profile);
-        this->openSubnautica(false);
-        this->selectDifferentProfile(previousProfile);
+//        this->openSubnautica(false);
+//        this->selectDifferentProfile(previousProfile);
     }
-    return true;
+    return this->openSubnautica(false);
+//    return true;
 }
