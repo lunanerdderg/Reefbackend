@@ -35,7 +35,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Implement tar library
 * Polish features
 * Add bug-catching
-* Contact support@nexusmods.com to register this application
+* Contact Nexus support email to register this application
 
 # Possible future features:
 * Find a way to automatically set Launch Options
