@@ -1,6 +1,7 @@
 #include <limits.h> // Linux
 #include <unistd.h> // Linux
 #include <pwd.h> // Linux
+ #include <signal.h> // Linux
 
 #include <cpr/cpr.h> // Must be rebuilt for Windows
 
@@ -53,6 +54,8 @@ bool renameFile(std::string, std::string);
 //std::string getPath();
 std::string getHomeDirectory();
 unsigned short int findSubnautica();
+pid_t getSubnauticaPID();
+bool pidActive(pid_t pidNumber);
     // Literally uses commands
 unsigned short int commandDoesNotExist(std::string, unsigned short int exitNum=1);
 bool haveAllNecessaryDependencies();

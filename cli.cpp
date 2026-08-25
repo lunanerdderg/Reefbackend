@@ -125,6 +125,13 @@ bool cli(bool devMode) {
                 std::cout << "Subnautica not found.\n";
             }
         }
+        else if (command.substr(0,16) == "getSubnauticaPID") {
+            std::cout << "Subnautica PID: '" << getSubnauticaPID() << "'\n";
+        }
+        else if (command.substr(0,16) == "isSubnauticaOpen") {
+            std::cout << "'" << pidActive(getSubnauticaPID()) << "'\n";
+        }
+
 
         else if (command.substr(0,8) == "copyFile" && devMode) {
             index = readTo(command, '"', 10)-1;

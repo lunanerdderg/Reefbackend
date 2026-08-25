@@ -228,3 +228,21 @@ bool Profile::changeDefaultProfile(std::string profile, bool autoLoad) { // BOOK
     }
     return true;
 }
+
+bool Profile::openSubnautica() {
+    return true;
+}
+bool Profile::openSubnautica(std::string profile) {
+    std::string previousProfile = this->getName();
+    if (profile != "" && !this->profileExists(profile)) {
+        return false;
+    }
+    if (profile == "") {
+        this->unloadProfile();
+    }
+    else {
+        this->loadNewProfile(profile);
+        this->selectDifferentProfile(previousProfile);
+    }
+    return true;
+}

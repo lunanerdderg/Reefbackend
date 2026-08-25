@@ -379,6 +379,20 @@ unsigned short int findSubnautica() { // 0 = Could not find, 1 = Steam, 2 = Hero
     }
     return result;
 }
+pid_t getSubnauticaPID() {
+    std::string result;
+    std::string line;
+    std::ifstream fin("/home/luna/.steam/steam/logs/gameprocess_log.txt");
+    while (std::getline(fin, line)) {
+        if (line.size() >= 105 && line.substr(22,24) == "AppID 264710 adding PID " && line.substr(51,53) == " as a tracked process \"WINEDLLOVERRIDES=\"winhttp=n,b\"") {
+            result = line.substr(46,5);
+        }
+    }
+    return std::stoul(result);
+}
+bool pidActive(pid_t pidNumber) {
+    return (kill(pidNumber, 0) != -1);
+}
 
 
 

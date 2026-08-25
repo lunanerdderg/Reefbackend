@@ -42,22 +42,23 @@
 1768094435 source:/home/luna/Documents/Programming/C++/Reefbackend/Settings.cpp
 	"Settings.h"
 
-1787435143 source:/home/luna/Documents/Programming/Apps/Reefbackend/cli.cpp
+1787601673 source:/home/luna/Documents/Programming/Apps/Reefbackend/cli.cpp
 	"cli.h"
 
 1786862820 /home/luna/Documents/Programming/Apps/Reefbackend/cli.h
 	"Profile.h"
 
-1787461295 /home/luna/Documents/Programming/Apps/Reefbackend/Profile.h
+1787597799 /home/luna/Documents/Programming/Apps/Reefbackend/Profile.h
 	"Settings.h"
 
 1787432506 /home/luna/Documents/Programming/Apps/Reefbackend/Settings.h
 	"consoleCommands.h"
 
-1787376974 /home/luna/Documents/Programming/Apps/Reefbackend/consoleCommands.h
+1787601941 /home/luna/Documents/Programming/Apps/Reefbackend/consoleCommands.h
 	<limits.h>
 	<unistd.h>
 	<pwd.h>
+	<signal.h>
 	<cpr/cpr.h>
 	<iostream>
 	<ctime>
@@ -67,10 +68,10 @@
 	<filesystem>
 	<fstream>
 
-1787376977 source:/home/luna/Documents/Programming/Apps/Reefbackend/consoleCommands.cpp
+1787601953 source:/home/luna/Documents/Programming/Apps/Reefbackend/consoleCommands.cpp
 	"consoleCommands.h"
 
-1787430054 source:/home/luna/Documents/Programming/Apps/Reefbackend/Profile.cpp
+1787597405 source:/home/luna/Documents/Programming/Apps/Reefbackend/Profile.cpp
 	"Profile.h"
 
 1787432847 source:/home/luna/Documents/Programming/Apps/Reefbackend/Settings.cpp
