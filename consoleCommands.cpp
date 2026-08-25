@@ -365,7 +365,7 @@ unsigned short int findSubnautica() { // 0 = Could not find, 1 = Steam, 2 = Hero
     unsigned short int result;
     std::string home = getHomeDirectory();
     std::string path = home;
-    path += "/.local/share/Steam/steamapps/common/Subnautica/";
+    path += "/.steam/steam/steamapps/common/Subnautica/";
     result = fileExists(path.c_str(), 1); // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica
     if (result == 0) {
         path = home;
@@ -379,19 +379,33 @@ unsigned short int findSubnautica() { // 0 = Could not find, 1 = Steam, 2 = Hero
     }
     return result;
 }
-pid_t getSubnauticaPID() {
+//pid_t getSubnauticaPID() {
+//    std::string result;
+//    std::string line;
+//    std::ifstream fin("/home/luna/.steam/steam/logs/gameprocess_log.txt");
+//    while (std::getline(fin, line)) {
+//        if (line.size() >= 105 && line.substr(22,24) == "AppID 264710 adding PID " && line.substr(51,53) == " as a tracked process \"WINEDLLOVERRIDES=\"winhttp=n,b\"") {
+//            result = line.substr(46,5);
+//        }
+//    }
+//    return std::stoul(result);
+//}
+//bool pidActive(pid_t pidNumber) {
+//    return (kill(pidNumber, 0) != -1);
+//}
+bool subnauticaOpen() {
     std::string result;
     std::string line;
-    std::ifstream fin("/home/luna/.steam/steam/logs/gameprocess_log.txt");
+    std::ifstream fin(getHomeDirectory() + "/.steam/steam/logs/gameprocess_log.txt");
     while (std::getline(fin, line)) {
         if (line.size() >= 105 && line.substr(22,24) == "AppID 264710 adding PID " && line.substr(51,53) == " as a tracked process \"WINEDLLOVERRIDES=\"winhttp=n,b\"") {
             result = line.substr(46,5);
         }
+        else if (result != "" && line.size() >= 64 && line.substr(22,41) == "AppID 264710 no longer tracking PID " + result) {
+            result = "";
+        }
     }
-    return std::stoul(result);
-}
-bool pidActive(pid_t pidNumber) {
-    return (kill(pidNumber, 0) != -1);
+    return (result != "" && kill(std::stoul(result), 0) != -1);
 }
 
 

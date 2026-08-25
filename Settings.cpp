@@ -32,7 +32,7 @@ void Settings::changeSubnauticaDirectory(unsigned short int location) {
         subnauticaDirectory = "";
     }
     else if (location == 1) {
-        subnauticaDirectory += "/.local/share/Steam/steamapps/common/Subnautica/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica
+        subnauticaDirectory += "/.steam/steam/steamapps/common/Subnautica/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica
     }
     else if (location == 2) {
         subnauticaDirectory += "/Games/Heroic/Subnautica/"; // Windows: C:\\\\Users\\USERNAME\\Games\\Heroic\\Subnautica
@@ -51,7 +51,7 @@ void Settings::changeSavesDirectory(unsigned short int location) {
         savesDirectory = "";
     }
     else if (location == 1) {
-        savesDirectory += "/.local/share/Steam/steamapps/common/Subnautica/SNAppData/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica\\SNAppData
+        savesDirectory += "/.steam/steam/steamapps/common/Subnautica/SNAppData/"; // Windows: C:\\\\Program Files (x86)\\Steam\\steamapps\\common\\Subnautica\\SNAppData
     }
     else if (location == 2) { // BOOKMARK
         savesDirectory += "/Games/Heroic/Subnautica/SNAppData/"; // Windows: C:\\\\Users\\h\\Games\\Heroic\\Subnautica\\SNAppData

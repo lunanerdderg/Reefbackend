@@ -54,8 +54,9 @@ bool renameFile(std::string, std::string);
 //std::string getPath();
 std::string getHomeDirectory();
 unsigned short int findSubnautica();
-pid_t getSubnauticaPID();
-bool pidActive(pid_t pidNumber);
+//pid_t getSubnauticaPID();
+//bool pidActive(pid_t pidNumber);
+bool subnauticaOpen();
     // Literally uses commands
 unsigned short int commandDoesNotExist(std::string, unsigned short int exitNum=1);
 bool haveAllNecessaryDependencies();
