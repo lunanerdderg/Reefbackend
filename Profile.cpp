@@ -11,7 +11,7 @@ bool Profile::deleteProfile() {
         return false;
     }
     deleteFile("Profiles/" + this->getName());
-    closeProfile();
+    this->closeProfile();
     return true;
 }
 
@@ -229,7 +229,12 @@ bool Profile::changeDefaultProfile(std::string profile, bool autoLoad) { // BOOK
     return true;
 }
 
-bool Profile::openSubnautica() {
+bool Profile::openSubnautica(bool refresh) {
+    if (refresh && this->getName() != "") {
+        this->unloadProfile();
+        this->loadProfile();
+    }
+    system("steam steam://rungameid/264710");
     return true;
 }
 bool Profile::openSubnautica(std::string profile) {
@@ -239,9 +244,11 @@ bool Profile::openSubnautica(std::string profile) {
     }
     if (profile == "") {
         this->unloadProfile();
+        this->openSubnautica(false);
     }
     else {
         this->loadNewProfile(profile);
+        this->openSubnautica(false);
         this->selectDifferentProfile(previousProfile);
     }
     return true;

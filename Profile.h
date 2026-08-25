@@ -24,8 +24,8 @@ class Profile {
         bool loadNewProfile(std::string);
         bool changeDefaultProfile(bool autoLoad=true);
         bool changeDefaultProfile(std::string profile, bool autoLoad=true);
-        bool openSubnautica();
-        bool openSubnautica(std::string profile);
+        bool openSubnautica(bool refresh=true);
+        bool openSubnautica(std::string);
 
 
     private:

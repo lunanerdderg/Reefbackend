@@ -374,18 +374,44 @@ bool cli(bool devMode) {
             curProfile.selectDifferentProfile(name);
             std::cout << "Profile '" << name << "' opened.\n";
         }
-        else if (command.substr(0,12) == "closeProfile") {
+        else if (command.substr(0,12) == "closeProfile" && devMode) {
             curProfile.closeProfile();
             std::cout << "Selected profile closed.\n";
         }
-        else if (command.substr(0,13) == "deleteProfile") {
+        else if (command.substr(0,7) == "vanilla") {
+            if (subnauticaOpen()) {
+                std::cout << "No changing profiles when Subnautica is open. Bad.\n";
+            }
+            else if (curProfile.getName() != "") {
+                curProfile.unloadProfile();
+                curProfile.closeProfile();
+                std::cout << "Selected profile closed.\n";
+            }
+            else {
+                std::cout << "There is no profile selected.\n";
+            }
+        }
+        else if (command.substr(0,16) == "deleteProfileCmd" && devMode) {
             curProfile.deleteProfile();
             std::cout << "Deleted profile.\n";
+        }
+        else if (command.substr(0,13) == "deleteProfile") {
+            if (subnauticaOpen()) {
+                std::cout << "Profiles cannot be deleted when Subnautica is open.\n";
+            }
+            else if (curProfile.getName() != "") {
+                curProfile.unloadAllMods();
+                curProfile.deleteProfile();
+                std::cout << "Deleted profile.\n";
+            }
+            else {
+                std::cout << "There is no profile selected.\n";
+            }
         }
         else if (command.substr(0,14) == "getProfileName") {
             std::cout << "Selected profile is named '" << curProfile.getName() << std::endl;
         }
-        else if (command.substr(0,13) == "changeProfile") {
+        else if (command.substr(0,13) == "changeProfile" && devMode) {
             index = readTo(command, '"', 15)-1;
             std::string name = command.substr(15, index - 14);
             curProfile.selectDifferentProfile(name);
@@ -402,18 +428,27 @@ bool cli(bool devMode) {
             std::string name = command.substr(8, index - 7);
             curProfile.addMod(name);
             std::cout << "Added '" << name << "' to selected profile.\n";
+            if (subnauticaOpen()) {
+                std::cout << "Be advised, changes will only take place after you refresh the profile.\n";
+            }
         }
         else if (command.substr(0,9) == "removeMod") {
             index = readTo(command, '"', 11)-1;
             std::string name = command.substr(11, index - 10);
             curProfile.removeMod(name);
             std::cout << "Removed '" << name << "' from selected profile.\n";
+            if (subnauticaOpen()) {
+                std::cout << "Be advised, changes will only take place after you refresh the profile.\n";
+            }
         }
         else if (command.substr(0,10) == "disableMod") {
             index = readTo(command, '"', 12)-1;
             std::string name = command.substr(12, index - 11);
             curProfile.disableMod(name);
             std::cout << "Disabled '" << name << "' in selected profile.\n";
+            if (subnauticaOpen()) {
+                std::cout << "Be advised, changes will only take place after you refresh the profile.\n";
+            }
         }
         else if (command.substr(0,11) == "loadProfile" && devMode) {
             curProfile.loadProfile();
@@ -437,11 +472,50 @@ bool cli(bool devMode) {
             curProfile.loadNewProfile(name);
             std::cout << "New profile loaded into Subnautica directory.\n";
         }
+        else if (command.substr(0,14) == "refreshProfile") {
+            if (subnauticaOpen()) {
+                std::cout << "Profiles cannot be refreshed when Subnautica is open.\n";
+            }
+            else if (curProfile.getName() != "") {
+                curProfile.unloadProfile();
+                curProfile.loadProfile();
+                if (devMode) {
+                    std::cout << "Selected";
+                }
+                else {
+                    std::cout << "Default";
+                }
+                std::cout << " profile refreshed.\n";
+            }
+            else {
+                std::cout << "There is no profile selected.\n";
+            }
+        }
         else if (command.substr(0,20) == "changeDefaultProfile") {
             index = readTo(command, '"', 22)-1;
             std::string name = command.substr(22, index - 21);
             curProfile.changeDefaultProfile(name);
             std::cout << "Changed default profile to '" << name << "' in selected profile.\n";
+        }
+        else if (command.substr(0,18) == "openSubnauticaWith") {
+            if (subnauticaOpen()) {
+                std::cout << "Subnautica is already open!\n";
+            }
+            else {
+                index = readTo(command, '"', 20)-1;
+                std::string name = command.substr(20, index - 19);
+                curProfile.openSubnautica(name);
+                std::cout << "Opened Subnautica with NON-default profile: '" << name << "'\n";
+            }
+        }
+        else if (command.substr(0,14) == "openSubnautica") {
+            if (subnauticaOpen()) {
+                std::cout << "Subnautica is already open!\n";
+            }
+            else {
+                curProfile.openSubnautica();
+                std::cout << "Opened Subnautica with default profile: '" << curProfile.getName() << "'\n";
+            }
         }
 
 

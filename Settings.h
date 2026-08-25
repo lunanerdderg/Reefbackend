@@ -13,7 +13,6 @@ class Settings {
 
         void changeSubnauticaDirectory(unsigned short int);
         void changeSavesDirectory(unsigned short int);
-//        bool changeDefaultProfile(std::string);
 
     private:
         unsigned int getSettingIndex(std::string);
