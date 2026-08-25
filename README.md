@@ -8,7 +8,6 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 
 # To do before Pre-Release:
 
-* Make sure that, when renaming default Profile, the name is changed in Settings too
 * Implement Nexus compatibility (using API key)
   * List available mods from Nexus
   * Keep track of Nexus mod versions
@@ -76,6 +75,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Automatically install mod dependencies with mods
 * Set default Profile (or vanilla)
 * Open with nondefault Profile/vanilla
+* Make sure that, when renaming default Profile, the name is changed in Settings too
 
 # Building
 
