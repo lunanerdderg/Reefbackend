@@ -491,6 +491,9 @@ bool cli(bool devMode) {
                 std::cout << "There is no profile selected.\n";
             }
         }
+        else if (command.substr(0,17) == "getDefaultProfile") {
+            std::cout << "Default profile is '" << settings.getSetting("defaultProfile") << "'\n";
+        }
         else if (command.substr(0,20) == "changeDefaultProfile") {
             index = readTo(command, '"', 22)-1;
             std::string name = command.substr(22, index - 21);
