@@ -36,9 +36,15 @@ std::string Profile::getName() {
 }
 
 bool Profile::rename(std::string newName) {
-    renameFile("Profiles/" + this->getName(), newName);
-    this->name = newName;
-    return true;
+    Settings config;
+    if (renameFile("Profiles/" + this->getName(), newName)) {
+        if (this->getName() == config.getSetting("defaultProfile")) {
+            this->changeDefaultProfile(newName);
+        }
+        this->name = newName;
+        return true;
+    }
+    return false;
 }
 
 bool Profile::profileExists() {
