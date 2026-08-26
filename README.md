@@ -11,7 +11,6 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 # To do before Pre-Release:
 
 * Implement Nexus compatibility (using API key)
-  * List available mods from Nexus
   * Keep track of Nexus mod versions
   * Download mod files from Nexus
   * Keep track of Nexus mod dependencies
@@ -30,6 +29,7 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 * Automatically save previous `LogOutput.log` once Subnautica is closed
 * Allow mods to be added directly to Profiles without requiring manual installation to Library first (automatic instead)
 * Test as many mods as possible to ensure sorting algorithm can handle all possible variations
+* List available mods from Nexus
 * Filter Nexus mods to exclude mods which require SMLHelper
 * Automatically create all files necessary for function of program if not detected in directory
 * Implement unzip library (probably [minizip](https://github.com/madler/zlib/tree/develop/contrib/minizip))
