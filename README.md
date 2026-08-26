@@ -1,3 +1,5 @@
+**(Nexus API-accessing files are private, and inaccessible to public for now. `NexusAPI.h` and `NexusAPI.cpp` are not in the repository, and will only be added once Nexus approves this project.)**
+
 If Vortex does actually end up getting full SteamOS compatibility, production of this program will probably cease.
 
 **__This project is unfinished, and should not be used!__**
@@ -5,8 +7,6 @@ If Vortex does actually end up getting full SteamOS compatibility, production of
 *(No QMM or SMLHelper compatibility planned.)*
 
 <sub>_[(How version numbering works in all my programs.)](https://github.com/lunanerdderg/lunanerdderg.github.io/blob/main/version-numbering.md)_</sub>
-
-(Nexus API-accessing files are private, and inaccessible to public for now. `NexusAPI.h` and `NexusAPI.cpp` are not in the repository, and will only be added once Nexus approves this project.)
 
 # To do before Pre-Release:
 
